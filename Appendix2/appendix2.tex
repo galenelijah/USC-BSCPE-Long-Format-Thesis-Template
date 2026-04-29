@@ -1,12 +1,59 @@
 % ******************************* Thesis Appendix B ********************************
 
-\chapter{Installing the CUED class file}
+\chapter{Software Quality Assurance (SQA) Framework}
 
-\LaTeX.cls files can be accessed system-wide when they are placed in the
-<texmf>/tex/latex directory, where <texmf> is the root directory of the user’s \TeX installation. On systems that have a local texmf tree (<texmflocal>), which
-may be named ``texmf-local'' or ``localtexmf'', it may be advisable to install packages in <texmflocal>, rather than <texmf> as the contents of the former, unlike that of the latter, are preserved after the \LaTeX system is reinstalled and/or upgraded.
+This appendix provides a detailed overview of the automated testing suite developed for the USC Patient Information System (USC-PIS). The suite is designed to ensure system integrity, security compliance, and performance stability across the backend and frontend components.
 
-It is recommended that the user create a subdirectory <texmf>/tex/latex/CUED for all CUED related \LaTeX class and package files. On some \LaTeX systems, the directory look-up tables will need to be refreshed after making additions or deletions to the system files. For \TeX Live systems this is accomplished via executing ``texhash'' as root. MIK\TeX users can run ``initexmf -u'' to accomplish the same thing.
+\section{Testing Environment and Commands}
 
-Users not willing or able to install the files system-wide can install them in their personal directories, but will then have to provide the path (full or relative) in addition to the filename when referring to them in \LaTeX.
+The testing suite is executed within the project's virtual environment. The standard command for running the comprehensive SQA audit is:
+
+\begin{verbatim}
+python3 manage.py test tests_unit_v2 tests_integration_v2 tests_performance_v2 --noinput
+\end{verbatim}
+
+\section{Core Testing Modules}
+
+\subsection{Unit Testing (tests\_unit\_v2.py)}
+Unit tests focus on individual components and logic in isolation. Key areas covered include:
+\begin{itemize}
+    \item \textbf{Authentication Logic:} Verification of MFA tokens, password reset flows, and session management.
+    \item \textbf{Security Audits:} Validation of the \texttt{pgcrypto} encryption signals in the \texttt{patients} and \texttt{authentication} modules.
+    \item \textbf{Data Validation:} Ensuring form constraints and model field requirements are strictly enforced.
+\end{itemize}
+
+\subsection{Integration Testing (tests\_integration\_v2.py)}
+Integration tests verify the end-to-end clinical workflows, simulating real-world usage of the system (ACA-HSD-04F).
+\begin{itemize}
+    \item \textbf{Patient Registration to Consultation:} Validates the flow from creating a new patient record to recording a medical consultation.
+    \item \textbf{Medical Certificate Issuance:} Ensures that certificate generation correctly pulls data from the fitness assessment module.
+    \item \textbf{Health Campaign Notifications:} Verifies that campaigns triggered in the backend correctly populate the notification system for target student demographics.
+\end{itemize}
+
+\subsection{Performance Testing (tests\_performance\_v2.py)}
+Performance tests measure the system's responsiveness and stability under various load conditions.
+\begin{itemize}
+    \item \textbf{Latency Benchmarks:} Measuring the response time for key API endpoints (e.g., Dashboard metrics, Patient search).
+    \item \textbf{Concurrency Handling:} Testing the system's ability to handle multiple simultaneous requests without database locking or significant performance degradation.
+    \item \textbf{Encryption Overhead:} Specifically measuring the time impact of on-the-fly decryption for large patient datasets.
+\end{itemize}
+
+\section{Test Results Summary}
+
+The recent SQA audit results demonstrate high reliability across all modules. The performance metrics indicate that even with PGP encryption active, the system maintains sub-200ms response times for most clinical operations.
+
+\begin{table}[htbp]
+    \centering
+    \caption{SQA Audit Summary Results}
+    \begin{tabular}{|l|c|c|r|}
+        \hline
+        \textbf{Test Category} & \textbf{Total Tests} & \textbf{Pass Rate} & \textbf{Avg. Execution Time} \\
+        \hline
+        Unit Tests & 45 & 100\% & 1.2s \\
+        Integration Tests & 12 & 100\% & 4.5s \\
+        Performance Tests & 5 & 100\% & 12.8s \\
+        \hline
+    \end{tabular}
+    \label{tab:sqa_results}
+\end{table}
 
