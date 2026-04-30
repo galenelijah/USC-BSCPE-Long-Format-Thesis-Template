@@ -10,104 +10,127 @@
     \graphicspath{{Chapter1/Figs/Vector/}{Chapter1/Figs/}}
 \fi
 
+\section{Problem Background}
 
-%********************************** %First Section  **************************************
-\section{What is loren ipsum? Title with math \texorpdfstring{$\sigma$}{[sigma]}} %Section - 1.1 
+The University of San Carlos (USC) Clinic plays a crucial role in ensuring the health and well-being of its students, faculty, and staff. However, the clinic's current Health Information System (HIS) is predominantly paper-based and fragmented, creating several challenges that impede the delivery of efficient, comprehensive, and high-quality healthcare services.
 
-Lorem Ipsum is simply dummy text of the printing and typesetting industry (see 
-Section~\ref{section1.3}). Lorem Ipsum~\citep{Aup91} has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularized in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem 
-Ipsum~\citep{AAB95,Con90,LM65}.
+\subsection{Incomplete Student Health Records}
+The clinic's existing system struggles to capture complete medical records, particularly for incoming first-year students. This gap in health histories can result in missed opportunities for preventive care, delays in diagnosis and treatment, and difficulties in tracking health trends across the student population. Comprehensive health records are essential for effective healthcare delivery, enabling the clinic to provide timely and appropriate interventions.
 
-The most famous equation in the world: $E^2 = (m_0c^2)^2 + (pc)^2$, which is known as the \textbf{energy-mass-momentum} relation as an in-line equation.
+\subsection{Inefficient Consultation Management}
+Managing a high volume of consultations, especially for minor ailments such as coughs and colds, is a significant challenge under the current system. This inefficiency leads to longer wait times, overcrowding, and frustration for both students and staff. Additionally, it delays the attention needed for more urgent medical issues, compromising the clinic's overall effectiveness.
 
-A {\em \LaTeX{} class file}\index{\LaTeX{} class file@LaTeX class file} is a file, which holds style information for a particular \LaTeX{}.
+\subsection{Medication Inventory Control Issues}
+The existing manual inventory management system, while adhering to the First-In, First-Out (FIFO) principle, is prone to errors. These errors can lead to stockouts and the expiration of unused medications, impacting the timely provision of care and resulting in unnecessary costs due to wasted resources. A robust inventory control system is vital for maintaining adequate medication supplies and ensuring patient safety.
 
+\subsection{Limited Reporting and Data Analysis}
+The clinic relies on Google Sheets for daily treatment records, which, while convenient, limits data accuracy, reporting capabilities, and long-term data analysis. This limitation hampers the clinic's ability to generate comprehensive reports and gain valuable insights into clinic utilization and student health outcomes. Effective data analysis is crucial for informed decision-making and continuous improvement of healthcare services.
 
-\begin{align}
-CIF: \hspace*{5mm}F_0^j(a) = \frac{1}{2\pi \iota} \oint_{\gamma} \frac{F_0^j(z)}{z - a} dz
-\end{align}
+\subsection{Cumbersome Administrative Processes}
+The manual process for issuing medical certificates is time-consuming and inefficient, creating delays for both clinic staff and students. This inefficiency can hinder students' ability to promptly return to their academic and extracurricular activities. Streamlined administrative processes are necessary to reduce staff workload and improve the overall patient experience.
 
-\nomenclature[z-cif]{$CIF$}{Cauchy's Integral Formula} 
-% first letter Z is for Acronyms 
-\nomenclature[a-F]{$F$}{complex function} 
-% first letter A is for Roman symbols
-\nomenclature[g-p]{$\pi$}{ $\simeq 3.14\ldots$} 
-% first letter G is for Greek Symbols
-\nomenclature[g-i]{$\iota$}{unit imaginary number $\sqrt{-1}$} 
-% first letter G is for Greek Symbols
-\nomenclature[g-g]{$\gamma$}{a simply closed curve on a complex plane}  
-% first letter G is for Greek Symbols
-\nomenclature[x-i]{$\oint_\gamma$}{integration around a curve $\gamma$} 
-% first letter X is for Other Symbols
-\nomenclature[r-j]{$j$}{superscript index}     
-% first letter R is for superscripts
-\nomenclature[s-0]{$0$}{subscript index}   
-% first letter S is for subscripts
+\subsection{Inadequate Information Dissemination}
+The clinic lacks a robust mechanism for disseminating health information and educational materials to the USC community across both the Downtown and Talamban campuses. This gap limits opportunities for preventive care, health promotion, and timely updates on relevant health issues. Effective communication channels are essential for fostering a well-informed and health-conscious university community.
 
+\subsection{Ineffective Patient Feedback Collection}
+The current method of collecting student feedback is cumbersome and does not lend itself to systematic analysis. This inefficiency makes it difficult to gauge student satisfaction, identify areas for improvement, and make data-driven decisions to enhance the quality of care provided by the clinic. A streamlined feedback collection process is critical for ensuring continuous improvement and high standards of patient care.
 
-%********************************** %Second Section  *************************************
-\section{Why do we use loren ipsum?} %Section - 1.2
+\section{Statement of the Problem}
 
+The USC Clinic's reliance on a predominantly paper-based and fragmented patient information management system has resulted in several inefficiencies, including:
+\begin{enumerate}
+    \item Incomplete patient records
+    \item Limited reporting capabilities
+    \item Lack of streamlined communication channels for health information dissemination
+    \item Inefficient patient feedback collection
+\end{enumerate}
 
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using `Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for `lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+These challenges hinder the clinic's ability to provide timely, efficient, and comprehensive healthcare services to the USC community. Addressing these issues is critical to improving clinic efficiency, enhancing patient satisfaction, and ensuring the highest quality of care for all USC students, faculty, and staff.
 
-%********************************** % Third Section  *************************************
-\section{Where does it come from?}  %Section - 1.3 
-\label{section1.3}
+\section{Goals and Objectives}
 
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+This project aims to design, develop, and implement a modern PIS for the USC Clinic to address the following specific objectives:
+\begin{enumerate}
+    \item \textbf{Capture comprehensive medical and dental records for students:} Streamline data collection to ensure complete and up-to-date medical and dental records for all students, including medical histories, treatment plans, and dental records.
+    \item \textbf{Increase the reach of health awareness campaigns:} Use the PIS to promote health campaigns with dedicated pages featuring PubMats, banners, and other materials, encouraging proactive health management.
+    \item \textbf{Facilitate student feedback collection and analysis:} Integrate digital evaluation forms to systematically collect and analyze patient feedback, enabling continuous improvement in healthcare services.
+    \item \textbf{Generate Detailed Reports for Data Analysis and Decision-Making:} Implement a module for generating customizable reports on patient visits, treatment outcomes, and feedback analysis to aid decision-making.
+    \item \textbf{Issue Notifications for Medication Reminders, Health Campaigns, and Clinic Updates:} Include a notification system for sending alerts on health campaigns, medication reminders, and important clinic updates via email and in-app notifications.
+    \item \textbf{Optimize the Issuance of Medical Certificates:} Streamline the process of issuing medical certificates by allowing quick access and input of relevant patient information, ensuring accuracy and efficiency.
+\end{enumerate}
 
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from ``de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham
+By achieving these objectives, this project aims to transform the USC Clinic's patient information management, leading to improved healthcare delivery, enhanced patient satisfaction, and increased operational efficiency for the clinic staff.
 
-``Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+\section{Significance of the Study}
 
-Section 1.10.32 of ``de Finibus Bonorum et Malorum", written by Cicero in 45 BC: ``Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+The successful implementation of a modernized PIS at the USC Clinic has the potential to transform healthcare delivery for the USC community. This project will directly benefit students by:
+\begin{enumerate}
+    \item \textbf{Improving access to care:} Streamlined data collection and notifications will reduce wait times and make it easier for students to manage their health.
+    \item \textbf{Enhancing the student experience:} Faster service, personalized care, and access to their health information electronically will improve the overall student healthcare experience.
+    \item \textbf{Promoting student well-being:} Access to educational materials and targeted health campaigns through the PIS will empower students to take a more active role in their health, leading to better health outcomes.
+\end{enumerate}
 
-1914 translation by H. Rackham: ``But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+The benefits extend to the clinic as well:
+\begin{enumerate}
+    \item \textbf{Increasing efficiency:} By optimizing processes and centralizing data, the new PIS will free up staff time, allowing them to focus on direct patient care.
+    \item \textbf{Improving decision-making:} Accurate data and detailed reports will empower clinic leadership to make informed decisions regarding resource allocation and service improvement.
+    \item \textbf{Reducing costs:} Streamlining workflows, reducing paperwork, and optimizing medication inventory management will contribute to cost savings.
+\end{enumerate}
 
-Section 1.10.33 of ``de Finibus Bonorum et Malorum", written by Cicero in 45 BC: ``At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+Beyond the immediate impact on the USC Clinic, this project can serve as a model for other university health centers seeking to modernize their systems and enhance student care.
 
-1914 translation by H. Rackham: ``On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+\section{Scope and Limitations}
 
-% Use \nomenclature command to define the technical terms used in your thesis document
-% Valid arguments:
-%   Mathematical symbols > X
-%   Subscripts           > S
-%   Superscripts         > R
-%   Abbreviations        > Z
-%   Greek Symbols        > G
-%   Roman Symbols        > A
+\subsection{Scope}
+The proposed PIS for the USC Clinic is designed to modernize and enhance the clinic's healthcare delivery through the following core functionalities:
+\begin{enumerate}
+    \item \textbf{Comprehensive Health and Dental Records:}
+    \begin{enumerate}
+        \item Centralized and secure storage of all student health information, including medical histories, treatment plans, medications, and dental records.
+        \item Focus on capturing comprehensive records from the start of student enrollment, ensuring complete and up-to-date information.
+        \item The system will focus on students but is not limited to students since faculty and university staff will be filling up the same forms.
+    \end{enumerate}
+    \item \textbf{Health Information Dissemination:}
+    \begin{enumerate}
+        \item Utilization of targeted communication tools to disseminate health information and promote preventive care.
+        \item Dedicated web pages within the system for health awareness campaigns, featuring PubMats, banners, and other educational materials.
+    \end{enumerate}
+    \item \textbf{Patient Feedback System:}
+    \begin{enumerate}
+        \item Integration of user-friendly digital evaluation forms to collect and analyze patient feedback.
+        \item Automated reminders to encourage continuous patient input, enabling the clinic to identify areas for improvement.
+    \end{enumerate}
+    \item \textbf{Report Generation:}
+    \begin{enumerate}
+        \item The system will include a report generation module that allows clinic staff to create detailed, customizable reports on various metrics such as patient visits, treatment outcomes, and feedback analysis. These reports will be exportable to formats like PDF and Excel for further analysis and record-keeping.
+    \end{enumerate}
+    \item \textbf{Notifications:}
+    \begin{enumerate}
+        \item The system will feature a notification system that sends alerts and reminders for health campaigns, medication schedules, and important clinic updates via email and in-app notifications.
+    \end{enumerate}
+    \item \textbf{Medical Certificate Issuance Optimization:}
+    \begin{enumerate}
+        \item The PIS will optimize the process of issuing medical certificates by allowing clinic staff to quickly access and input relevant patient information and include all necessary details. This will reduce administrative workload and speed up the issuance process.
+    \end{enumerate}
+    \item \textbf{Initial Deployment Plan:}
+    \begin{enumerate}
+        \item The initial deployment will focus on the USC DC Clinic.
+    \end{enumerate}
+    \item \textbf{Platform:}
+    \begin{enumerate}
+        \item The system will be web-based, ensuring accessibility through standard web browsers.
+    \end{enumerate}
+    \item \textbf{Scalability:}
+    \begin{enumerate}
+        \item The system will be designed to scale for future iterations and broader deployment across other clinics as needed.
+    \end{enumerate}
+\end{enumerate}
 
-% See sample uses of the command below.
-% Other nomenclature items auto-generated in this template are defined with the sample equation in the first subsection of this tex file. 
-% For reference, keep these sample lines in the tex file by commenting them out, if unused for now.
-
-\nomenclature[z-DEM]{DEM}{Discrete Element Method}
-\nomenclature[z-FEM]{FEM}{Finite Element Method}
-\nomenclature[z-PFEM]{PFEM}{Particle Finite Element Method}
-\nomenclature[z-FVM]{FVM}{Finite Volume Method}
-\nomenclature[z-BEM]{BEM}{Boundary Element Method}
-\nomenclature[z-MPM]{MPM}{Material Point Method}
-\nomenclature[z-LBM]{LBM}{Lattice Boltzmann Method}
-\nomenclature[z-MRT]{MRT}{Multi-Relaxation 
-Time}
-\nomenclature[z-RVE]{RVE}{Representative Elemental Volume}
-\nomenclature[z-GPU]{GPU}{Graphics Processing Unit}
-\nomenclature[z-SH]{SH}{Savage Hutter}
-\nomenclature[z-CFD]{CFD}{Computational Fluid Dynamics}
-\nomenclature[z-LES]{LES}{Large Eddy Simulation}
-\nomenclature[z-FLOP]{FLOP}{Floating Point Operations}
-\nomenclature[z-ALU]{ALU}{Arithmetic Logic Unit}
-\nomenclature[z-FPU]{FPU}{Floating Point Unit}
-\nomenclature[z-SM]{SM}{Streaming Multiprocessors}
-\nomenclature[z-PCI]{PCI}{Peripheral Component Interconnect}
-\nomenclature[z-CK]{CK}{Carman - Kozeny}
-\nomenclature[z-CD]{CD}{Contact Dynamics}
-\nomenclature[z-DNS]{DNS}{Direct Numerical Simulation}
-\nomenclature[z-EFG]{EFG}{Element-Free Galerkin}
-\nomenclature[z-PIC]{PIC}{Particle-in-cell}
-\nomenclature[z-USF]{USF}{Update Stress First}
-\nomenclature[z-USL]{USL}{Update Stress Last}
-\nomenclature[s-crit]{crit}{Critical state}
-\nomenclature[z-DKT]{DKT}{Draft Kiss Tumble}
-\nomenclature[z-PPC]{PPC}{Particles per cell}
+\subsection{Limitations}
+\begin{enumerate}
+    \item \textbf{Scope of Records:} The initial focus will be on capturing comprehensive medical and dental records for students, aligning with the clinic's objective to gather extensive health information during enrollment phases.
+    \item \textbf{User Adoption:} The success of the PIS implementation depends heavily on comprehensive training and ongoing support for clinic staff. Effective user adoption strategies are critical to ensure the system is used both reliably and effectively.
+    \item \textbf{Resource Constraints:} As a student-led project with limited resources, the development team may need to prioritize certain features over others. Some functionalities, such as medication tracking, inventory management, may be deferred to future iterations.
+    \item \textbf{Security Measures:} Initially, only basic security measures will be implemented to protect patient data, with plans to enhance security features in future updates. The system's user authentication will be basic and will not be able to verify whether a student is currently enrolled or has graduated.
+    \item \textbf{Standalone System:} The system will be operated independently and will not be integrated with existing systems.
+\end{enumerate}

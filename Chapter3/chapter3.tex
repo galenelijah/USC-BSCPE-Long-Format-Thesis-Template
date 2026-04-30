@@ -1,152 +1,110 @@
+%*******************************************************************************
+%****************************** Third Chapter **********************************
+%*******************************************************************************
+
 \chapter{Methodology}
 
-% **************************** Define Graphics Path **************************
 \ifpdf
-    \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
+    \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/PDF/}{Chapter3/Figs/}}
 \else
     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
 \fi
 
-\section{First section of the third chapter}
-And now I begin my third chapter here \dots
+The conceptual framework for developing the USC Clinic’s PIS is centered on a user-centered design approach. This approach prioritizes the needs and workflows of both clinic staff and students, ensuring the system enhances healthcare delivery and patient satisfaction.
 
-And now to cite some more people~\cite{Rea85,Ancey1996}
+\section{Conceptual Framework}
 
-\subsection{First subsection in the first section}
-\dots and some more 
-
-\subsection{Second subsection in the first section}
-\dots and some more \dots
-
-\subsubsection{First subsub section in the second subsection}
-\dots and some more in the first subsub section otherwise it all looks the same
-doesn't it? well we can add some text to it \dots
-
-\subsection{Third subsection in the first section}
-\dots and some more \dots
-
-\subsubsection{First subsub section in the third subsection}
-\dots and some more in the first subsub section otherwise it all looks the same
-doesn't it? well we can add some text to it and some more and some more and
-some more and some more and some more and some more and some more \dots
-
-\subsubsection{Second subsub section in the third subsection}
-\dots and some more in the first subsub section otherwise it all looks the same
-doesn't it? well we can add some text to it \dots
-
-\section{Second section of the third chapter}
-and here I write more \dots
-
-\section{The layout of formal tables}
-This section has been modified from ``Publication quality tables in \LaTeX*''
- by Simon Fear.
-
-The layout of a table has been established over centuries of experience and 
-should only be altered in extraordinary circumstances. 
-
-When formatting a table, remember two simple guidelines at all times:
-
+The framework encompasses the following key principles:
 \begin{enumerate}
-  \item Never, ever use vertical rules (lines).
-  \item Never use double rules.
+    \item \textbf{User-Centered Design (UCD):} The development process will involve clinic staff and students from the outset, ensuring that the system is intuitive and meets their specific needs. Regular feedback sessions and iterative testing will be conducted to refine the system based on user input.
+    \item \textbf{Comprehensive Record Keeping:} The PIS will provide centralized and secure storage for all student health information, including medical histories, treatment plans, medications, and dental records. The system will focus on capturing comprehensive records from the start of student enrollment, ensuring complete and up-to-date information.
+    \item \textbf{Effective Health Information Dissemination:} The system will include targeted communication tools for sharing health information and promoting preventive care. This will be achieved through dedicated web pages for health campaigns featuring PubMats, banners, and other educational materials.
+    \item \textbf{Patient Feedback Collection and Analysis:} The PIS will integrate user-friendly digital evaluation forms and automated reminders to collect and analyze patient feedback. This continuous feedback loop will help the clinic identify areas for improvement and enhance the quality of care provided.
+    \item \textbf{Scalability and Flexibility:} The system will be designed to scale for future iterations and broader deployment across other clinics. The modular architecture will allow for the addition of new features and functionalities as the clinic's needs evolve.
+    \item \textbf{Basic Security Measures:} Initial implementation will include basic security measures to protect patient data, with plans to enhance security features in future updates. This ensures compliance with privacy regulations and safeguards sensitive information.
+    \item \textbf{Web-Based Platform:} The PIS will be a web-based application accessible through standard web browsers, ensuring ease of access for users. Hosting on Heroku will provide a robust and scalable environment for the application, simplifying deployment and management.
 \end{enumerate}
 
-These guidelines may seem extreme but I have
-never found a good argument in favour of breaking them. For
-example, if you feel that the information in the left half of
-a table is so different from that on the right that it needs
-to be separated by a vertical line, then you should use two
-tables instead. Not everyone follows the second guideline:
+\section{Systems Analysis and Design}
 
-There are three further guidelines worth mentioning here as they
-are generally not known outside the circle of professional
-typesetters and subeditors:
+\subsection{Systems Analysis}
+The initial phase of the project will focus on understanding the current state of the USC Clinic’s patient information management through direct interaction with clinic staff and a review of existing forms.
 
-\begin{enumerate}\setcounter{enumi}{2}
-  \item Put the units in the column heading (not in the body of
-          the table).
-  \item Always precede a decimal point by a digit; thus 0.1
-      {\em not} just .1.
-  \item Do not use `ditto' signs or any other such convention to
-      repeat a previous value. In many circumstances a blank
-      will serve just as well. If it won't, then repeat the value.
+\subsubsection{Ongoing Needs Assessment}
+A continuous needs assessment approach will be employed throughout the project life cycle, with regular meetings and feedback sessions with clinic staff. This iterative process will ensure that the PIS is closely tailored to the evolving needs and workflows of the clinic. The needs assessment will focus on:
+\begin{enumerate}
+    \item \textbf{Interviews:} Structured interviews will be conducted with clinic staff, including doctors, nurses, and administrators. The interview guide will focus on understanding their daily tasks, challenges they face with the current system, and desired features in a new PIS.
+    \item \textbf{Observations:} Direct observation of daily clinic operations will be carried out to identify bottlenecks, inefficiencies, and opportunities for improvement in the existing system. Observations will be documented in field notes, which will be analyzed to identify recurring patterns and themes.
+    \item \textbf{Form Analysis:} Existing forms for medical and dental health records will be thoroughly analyzed to understand the types of data being collected, their structure, and how they are used in the current workflow.
 \end{enumerate}
 
-A frequently seen mistake is to use `\textbackslash begin\{center\}' \dots `\textbackslash end\{center\}' inside a figure or table environment. This center environment can cause additional vertical space. If you want to avoid that just use `\textbackslash centering'
+\subsubsection{Current Processes of the USC Clinic}
+\begin{enumerate}
+    \item \textbf{Paper-Based Records:} The USC Clinic predominantly relies on paper-based systems for managing patient information. This includes storing medical histories, treatment plans, medications, and dental records in physical files. This approach leads to several inefficiencies, including difficulties in maintaining complete and accurate records, delays in retrieving patient information, and increased risk of data loss or damage.
+    \item \textbf{Patient Feedback Collection:} The clinic currently uses Google Forms to collect patient feedback. While this provides a basic mechanism for gathering input from students, it lacks integration with other clinic systems, making it challenging to systematically analyze the feedback and implement improvements based on student responses.
+    \item \textbf{Health Information Dissemination:} The clinic does not have a robust system in place for disseminating health information and educational materials to students. There are limited channels for reaching out to the student population with health campaigns, updates, and preventive care information. This gap limits the clinic’s ability to promote health awareness and timely interventions.
+\end{enumerate}
 
+\subsection{Systems Design}
+Informed by the findings of the systems analysis and ongoing needs assessment, the system design phase will focus on creating a detailed blueprint for the new PIS.
 
-\begin{table}
-\caption{A badly formatted table}
-\centering
-\label{table:bad_table}
-\begin{tabular}{|l|c|c|c|c|}
-\hline 
-& \multicolumn{2}{c}{Species I} & \multicolumn{2}{c|}{Species II} \\ 
-\hline
-Dental measurement  & mean & SD  & mean & SD  \\ \hline 
-\hline
-I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-\hline 
-I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-\hline 
-I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-\hline 
-I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-\hline 
-CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-\hline 
-CBL & 11.88 & 0.05 & 13.11 & 0.04\\ 
-\hline 
-\end{tabular}
-\end{table}
+\subsubsection{Design Principles}
+The following design principles will guide the development of the PIS:
+\begin{enumerate}
+    \item \textbf{User-Centered Design (UCD):}
+    \begin{enumerate}
+        \item Prioritizing the needs and workflows of clinic staff and students.
+        \item Engaging users throughout all stages of development to ensure the system is intuitive and efficient.
+    \end{enumerate}
+    \item \textbf{Comprehensive Record Keeping:}
+    \begin{enumerate}
+        \item Providing centralized and secure storage for all student health information.
+        \item Facilitating effective and timely healthcare delivery with complete and up-to-date health records.
+    \end{enumerate}
+    \item \textbf{Effective Health Information Dissemination:}
+    \begin{enumerate}
+        \item Including tools for sharing health information and promoting preventive care.
+        \item Utilizing dedicated web pages for health campaigns.
+    \end{enumerate}
+    \item \textbf{Patient Feedback Collection and Analysis:}
+    \begin{enumerate}
+        \item Integrating user-friendly digital evaluation forms and automated reminders.
+        \item Systematically gathering input from students and implementing improvements based on feedback.
+    \end{enumerate}
+    \item \textbf{Scalability and Flexibility:}
+    \begin{enumerate}
+        \item Designing a scalable architecture for future enhancements and broader deployment.
+        \item Ensuring modular components can be easily updated or replaced.
+    \end{enumerate}
+    \item \textbf{Basic Security Measures:}
+    \begin{enumerate}
+        \item Implementing basic security measures to protect patient data.
+        \item Including encryption and secure user authentication, with plans for future security enhancements.
+    \end{enumerate}
+    \item \textbf{Web-Based Platform:}
+    \begin{enumerate}
+        \item Ensuring the PIS is accessible through standard web browsers.
+        \item Providing flexibility and ease of use for both clinic staff and students.
+    \end{enumerate}
+\end{enumerate}
 
-\begin{table}
-\caption{A nice looking table}
-\centering
-\label{table:nice_table}
-\begin{tabular}{l c c c c}
-\hline 
-\multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\ 
-\cline{2-5}
-  & mean & SD  & mean & SD  \\ 
-\hline
-I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+\section{Validation and Deployment}
 
-I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+This section details the strategies and processes for ensuring the quality, functionality, and adoption of the PIS within the USC Clinic.
 
-I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+\subsection{Validation and Testing}
+A comprehensive validation and testing plan will be implemented to ensure that the PIS meets the requirements identified during the needs assessment and adheres to the design principles outlined. This plan includes:
+\begin{enumerate}
+    \item \textbf{Unit Testing:} Individual components and modules of the PIS will be tested in isolation to verify their functionality and correct operation.
+    \item \textbf{Integration Testing:} The interaction and data flow between different modules of the PIS will be tested to ensure seamless integration and data integrity.
+    \item \textbf{Performance Testing:} The system will be subjected to performance testing to assess its responsiveness, speed, and ability to handle expected workloads.
+    \item \textbf{User Acceptance Testing (UAT):} A select group of users, including a representative sample of students, faculty, staff, and healthcare providers, will be invited to test the PIS in a controlled environment. Their feedback will be used to identify any usability issues, bugs, or areas for improvement.
+    \item \textbf{Iterative Feedback and Refinement:} Based on the feedback from the UAT, iterative rounds of testing and refinement will be conducted to ensure the system meets the needs of all user groups.
+\end{enumerate}
 
-I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-
-CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-
-CBL & 11.88 & 0.05 & 13.11 & 0.04\\ 
-\hline 
-\end{tabular}
-\end{table}
-
-
-\begin{table}
-\caption{Even better looking table using booktabs}
-\centering
-\label{table:good_table}
-\begin{tabular}{l c c c c}
-\toprule
-\multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\ 
-\cmidrule{2-5}
-  & mean & SD  & mean & SD  \\ 
-\midrule
-I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-
-I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-
-I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-
-I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-
-CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-
-CBL & 11.88 & 0.05 & 13.11 & 0.04\\ 
-\bottomrule
-\end{tabular}
-\end{table}
+\subsection{Deployment}
+To minimize disruption to clinic operations, a phased deployment approach will be adopted. This involves:
+\begin{enumerate}
+    \item \textbf{Pilot Deployment:} The initial pilot deployment will focus on 80 Percent of 1st year Students from the Department of Hospitality Management, Bachelor of Science in Tourism Management. This group will provide a representative sample for testing the system's functionalities and gathering comprehensive feedback. Faculty, staff, and healthcare providers will also be included in the pilot to ensure the system meets the needs of all user groups. The pilot group will be selected based on their diverse roles within the clinic and their willingness to provide feedback. The success of the pilot will be evaluated based on user feedback, system performance, and any reported issues.
+    \item \textbf{Full Implementation:} After successful completion of the pilot deployment and thorough staff training, the PIS will be fully implemented across the entire clinic. Ongoing support and maintenance will be provided to ensure the system's continued effectiveness.
+\end{enumerate}
