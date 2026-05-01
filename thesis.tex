@@ -86,6 +86,12 @@
 % Thesis title and author information, refernce file for biblatex
 \input{thesis-info}
 
+% Nomenclature definitions
+\input{Preamble/nomenclature}
+
+% Survey macros for Chapter 4 results
+\input{Preamble/survey_macros}
+
 % ***************************** Abstract Separate ******************************
 % To printout only the titlepage and the abstract with the PhD title and the
 % author name for submission to the Student Registry, use the `abstract' option in
@@ -177,11 +183,15 @@
 
 \begin{appendices} % Using appendices environment for more functunality
 
+% To hide sections from TOC, we set tocdepth to 0 locally for appendices
 \addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
 
 \include{Appendix1/appendix1}
 \include{Appendix2/appendix2}
 % You may add/remove Appendices
+
+% Reset tocdepth to 2 (original value) so subsequent passes don't hide everything
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 
 \end{appendices}
 

@@ -52,19 +52,57 @@ The USC-PIS was benchmarked against strict latency and concurrency thresholds:
 User Acceptance Testing (UAT) was conducted to gather qualitative and quantitative feedback, assessing whether the platform met the intended objectives of both the clinic staff and the student body.
 
 \subsection{Clinic Staff Evaluation}
-Testing was conducted with a sample of clinical staff members (N=7), consisting of Doctors, Nurses, and Dentists. The feedback indicated strong operational improvements over the traditional paper-based workflow.
+Testing was conducted with a clinical sample of N=7 staff members, consisting of two Doctors, three Nurses, and two Dentists. The majority of the respondents (5 out of 7) reported using the system on a daily basis. Based on the statistical means measured on a 5.00-point Likert scale, the staff provided moderate to positive feedback, reflecting both operational improvements and the transitional challenges of adopting a new digital workflow.
 
 \begin{itemize}
-    \item \textbf{Workflow Efficiency:} Staff respondents noted that the system was fast, easy, and made ``generating data easier''. Doctors explicitly praised the organization of patient profiles, stating it made tracking and physical examinations significantly more organized.
-    \item \textbf{Security Validation:} One Doctor raised a critical point regarding the necessity of security features to protect confidential data. This feedback successfully validated the architectural decision to implement PostgreSQL \texttt{pgcrypto} column-level encryption for all clinical diagnoses and patient records.
-    \item \textbf{System Retooling Iteration:} During early UAT, Nurses stated that while the reporting system was efficient, adding a feature to ``sort students by academic year'' would drastically improve monitoring. This feedback directly led to the engineering of the ``Application Retooling'' advanced filter bar, which dynamically sorts students by Academic Year and Semester.
+    \item \textbf{System Efficiency \& Accuracy:} The system achieved a mean score of 3.29/5.00 for efficiency in managing patient records, while data accuracy and the prevention of duplicate records both scored higher at a mean of 3.57/5.00. Staff respondents noted that the platform provides an ``Easy and fast system flow'' and makes ``generating data'' significantly easier. Doctors explicitly praised the organization of patient profiles, stating that the interface makes ``everything a lot more organize[d]''.
+    \item \textbf{Reporting \& Workflow Integration:} The generation of reports and the provision of tools for analyzing patient data both received a mean score of 3.29/5.00. During testing, Nurses stated that while the reporting system is efficient, ``adding a feature to sort students by academic year would further improve our ability to generate monitoring reports''. This direct qualitative feedback led to the engineering of the ``Application Retooling'' dynamic filter bar. However, the system's integration with existing manual workflows scored a mean of 3.14/5.00, and the ability to reduce the need for external tools scored 2.71/5.00, indicating that staff still heavily rely on parallel physical documentation.
+    \item \textbf{Overall Satisfaction \& Constructive Feedback:} The general satisfaction among clinic staff reached a mean of 3.29/5.00. While many users praised the streamlined data gathering, one Doctor provided highly critical feedback, citing concerns over ``No security features to protect confidential data'' and the continued necessity of ``written records for documentation and possibly, medico-legal purposes''. This critical feedback is particularly valuable; while it reflects a user misunderstanding of the system's invisible backend security, it strongly validates the architectural necessity of the PostgreSQL \texttt{pgcrypto} column-level encryption implemented by the researchers. Furthermore, it highlights a critical need to better educate medical staff on digital security protocols during the training phase.
 \end{itemize}
+
+% Insert Staff Figures
+\surveysection{Staff Evaluation: System Efficiency \& Reporting}
+\begin{center}
+    \begin{multicols}{2}
+        \surveypie{2/Doctor, 3/Nurse, 2/Dentist}{Staff Role in the Clinic}
+        \surveypie{5/Daily, 1/Weekly, 1/Monthly}{Frequency of using the system}
+        \surveybar{1}{1}{1}{3}{1}{The system is efficient for managing patient records.}
+        \surveybar{1}{0}{2}{2}{2}{The data stored and retrieved is accurate and reliable.}
+        \surveybar{1}{0}{2}{2}{2}{The system helps avoid duplicate or missing records.}
+        \surveybar{1}{1}{1}{2}{2}{The system improves time management and workflow.}
+        \surveybar{1}{1}{1}{3}{1}{Generating reports is easy.}
+        \surveybar{1}{1}{1}{3}{1}{Sufficient tools for analyzing patient data.}
+        \surveybar{1}{0}{3}{2}{1}{Feedback analysis is helpful for operations.}
+        \surveybar{1}{0}{2}{3}{1}{Logs and audit trails are sufficient.}
+        \surveybar{1}{1}{1}{3}{1}{The interface is intuitive and easy to use.}
+        \surveybar{1}{0}{3}{1}{1}{Technical issues are minimal.}
+        \surveybar{1}{2}{1}{1}{2}{Integrates well with clinic workflow.}
+        \surveybar{1}{3}{0}{2}{1}{Tasks are easier compared to manual.}
+        \surveybar{1}{3}{0}{3}{0}{Reduces need for external tools.}
+        \surveybar{1}{0}{3}{2}{1}{Overall, staff satisfaction.}
+    \end{multicols}
+\end{center}
 
 \subsection{Student Evaluation}
-UAT was also conducted with the student demographic to evaluate the platform's accessibility and feature relevance. Based on the survey responses, the system received overwhelmingly positive feedback.
+UAT was conducted with N=70 students from the CPE 1202L course to evaluate the platform’s accessibility, responsiveness, and feature relevance. Based on the survey responses and statistical means (measured on a 5.00-point Likert scale), the system received overwhelmingly positive feedback.
 
 \begin{itemize}
-    \item \textbf{Accessibility and Navigation:} Students consistently highlighted the system's clean user interface and accessibility. Respondents praised the ability to easily view their health records and noted that the interface was ``straightforward and easily accessible''.
-    \item \textbf{Highest Rated Features:} The student body overwhelmingly identified the \textbf{Patient Medical Dashboard}, the automated \textbf{BMI Calculation}, and the \textbf{Medical Certificate Issuance} as the most useful tools. One student explicitly noted that the ability to ``order'' a medical certificate online and receive it without queueing in a physical line was a massive operational improvement.
-    \item \textbf{Constructive Feedback:} While the system was highly praised, the most recurring constructive suggestions from the student demographic were requests for a \textbf{``Dark Mode''} toggle and further optimizations for mobile responsiveness. These suggestions have been documented to guide future post-deployment maintenance and iterative UI enhancements.
+    \item \textbf{Accessibility \& Usability:} Students consistently highlighted the system's clean user interface and accessibility. The system scored an exceptional mean of 4.70/5.00 for the ease of logging in and accessing personal records. The clarity of the health information displayed was rated even higher, achieving a mean of 4.76/5.00. Furthermore, system responsiveness and the ability to access the platform anytime and anywhere both achieved a high mean score of 4.61/5.00, indicating a highly stable and available web architecture.
+    \item \textbf{Feature Relevance \& Satisfaction:} The student body overwhelmingly identified the platform's core functionalities as highly beneficial, awarding a mean score of 4.60/5.00 for overall feature helpfulness. Specifically, the automated Medical Certificate request and issuance process received a mean of 4.47/5.00, while the timeliness of system notifications scored 4.49/5.00. In qualitative feedback, users specifically praised the Patient Medical Dashboard and the automated BMI Calculation tools, noting that the ability to order a medical certificate without queueing in physical lines was a massive operational improvement.
+    \item \textbf{Overall Satisfaction \& Constructive Feedback:} The general satisfaction with the USC-PIS reached an impressive mean of 4.76/5.00. While the system was highly praised, the most recurring constructive suggestions from the demographic were requests for a ``Dark Mode'' toggle and further optimizations for mobile responsiveness to prevent interface stretching. Additionally, several users noted that the strict password creation requirements during registration were slightly confusing and could benefit from clearer prompt instructions. These suggestions have been documented to guide future post-deployment maintenance.
 \end{itemize}
+
+% Insert Student Figures
+\surveysection{Student Evaluation: Accessibility \& Satisfaction}
+\begin{center}
+    \begin{multicols}{2}
+        \studentsurveybar{0}{2}{3}{9}{56}{It was easy for me to log in and access my records.}
+        \studentsurveybar{0}{0}{4}{9}{57}{The health information displayed was clear and easy to understand.}
+        \studentsurveybar{0}{1}{3}{18}{48}{The system was responsive and worked smoothly.}
+        \studentsurveybar{0}{0}{6}{15}{49}{I was able to access the system anytime and anywhere.}
+        \studentsurveybar{1}{1}{5}{19}{44}{The notifications (updates, reminders) were useful and timely.}
+        \studentsurveybar{1}{0}{4}{25}{40}{The certificate request and issuance process was clear and easy.}
+        \studentsurveybar{1}{1}{1}{19}{48}{The features of the system are helpful to me as a student.}
+        \studentsurveybar{0}{0}{1}{15}{54}{Overall, student satisfaction.}
+    \end{multicols}
+\end{center}

@@ -1,0 +1,170 @@
+% REQUIREMENTS-----------------------------------------------------------------
+\documentclass{article}
+\usepackage[margin=0.7in]{geometry} 
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+\usepackage{pgfplots}
+\usepackage{multicol} 
+\usepackage{capt-of} 
+\pgfplotsset{compat=1.18}
+\usepackage{xfp} 
+
+%========= STUDENT BAR CHART MACRO ===================================================
+\newcommand{\studentsurveybar}[6]{
+    \def\totalresponses{\fpeval{#1 + #2 + #3 + #4 + #5}}
+    \def\meanweight{\fpeval{round((1*#1 + 2*#2 + 3*#3 + 4*#4 + 5*#5) / \totalresponses, 2)}}
+
+    \begin{center}
+    \begin{minipage}{\linewidth} %
+        \vspace{-1em} % Reduces gap above chart
+        \begin{tikzpicture}
+            \begin{axis}[
+                ybar, bar width=0.6cm, ymin=0,
+                enlarge y limits={upper, value=0.2},
+                width=\linewidth, height=4.5cm, % Slightly shorter to fit more on page
+                axis y line*=left, ymajorgrids=true, ytick distance=20,
+                symbolic x coords={1,2,3,4,5}, xtick=data, enlarge x limits=0.2,
+                nodes near coords,
+                every node near coord/.append style={
+                    font=\tiny, color=white, anchor=north, yshift=-2pt
+                }
+            ]
+            \addplot[fill=brown!60!black, draw=none] coordinates {
+                (1,#1) [#1 (\fpeval{round(#1/\totalresponses*100, 1)}\%)]
+                (2,#2) [#2 (\fpeval{round(#2/\totalresponses*100, 1)}\%)]
+                (3,#3) [#3 (\fpeval{round(#3/\totalresponses*100, 1)}\%)]
+                (4,#4) [#4 (\fpeval{round(#4/\totalresponses*100, 1)}\%)]
+                (5,#5) [#5 (\fpeval{round(#5/\totalresponses*100, 1)}\%)]
+            };
+            \end{axis}
+        \end{tikzpicture}
+        \vspace{-0.5em}
+        \captionof{figure}{#6 (Mean: \meanweight)}
+        \vspace{0.5em} % Small buffer before next chart
+    \end{minipage}
+    \end{center}
+}
+
+%========= BAR CHART MACRO ===================================================
+\newcommand{\surveybar}[6]{
+    \def\totalresponses{\fpeval{#1 + #2 + #3 + #4 + #5}}
+    \def\meanweight{\fpeval{round((1*#1 + 2*#2 + 3*#3 + 4*#4 + 5*#5) / \totalresponses, 2)}}
+
+    \begin{center}
+    \begin{minipage}{\linewidth} %
+        \vspace{-1em} % Reduces gap above chart
+        \begin{tikzpicture}
+            \begin{axis}[
+                ybar, bar width=0.6cm, ymin=0,
+                enlarge y limits={upper, value=0.2},
+                width=\linewidth, height=4.5cm, % Slightly shorter to fit more on page
+                axis y line*=left, ymajorgrids=true, ytick distance=1,
+                symbolic x coords={1,2,3,4,5}, xtick=data, enlarge x limits=0.2,
+                nodes near coords,
+                every node near coord/.append style={
+                    font=\tiny, color=white, anchor=north, yshift=-2pt
+                }
+            ]
+            \addplot[fill=brown!60!black, draw=none] coordinates {
+                (1,#1) [#1 (\fpeval{round(#1/\totalresponses*100, 1)}\%)]
+                (2,#2) [#2 (\fpeval{round(#2/\totalresponses*100, 1)}\%)]
+                (3,#3) [#3 (\fpeval{round(#3/\totalresponses*100, 1)}\%)]
+                (4,#4) [#4 (\fpeval{round(#4/\totalresponses*100, 1)}\%)]
+                (5,#5) [#5 (\fpeval{round(#5/\totalresponses*100, 1)}\%)]
+            };
+            \end{axis}
+        \end{tikzpicture}
+        \vspace{-0.5em}
+        \captionof{figure}{#6 (Mean: \meanweight)}
+        \vspace{0.5em} % Small buffer before next chart
+    \end{minipage}
+    \end{center}
+}
+
+%========= PIE CHART MACRO ===================================================
+\newcommand{\surveypie}[2]{
+    \begin{center}
+    \begin{minipage}{\linewidth} %
+        \begin{tikzpicture}
+            \pie[sum = auto, text = legend, radius = 1.5]{#1}
+        \end{tikzpicture}
+        \captionof{figure}{#2}
+    \end{minipage}
+    \end{center}
+}
+
+%========= CONTINUOUS SECTION MACRO =========================================
+\newcommand{\surveysection}[1]{
+    \vspace{2.5em}           % Single top margin for the section
+    \hrule
+    \nopagebreak             % Prevents the line from being separated from the title
+    \vspace{0.6em}           % Space between the line and the text
+    \noindent{\large\textbf{#1}}
+    \par\nopagebreak         % Ensures the title stays with the chart below
+    \vspace{0.8em}           % Space before the first chart starts
+}
+
+\begin{document}
+
+\begin{multicols}{2}
+
+\section{Clinic Staff Eval Form}
+
+    \surveypie{2/Doctor, 3/Nurse, 2/Dentist}{Staff Role in the Clinic}
+    \surveypie{5/Daily, 1/Weekly, 1/Monthly}{Frequency of using the system}
+
+    \surveysection{System Efficiency \& Accuracy}
+    \surveybar{1}{1}{1}{3}{1}{The system is efficient for managing patient records.}
+    \surveybar{1}{0}{2}{2}{2}{The data stored and retrieved is accurate and reliable.}
+    \surveybar{1}{0}{2}{2}{2}{The system helps avoid duplicate or missing records.}
+    \surveybar{1}{1}{1}{2}{2}{The system improves time management and workflow.}
+
+    \surveysection{Reporting \& Administrative}
+    \surveybar{1}{1}{1}{3}{1}{Generating reports is easy.}
+    \surveybar{1}{1}{1}{3}{1}{Sufficient tools for analyzing patient data.}
+    \surveybar{1}{0}{3}{2}{1}{Feedback analysis is helpful for operations.}
+    \surveybar{1}{0}{2}{3}{1}{Logs and audit trails are sufficient.}
+
+    \surveysection{Usability \& Security}
+    \surveybar{1}{1}{1}{3}{1}{The interface is intuitive and easy to use.}
+    \surveybar{1}{0}{3}{1}{1}{Technical issues are minimal.}
+
+    \surveysection{Workflow \& Integration}
+    \surveybar{1}{2}{1}{1}{2}{Integrates well with clinic workflow.}
+    \surveybar{1}{3}{0}{2}{1}{Tasks are easier compared to manual.}
+    \surveybar{1}{3}{0}{3}{0}{Reduces need for external tools.}
+
+    \surveysection{Overall Satisfaction}
+    \surveybar{1}{0}{3}{2}{1}{Overall, I am satisfied with the system.}
+
+
+\newpage % STUDENT EVAL FORM==============================================================
+\section{Student Eval Form}
+
+    \surveysection{Accessibility \& Usability}
+    \studentsurveybar{0}{2}{3}{9}{56}{It was easy for me to log in and access my records.}
+    \studentsurveybar{0}{0}{4}{9}{57}{The health information displayed was clear and easy to understand.}
+    \studentsurveybar{0}{1}{3}{18}{48}{The system was responsive and worked smoothly (loading speed, navigation).}
+    \studentsurveybar{0}{0}{6}{15}{49}{I was able to access the system anytime and anywhere without major issues.}
+
+    \surveysection{Features  \& Satisfaction}
+    \studentsurveybar{1}{1}{5}{19}{44}{The notifications (updates, reminders) were useful and timely.}
+    \studentsurveybar{1}{0}{4}{25}{40}{The certificate request and issuance process was clear and easy.}
+    \studentsurveybar{1}{1}{1}{19}{48}{The features of the system (viewing records, notifications, certificate requests) are helpful to me as a student.}
+
+    \surveysection{Overall Satisfaction}
+    \studentsurveybar{0}{0}{1}{15}{54}{The notifications (updates, reminders) were useful and timely.}
+    
+
+
+
+
+
+
+
+
+\end{multicols}
+
+\end{document}
+
