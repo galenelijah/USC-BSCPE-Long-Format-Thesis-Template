@@ -10,101 +10,100 @@
     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
 \fi
 
-The conceptual framework for developing the USC Clinic’s PIS is centered on a user-centered design approach. This approach prioritizes the needs and workflows of both clinic staff and students, ensuring the system enhances healthcare delivery and patient satisfaction.
+This chapter details the methodology guiding the system design, core features, software tools utilized, and the overall deployment and testing strategies employed for the University of San Carlos Patient Information System (USC-PIS). The development process follows a highly structured, user-centered engineering approach tailored to modernize the clinic's healthcare delivery.
 
 \section{Conceptual Framework}
 
-The framework encompasses the following key principles:
+The conceptual framework for developing the USC-PIS is anchored in a User-Centered Design (UCD) approach, which prioritizes the workflows of clinic staff and the accessibility needs of the students. The legacy system at the USC Clinic was heavily reliant on fragmented, paper-based records (such as the Daily Treatment Records) and basic Google Forms for feedback, which introduced significant inefficiencies in data retrieval and program evaluation.
+
+To resolve these bottlenecks, the modernized framework was constructed upon the following core pillars:
+
 \begin{enumerate}
-    \item \textbf{User-Centered Design (UCD):} The development process will involve clinic staff and students from the outset, ensuring that the system is intuitive and meets their specific needs. Regular feedback sessions and iterative testing will be conducted to refine the system based on user input.
-    \item \textbf{Comprehensive Record Keeping:} The PIS will provide centralized and secure storage for all student health information, including medical histories, treatment plans, medications, and dental records. The system will focus on capturing comprehensive records from the start of student enrollment, ensuring complete and up-to-date information.
-    \item \textbf{Effective Health Information Dissemination:} The system will include targeted communication tools for sharing health information and promoting preventive care. This will be achieved through dedicated web pages for health campaigns featuring PubMats, banners, and other educational materials.
-    \item \textbf{Patient Feedback Collection and Analysis:} The PIS will integrate user-friendly digital evaluation forms and automated reminders to collect and analyze patient feedback. This continuous feedback loop will help the clinic identify areas for improvement and enhance the quality of care provided.
-    \item \textbf{Scalability and Flexibility:} The system will be designed to scale for future iterations and broader deployment across other clinics. The modular architecture will allow for the addition of new features and functionalities as the clinic's needs evolve.
-    \item \textbf{Basic Security Measures:} Initial implementation will include basic security measures to protect patient data, with plans to enhance security features in future updates. This ensures compliance with privacy regulations and safeguards sensitive information.
-    \item \textbf{Web-Based Platform:} The PIS will be a web-based application accessible through standard web browsers, ensuring ease of access for users. Hosting on Heroku will provide a robust and scalable environment for the application, simplifying deployment and management.
+    \item \textbf{Comprehensive Record Keeping:} Centralizing medical histories, treatment plans, and dental charts in a secure database.
+    \item \textbf{Effective Health Information Dissemination:} Utilizing dedicated digital campaigns to promote preventive care and health awareness across the campus.
+    \item \textbf{Patient Feedback Collection and Analysis:} Integrating automated, digital evaluation forms following consultations to enable data-driven service refinement.
+    \item \textbf{Basic Security Measures \& Privacy:} Enforcing robust data encryption and Role-Based Access Control (RBAC) to safeguard Protected Health Information (PHI).
 \end{enumerate}
 
 \section{Systems Analysis and Design}
 
-\subsection{Systems Analysis}
-The initial phase of the project will focus on understanding the current state of the USC Clinic’s patient information management through direct interaction with clinic staff and a review of existing forms.
+\subsection{System Architecture}
 
-\subsubsection{Ongoing Needs Assessment}
-A continuous needs assessment approach will be employed throughout the project life cycle, with regular meetings and feedback sessions with clinic staff. This iterative process will ensure that the PIS is closely tailored to the evolving needs and workflows of the clinic. The needs assessment will focus on:
-\begin{enumerate}
-    \item \textbf{Interviews:} Structured interviews will be conducted with clinic staff, including doctors, nurses, and administrators. The interview guide will focus on understanding their daily tasks, challenges they face with the current system, and desired features in a new PIS.
-    \item \textbf{Observations:} Direct observation of daily clinic operations will be carried out to identify bottlenecks, inefficiencies, and opportunities for improvement in the existing system. Observations will be documented in field notes, which will be analyzed to identify recurring patterns and themes.
-    \item \textbf{Form Analysis:} Existing forms for medical and dental health records will be thoroughly analyzed to understand the types of data being collected, their structure, and how they are used in the current workflow.
-\end{enumerate}
+The USC-PIS is engineered using a modern, scalable three-tier web architecture.
 
-\subsubsection{Current Processes of the USC Clinic}
-\begin{enumerate}
-    \item \textbf{Paper-Based Records:} The USC Clinic predominantly relies on paper-based systems for managing patient information. This includes storing medical histories, treatment plans, medications, and dental records in physical files. This approach leads to several inefficiencies, including difficulties in maintaining complete and accurate records, delays in retrieving patient information, and increased risk of data loss or damage.
-    \item \textbf{Patient Feedback Collection:} The clinic currently uses Google Forms to collect patient feedback. While this provides a basic mechanism for gathering input from students, it lacks integration with other clinic systems, making it challenging to systematically analyze the feedback and implement improvements based on student responses.
-    \item \textbf{Health Information Dissemination:} The clinic does not have a robust system in place for disseminating health information and educational materials to students. There are limited channels for reaching out to the student population with health campaigns, updates, and preventive care information. This gap limits the clinic’s ability to promote health awareness and timely interventions.
-\end{enumerate}
+\begin{itemize}
+    \item \textbf{Presentation Layer (Frontend):} Developed using React 18 with a Vite build system and Material-UI components, providing a highly responsive and low-latency Graphical User Interface (GUI) across various devices.
+    \item \textbf{Application Layer (Backend):} Powered by Python and Django 5.0.2, integrated with the Django REST Framework (DRF) 3.14.0. This layer handles business logic, automated notifications, and the system's strict RBAC middleware.
+    \item \textbf{Data Layer (Database):} The system utilizes a dual-database paradigm: PostgreSQL 16.8 for production deployment and SQLite for local development, utilizing vendor-aware logic to ensure environment compatibility.
+\end{itemize}
 
-\subsection{Systems Design}
-Informed by the findings of the systems analysis and ongoing needs assessment, the system design phase will focus on creating a detailed blueprint for the new PIS.
+\subsection{Core System Features and Integration}
 
-\subsubsection{Design Principles}
-The following design principles will guide the development of the PIS:
-\begin{enumerate}
-    \item \textbf{User-Centered Design (UCD):}
-    \begin{enumerate}
-        \item Prioritizing the needs and workflows of clinic staff and students.
-        \item Engaging users throughout all stages of development to ensure the system is intuitive and efficient.
-    \end{enumerate}
-    \item \textbf{Comprehensive Record Keeping:}
-    \begin{enumerate}
-        \item Providing centralized and secure storage for all student health information.
-        \item Facilitating effective and timely healthcare delivery with complete and up-to-date health records.
-    \end{enumerate}
-    \item \textbf{Effective Health Information Dissemination:}
-    \begin{enumerate}
-        \item Including tools for sharing health information and promoting preventive care.
-        \item Utilizing dedicated web pages for health campaigns.
-    \end{enumerate}
-    \item \textbf{Patient Feedback Collection and Analysis:}
-    \begin{enumerate}
-        \item Integrating user-friendly digital evaluation forms and automated reminders.
-        \item Systematically gathering input from students and implementing improvements based on feedback.
-    \end{enumerate}
-    \item \textbf{Scalability and Flexibility:}
-    \begin{enumerate}
-        \item Designing a scalable architecture for future enhancements and broader deployment.
-        \item Ensuring modular components can be easily updated or replaced.
-    \end{enumerate}
-    \item \textbf{Basic Security Measures:}
-    \begin{enumerate}
-        \item Implementing basic security measures to protect patient data.
-        \item Including encryption and secure user authentication, with plans for future security enhancements.
-    \end{enumerate}
-    \item \textbf{Web-Based Platform:}
-    \begin{enumerate}
-        \item Ensuring the PIS is accessible through standard web browsers.
-        \item Providing flexibility and ease of use for both clinic staff and students.
-    \end{enumerate}
-\end{enumerate}
+To support the clinic's operational workflows, the system implements several key clinical and administrative features:
 
-\section{Validation and Deployment}
+\begin{itemize}
+    \item \textbf{Clinical Records and Retooling:} A unified interface manages both medical and dental data entry. The dental module specifically enforces FDI tooth notation (11-48) through regex validation. The backend incorporates an advanced real-time sorting logic to segment students by Academic Year and Semester.
+    \item \textbf{Medical Certificate Issuance:} The system digitalizes the USC Form ACA-HSD-04F workflow. Nurses are authorized to draft certificates, but strict RBAC implementation requires a user with a DOCTOR role to execute the final approval. Upon approval, a dual-engine module generates a landscape-formatted PDF.
+    \item \textbf{Health Campaigns and Feedback Loops:} Health awareness announcements are deployed to student dashboards governed strictly by active date ranges. When a clinical record is created, a background pipeline powered by Celery and Redis asynchronously schedules a 24-hour follow-up feedback evaluation request to the patient.
+\end{itemize}
 
-This section details the strategies and processes for ensuring the quality, functionality, and adoption of the PIS within the USC Clinic.
+\subsection{Security Measures}
 
-\subsection{Validation and Testing}
-A comprehensive validation and testing plan will be implemented to ensure that the PIS meets the requirements identified during the needs assessment and adheres to the design principles outlined. This plan includes:
-\begin{enumerate}
-    \item \textbf{Unit Testing:} Individual components and modules of the PIS will be tested in isolation to verify their functionality and correct operation.
-    \item \textbf{Integration Testing:} The interaction and data flow between different modules of the PIS will be tested to ensure seamless integration and data integrity.
-    \item \textbf{Performance Testing:} The system will be subjected to performance testing to assess its responsiveness, speed, and ability to handle expected workloads.
-    \item \textbf{User Acceptance Testing (UAT):} A select group of users, including a representative sample of students, faculty, staff, and healthcare providers, will be invited to test the PIS in a controlled environment. Their feedback will be used to identify any usability issues, bugs, or areas for improvement.
-    \item \textbf{Iterative Feedback and Refinement:} Based on the feedback from the UAT, iterative rounds of testing and refinement will be conducted to ensure the system meets the needs of all user groups.
-\end{enumerate}
+Data privacy is a foundational element of the USC-PIS design. The system utilizes PostgreSQL's native \texttt{pgcrypto} extension to apply military-grade symmetric encryption (AES-256) at the column level. Sensitive patient data, including names and clinical diagnoses, bypass standard plain-text storage and are strictly converted into secure \texttt{BinaryField} bytea hashes automatically via Django \texttt{post\_save} signals. Furthermore, all file uploads are governed by an interception proxy that strictly rejects executable scripts, maintaining a 100\% rejection rate against malicious payloads.
 
-\subsection{Deployment}
-To minimize disruption to clinic operations, a phased deployment approach will be adopted. This involves:
-\begin{enumerate}
-    \item \textbf{Pilot Deployment:} The initial pilot deployment will focus on 80 Percent of 1st year Students from the Department of Hospitality Management, Bachelor of Science in Tourism Management. This group will provide a representative sample for testing the system's functionalities and gathering comprehensive feedback. Faculty, staff, and healthcare providers will also be included in the pilot to ensure the system meets the needs of all user groups. The pilot group will be selected based on their diverse roles within the clinic and their willingness to provide feedback. The success of the pilot will be evaluated based on user feedback, system performance, and any reported issues.
-    \item \textbf{Full Implementation:} After successful completion of the pilot deployment and thorough staff training, the PIS will be fully implemented across the entire clinic. Ongoing support and maintenance will be provided to ensure the system's continued effectiveness.
-\end{enumerate}
+\section{Software Tools}
+
+The development of the web-based PIS relies on an enterprise-grade technology stack:
+
+\begin{itemize}
+    \item \textbf{Frontend Technologies:} React 18, Vite, Material-UI, and Redux Toolkit for state management.
+    \item \textbf{Backend Technologies:} Python, Django 5.0.2, Django REST Framework 3.14.0, and Celery.
+    \item \textbf{Database:} PostgreSQL 16.8 (Production) and SQLite (Development).
+    \item \textbf{Enterprise Integrations:} Heroku for cloud hosting and CI/CD pipelines, Cloudinary for scalable Content Delivery Network (CDN) file storage, and the Gmail API (OAuth 2.0) for bypassing strict SMTP security blocks to dispatch notifications reliably.
+\end{itemize}
+
+\section{Development and Testing Strategy}
+
+The development adhered to an Agile methodology, ensuring iterative cycles that adapted to clinical staff feedback. To ensure software quality and alignment with functional requirements, the system underwent a rigorous, multi-layered testing pipeline.
+
+\subsection{Functional and Security Testing}
+
+\begin{itemize}
+    \item \textbf{Unit Testing (UT-01 to UT-06):} Validated isolated components and logic constraints. Key tests verified the strict binary storage of \texttt{pgcrypto} encrypted data, accurate regex enforcement of the FDI 11-48 dental charting range, and the rejection of \texttt{.EXE} and \texttt{.JS} file uploads to secure system integrity.
+    \item \textbf{Integration Testing (IT-01 to IT-05):} Evaluated end-to-end interactions between the frontend, backend, and external APIs. This included simulating the end-to-end medical certificate pipeline (from a Nurse's draft to a Doctor's approval to PDF rendering) and executing RBAC stress tests to ensure unauthorized users could not bypass role-gated endpoints.
+\end{itemize}
+
+\subsection{Performance Testing}
+
+Quantitative benchmarks evaluated the system's operational capability to handle peak clinical loads (PT-01 to PT-04).
+
+\begin{itemize}
+    \item \textbf{Search Efficiency:} Patient search query latency was successfully recorded between 123.16ms and 127.81ms, functioning nearly four times faster than the 500ms maximum threshold.
+    \item \textbf{PDF Generation:} The dual-engine PDF module consistently generated official Medical Certificates in 122.93ms to 124.53ms.
+    \item \textbf{Concurrency:} The architecture stabilized processing 20 simultaneous HTTP requests in 0.66 seconds with a 0\% data drop rate.
+\end{itemize}
+
+\subsection{User Acceptance Testing (UAT)}
+
+Preliminary User Acceptance Testing (UAT) was conducted to measure the system's usability and feature relevance.
+
+\begin{itemize}
+    \item \textbf{Staff Evaluation (N=7):} Nurses, Doctors, and Dentists noted strong efficiency improvements over legacy operations, citing that generating data was significantly easier. Feedback from this group directly resulted in the engineering of the ``Application Retooling'' filter bar to sort students dynamically by Academic Year.
+    \item \textbf{Student Evaluation:} UAT was conducted with the student demographic to evaluate accessibility. Based on the responses, the system received overwhelmingly positive feedback, with users praising the Patient Medical Dashboard and automated BMI calculations. Constructive feedback included a request for a ``Dark Mode'' toggle and improved mobile responsiveness.
+\end{itemize}
+
+\section{Validation and Pilot Deployment}
+
+To guarantee a smooth transition from a paper-based system to the fully digital USC-PIS, the deployment will follow a highly structured roll-out.
+
+\subsection{Pilot Deployment}
+
+The initial pilot deployment will exclusively target 80\% of 1st-year students from the Bachelor of Science in Tourism Management (BSTM), alongside selected clinical staff. This targeted demographic offers a representative sample size to accurately validate data synchronization, performance thresholds, and operational workflows under real clinic loads before expanding the system to the entire university.
+
+\subsection{Training and Support}
+
+To equip the clinic personnel with the necessary digital competency, training will be executed via a hybrid approach utilizing hands-on demonstration modules supplemented by comprehensive User Manuals.
+
+\begin{itemize}
+    \item \textbf{Role-Specific Modules:} Nurses will be trained to utilize the Retooling Filter Bar to segment patient datasets via Academic Year logic. Dentists will be trained to optimize high-volume clinic days by utilizing the streamlined ``Consultation Only'' mode. Administrative Staff will be trained on the asynchronous Celery-powered reporting module and the strict RBAC constraints mandated for Medical Certificate issuance.
+\end{itemize}

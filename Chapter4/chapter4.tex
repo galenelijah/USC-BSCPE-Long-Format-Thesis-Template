@@ -1,33 +1,70 @@
+%*******************************************************************************
+%****************************** Fourth Chapter *********************************
+%*******************************************************************************
+
 \chapter{Results and Discussion}
 
-% **************************** Define Graphics Path **************************
-% \ifpdf
-%     \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
-% \else
-%     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
-% \fi
+\ifpdf
+    \graphicspath{{Chapter4/Figs/Raster/}{Chapter4/PDF/}{Chapter4/Figs/}}
+\else
+    \graphicspath{{Chapter4/Figs/Vector/}{Chapter4/Figs/}}
+\fi
 
-\section{First section of the fourth chapter}
-And now I begin my fourth chapter here \dots
+This chapter presents the outcomes of the various evaluations conducted throughout the development of the web-based University of San Carlos Patient Information System (USC-PIS). It covers the results of the functional testing (Unit and Integration), non-functional testing (Performance and Security), and User Acceptance Testing (UAT). The findings validate the system’s reliability, efficiency, and usability in modernizing the clinic's healthcare delivery.
 
-   
-\subsection{First subsection in the first section}
-\dots and some more 
+\section{Functional Testing}
 
-\subsection{Second subsection in the first section}
-\dots and some more \dots
+Functional testing was conducted to verify that both isolated modules and integrated workflows behaved exactly as specified in the software requirements. The testing pipeline was divided into Unit Testing and Integration Testing, ensuring rigorous validation of clinical logic and role-based constraints.
 
-\subsubsection{First subsub section in the second subsection}
-\dots and some more in the first subsub section otherwise it all looks the same doesn't it? well we can add some text to it \dots
+\subsection{Unit Testing Results}
+Unit testing evaluated the foundational components and security middleware of the USC-PIS. A total of six primary unit tests (UT-01 to UT-06) were executed to validate clinical logic and database security.
 
-\subsection{Third subsection in the first section}
-\dots and some more \dots
+\begin{itemize}
+    \item \textbf{Database Security (UT-01):} Validated the PostgreSQL \texttt{pgcrypto} column-level encryption. The test successfully confirmed that sensitive patient data (Names and Diagnoses) bypassed plain-text memory and were stored strictly as \texttt{BinaryField} (\texttt{bytea}) hashes.
+    \item \textbf{Clinical Logic \& Filtering (UT-02 \& UT-04):} Verified the advanced Academic Year-Level filtering logic, achieving 100\% accuracy in isolating 1st to 4th-year students. Additionally, the dental module successfully enforced regex validation for the FDI tooth notation, strictly accepting the 11-48 numerical range and blocking invalid inputs like ``1,2''.
+    \item \textbf{System Integrity (UT-03, UT-05, UT-06):} Validated the Multi-Factor Authentication (MFA) expiration logic, the SafeList fast-pass onboarding which correctly auto-assigned DOCTOR and NURSE roles, and the File Security audit which maintained a 100\% rejection rate against malicious payloads such as \texttt{.EXE} and \texttt{.JS} scripts. All unit tests passed without failure.
+\end{itemize}
 
-\subsubsection{First subsub section in the third subsection}
-\dots and some more in the first subsub section otherwise it all looks the same doesn't it? well we can add some text to it and some more and some more and some more and some more and some more and some more and some more \dots
+\subsection{Integration Testing Results}
+Integration testing (IT-01 to IT-05) verified that different modules—such as frontend forms, backend APIs, and external enterprise integrations—worked seamlessly together.
 
-\subsubsection{Second subsub section in the third subsection}
-\dots and some more in the first subsub section otherwise it all looks the same doesn't it? well we can add some text to it \dots
+\begin{itemize}
+    \item \textbf{Clinical Pipeline (IT-01):} Simulated the end-to-end medical certificate workflow (USC Form ACA-HSD-04F). The test successfully verified the sequence from a Nurse's draft to a Doctor's approval, culminating in the automated generation of the landscape-formatted PDF.
+    \item \textbf{Role-Based Access Control (IT-03):} Executed a security stress test on the RBAC middleware. The system accurately restricted cross-patient access, returning 403 (Denied) or 404 (Hidden) HTTP statuses for unauthorized users attempting to access role-gated endpoints.
+    \item \textbf{Automated Workflows (IT-02 \& IT-05):} Verified the real-time feedback analytics dashboard and the health campaign dissemination. The system successfully displayed administrative health alerts directly to student feeds and persisted post-visit survey data into the database.
+\end{itemize}
 
-\section{Second section of the third chapter}
-and here I write more \dots
+\section{Non-Functional Testing}
+
+To ensure the system could handle peak clinical loads and address the operational inefficiencies of the legacy paper-based method, rigorous non-functional performance testing (PT-01 to PT-04) was conducted.
+
+\subsection{Performance Benchmarking Results}
+The USC-PIS was benchmarked against strict latency and concurrency thresholds:
+
+\begin{itemize}
+    \item \textbf{Search Efficiency (PT-04):} To resolve the inefficiency problem highlighted in Chapter 1, the patient search latency was tested on a seeded database of over 100 patient records. The search query returned results in \textbf{127.81 ms}, operating nearly four times faster than the 500 ms maximum allowable limit.
+    \item \textbf{PDF Generation (PT-01):} The dual-engine PDF module (utilizing \texttt{xhtml2pdf} with a \texttt{reportlab} fallback) successfully generated official Medical Certificates in \textbf{122.93 ms}, functioning well below the 1000 ms limit constraint.
+    \item \textbf{Concurrency \& Overhead (PT-02 \& PT-03):} The system's architecture stabilized while processing 20 simultaneous HTTP requests in \textbf{0.66 seconds}, suffering a 0\% data drop rate. Furthermore, the \texttt{pgcrypto} encryption integration proved highly efficient, registering a computational overhead of \textbf{< 1.0 ms} during database commits.
+\end{itemize}
+
+\section{User Acceptance Testing (UAT) Results and Feedback}
+
+User Acceptance Testing (UAT) was conducted to gather qualitative and quantitative feedback, assessing whether the platform met the intended objectives of both the clinic staff and the student body.
+
+\subsection{Clinic Staff Evaluation}
+Testing was conducted with a sample of clinical staff members (N=7), consisting of Doctors, Nurses, and Dentists. The feedback indicated strong operational improvements over the traditional paper-based workflow.
+
+\begin{itemize}
+    \item \textbf{Workflow Efficiency:} Staff respondents noted that the system was fast, easy, and made ``generating data easier''. Doctors explicitly praised the organization of patient profiles, stating it made tracking and physical examinations significantly more organized.
+    \item \textbf{Security Validation:} One Doctor raised a critical point regarding the necessity of security features to protect confidential data. This feedback successfully validated the architectural decision to implement PostgreSQL \texttt{pgcrypto} column-level encryption for all clinical diagnoses and patient records.
+    \item \textbf{System Retooling Iteration:} During early UAT, Nurses stated that while the reporting system was efficient, adding a feature to ``sort students by academic year'' would drastically improve monitoring. This feedback directly led to the engineering of the ``Application Retooling'' advanced filter bar, which dynamically sorts students by Academic Year and Semester.
+\end{itemize}
+
+\subsection{Student Evaluation}
+UAT was also conducted with the student demographic to evaluate the platform's accessibility and feature relevance. Based on the survey responses, the system received overwhelmingly positive feedback.
+
+\begin{itemize}
+    \item \textbf{Accessibility and Navigation:} Students consistently highlighted the system's clean user interface and accessibility. Respondents praised the ability to easily view their health records and noted that the interface was ``straightforward and easily accessible''.
+    \item \textbf{Highest Rated Features:} The student body overwhelmingly identified the \textbf{Patient Medical Dashboard}, the automated \textbf{BMI Calculation}, and the \textbf{Medical Certificate Issuance} as the most useful tools. One student explicitly noted that the ability to ``order'' a medical certificate online and receive it without queueing in a physical line was a massive operational improvement.
+    \item \textbf{Constructive Feedback:} While the system was highly praised, the most recurring constructive suggestions from the student demographic were requests for a \textbf{``Dark Mode''} toggle and further optimizations for mobile responsiveness. These suggestions have been documented to guide future post-deployment maintenance and iterative UI enhancements.
+\end{itemize}

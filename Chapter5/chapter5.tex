@@ -1,19 +1,40 @@
-\chapter{Conclusions}
+%*******************************************************************************
+%****************************** Fifth Chapter **********************************
+%*******************************************************************************
 
-% **************************** Define Graphics Path **************************
-% \ifpdf
-%     \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
-% \else
-%     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
-% \fi
+\chapter{Conclusions and Recommendations}
+
+\ifpdf
+    \graphicspath{{Chapter5/Figs/Raster/}{Chapter5/PDF/}{Chapter5/Figs/}}
+\else
+    \graphicspath{{Chapter5/Figs/Vector/}{Chapter5/Figs/}}
+\fi
 
 \section{Summary}
-Summary of thesis here \dots
 
-   
+The development of the web-based University of San Carlos Patient Information System (USC-PIS) was undertaken to modernize the USC-DC clinic's legacy paper-based operations. The project aimed to establish a centralized, secure, and highly efficient digital platform for managing clinical records, issuing medical certificates, disseminating health campaigns, and automating patient feedback.
+
+The system was engineered utilizing a modern three-tier architecture: a React 18 frontend, a Django 5.0.2 backend, and a PostgreSQL database utilizing vendor-aware logic for dual-environment deployment. To ensure comprehensive system reliability, the project underwent a rigorous Software Quality Assurance (SQA) audit encompassing functional testing, non-functional performance benchmarking, and security validation. Following system stabilization, a pilot deployment was structured to target 80\% of 1st-year students from the Bachelor of Science in Tourism Management (BSTM), along with selected clinical staff, to validate real-world operational readiness.
+
 \section{Conclusions}
-Conclusions here \dots
 
+The implementation of the USC-PIS successfully addressed the operational inefficiencies and data fragmentation of the clinic's previous paper-based approach. Based on the rigorous testing and user evaluations, the following conclusions are drawn:
+
+\begin{itemize}
+    \item \textbf{Functional Reliability and Security:} The system achieved a 100\% pass rate across all functional unit and integration tests. The integration of PostgreSQL's \texttt{pgcrypto} extension was highly successful, ensuring that Protected Health Information (PHI), such as patient names and clinical diagnoses, is strictly converted into encrypted \texttt{BinaryField} (\texttt{bytea}) hashes without noticeable computational overhead. Furthermore, security measures such as Role-Based Access Control (RBAC) and strict file upload validations correctly blocked unauthorized access and malicious executable scripts.
+    \item \textbf{Operational Efficiency:} Performance testing empirically proved that the system resolved previous manual bottlenecks. Patient search latency across the database executed between 123.16ms and 127.81ms, functioning nearly four times faster than the required 500ms threshold. The automated generation of the USC Form ACA-HSD-04F Medical Certificate via the dual-engine PDF module consistently completed in 122.93ms to 124.53ms. The system also proved highly scalable, sustaining 20 concurrent HTTP requests in 0.66 seconds with a 0\% data failure rate.
+    \item \textbf{User Satisfaction and Workflow Alignment:} User Acceptance Testing (UAT) demonstrated high satisfaction among both clinic staff and students. Staff confirmed that features like the ``Application Retooling'' filter—which sorts patients dynamically by Academic Year and Semester—greatly improved monitoring and tracking. The student demographic overwhelmingly praised the system's accessibility, highlighting the Patient Medical Dashboard, the automated BMI Calculation, and the convenience of requesting medical certificates online without enduring physical queues.
+\end{itemize}
+
+Overall, the USC-PIS is a fully matured, production-ready system that successfully digitalizes clinical workflows while maintaining strict data privacy, proving to be a massive operational improvement for the university clinic.
 
 \section{Recommendations}
-Recommendations here \dots
+
+Based on the testing results, the design constraints of the current deployment, and the constructive feedback gathered during the User Acceptance Testing (UAT), the following recommendations are proposed for future iterations of the USC-PIS:
+
+\begin{enumerate}
+    \item \textbf{User Interface Enhancements:} While the system was highly praised for its clean navigation, multiple student respondents requested the addition of a ``Dark Mode'' toggle and suggested further UI optimizations to ensure the interface is perfectly responsive on narrower mobile screens.
+    \item \textbf{Expansion of Clinical Scope:} Due to the time constraints of the academic project, complex inventory management and patient medication tracking were deferred. Future developers should integrate a medication inventory module to track clinic stock and automatically link dispensed medications to the patient's unified timeline.
+    \item \textbf{Enterprise System Integration:} The current system utilizes its own secure authentication flow to accommodate standard hosting constraints. Future iterations should aim to integrate the official University Single Sign-On (SSO) infrastructure to further streamline the login process for students and faculty.
+    \item \textbf{University-Wide Deployment:} Following the successful pilot deployment targeting the BSTM students, it is recommended that the system be gradually rolled out to all remaining departments and colleges within the university to maximize the impact of the health campaigns and centralized record-keeping.
+\end{enumerate}

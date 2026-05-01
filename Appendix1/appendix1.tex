@@ -1,131 +1,306 @@
 % ******************************* Thesis Appendix A ****************************
-\chapter{How to install \LaTeX} 
 
-\section*{Windows OS}
+\chapter{Software Requirements Specification (SRS)}
+\label{appendix:srs}
 
-\subsection*{TeXLive package - full version}
-\begin{enumerate}
-\item	Download the TeXLive ISO (2.2GB) from\\
-\href{https://www.tug.org/texlive/}{https://www.tug.org/texlive/}
-\item	Download WinCDEmu (if you don't have a virtual drive) from \\
-\href{http://wincdemu.sysprogs.org/download/}
-{http://wincdemu.sysprogs.org/download/}
-\item	To install Windows CD Emulator follow the instructions at\\
-\href{http://wincdemu.sysprogs.org/tutorials/install/}
-{http://wincdemu.sysprogs.org/tutorials/install/}
-\item	Right click the iso and mount it using the WinCDEmu as shown in \\
-\href{http://wincdemu.sysprogs.org/tutorials/mount/}{
-http://wincdemu.sysprogs.org/tutorials/mount/}
-\item	Open your virtual drive and run setup.pl
-\end{enumerate}
+\section{Introduction}
 
-or
+\subsection{Purpose \& Scope}
+The University of San Carlos (USC) Clinic mandates a transition from a fragmented, paper-based operations model to a fully digital Health Information System (HIS). The USC-PIS is engineered to centralize and secure student health information by capturing comprehensive medical histories, treatment plans, medications, and dental records. The system scope encompasses the complete digital replacement of the Daily Treatment Records (DTR), consultation management, medical certificate issuance, health awareness campaigns, automated patient notifications, and rigorous feedback analytics.
 
-\subsection*{Basic MikTeX - \TeX~ distribution}
-\begin{enumerate}
-\item	Download Basic-MiK\TeX (32bit or 64bit) from\\
-\href{http://miktex.org/download}{http://miktex.org/download}
-\item	Run the installer 
-\item	To add a new package go to Start >> All Programs >> MikTex >> Maintenance (Admin) and choose Package Manager
-\item	Select or search for packages to install
-\end{enumerate}
+\subsection{Design \& Implementation Constraints}
+The "Modernizing the USC-DC Clinic's Patient Information System" project is a web-based system developed under the timeframe and academic constraints of the CpE Design course sequence. As a student-led initiative, the following constraints and boundaries apply to the current deployment:
+\begin{itemize}
+    \item \textbf{Hardware \& Hosting Constraints:} The system relies on Heroku's basic tier hosting and PostgreSQL, deliberately excluding costly enterprise integrations like Single Sign-On (SSO).
+    \item \textbf{Inventory Management:} Medication stock tracking is not included.
+    \item \textbf{Billing Integration:} Advanced insurance processing and financial management are excluded.
+    \item \textbf{Appointment Scheduling:} Consultations are strictly handled via a manual walk-in workflow as per clinic request.
+    \item \textbf{Patient Medication Tracking:} This functionality is deferred to future iterations.
+\end{itemize}
+To maintain a strict boundary on the current system deployment, the following features are deliberately excluded from the current thesis scope and deferred to future enterprise phases.
 
-\subsection*{TexStudio - \TeX~ editor}
-\begin{enumerate}
-\item	Download TexStudio from\\
-\href{http://texstudio.sourceforge.net/\#downloads}
-{http://texstudio.sourceforge.net/\#downloads} 
-\item	Run the installer
-\end{enumerate}
+\subsection{Definitions}
+\begin{itemize}
+    \item \textbf{PII/PHI (Personally Identifiable Information / Protected Health Information):} Sensitive patient data protected by the database architecture.
+    \item \textbf{pgcrypto:} A native PostgreSQL extension integrated into the system for applying industry-standard, column-level symmetric encryption to sensitive data.
+    \item \textbf{RBAC (Role-Based Access Control):} A security paradigm implemented via Django REST Framework (DRF) permission classes to restrict access dynamically.
+    \item \textbf{FDI Notation:} The standard numerical tooth identification system (11-48) enforced via regex constraints within the Dental Records module.
+\end{itemize}
 
-\section*{Mac OS X}
-\subsection*{MacTeX - \TeX~ distribution}
-\begin{enumerate}
-\item	Download the file from\\
-\href{https://www.tug.org/mactex/}{https://www.tug.org/mactex/}
-\item	Extract and double click to run the installer. It does the entire configuration, sit back and relax.
-\end{enumerate}
+\section{Overall Description}
 
-\subsection*{TexStudio - \TeX~ editor}
-\begin{enumerate}
-\item	Download TexStudio from\\
-\href{http://texstudio.sourceforge.net/\#downloads}
-{http://texstudio.sourceforge.net/\#downloads} 
-\item	Extract and Start
-\end{enumerate}
+\subsection{System Perspective}
+The USC-PIS is built upon a modern, three-tier web architecture. The backend is powered by Django 5.0.2 and Django REST Framework, while the presentation layer operates on React 18 using a Vite build system and Material-UI components. The data layer relies on a dual-database environment featuring PostgreSQL for production and SQLite for local development, enforcing vendor-aware logic to prevent compatibility errors during testing. External enterprise integrations include Heroku for hosting, Cloudinary for scalable media storage, and the Gmail API utilizing OAuth 2.0 to bypass "less secure app" restrictions for clinical communications.
 
+\subsection{User Classes \& Characteristics}
+The system strictly enforces user authorizations across hierarchical classes:
 
-\section*{Unix/Linux}
-\subsection*{TeXLive - \TeX~ distribution}
-\subsubsection*{Getting the distribution:}
-\begin{enumerate}
-\item	TexLive can be downloaded from\\
-\href{http://www.tug.org/texlive/acquire-netinstall.html}
-{http://www.tug.org/texlive/acquire-netinstall.html}.
-\item	TexLive is provided by most operating system you can use (rpm,apt-get or yum) to get TexLive distributions
-\end{enumerate}
+\begin{table}[htbp]
+\centering
+\caption{User Classes \& Capabilities}
+\begin{tabular}{|p{0.2\textwidth}|p{0.75\textwidth}|}
+\hline
+\textbf{Role} & \textbf{Access Level \& Capabilities} \\
+\hline
+\textbf{Admin} & Possesses full system access, including global RBAC adjustments, system health monitoring, email system administration, and report generation. \\
+\hline
+\textbf{Doctor / Dentist} & Endowed with full administrative and clinical access, only the Doctor role is uniquely authorized to approve medical certificates. Both can prescribe treatments and access all reporting/feedback analytics. \\
+\hline
+\textbf{Nurse} & Supervisory and data-entry capacity; authorized to cater to patients, record vital signs, input treatment plans, and draft medical certificates for doctor approval. \\
+\hline
+\textbf{Staff} & Manages clinic administration, patient intake, certificate issuance, report generation, and health campaign creation. All other clinical roles (Admin, Doctor, Dentist, and Nurse) possess the authorization to perform all tasks and access all functionalities available to this Staff role. \\
+\hline
+\textbf{Student / Faculty (Patient)} & Restricted to their own data; permitted only to read personal medical/dental timelines, submit visit-linked feedback, and view public health campaigns. \\
+\hline
+\end{tabular}
+\end{table}
 
-\subsubsection*{Installation}
-\begin{enumerate}
-\item	Mount the ISO file in the mnt directory
-\begin{verbatim}
-mount -t iso9660 -o ro,loop,noauto /your/texlive####.iso /mnt
-\end{verbatim}
+\subsection{Hardware Interfaces}
+\begin{itemize}
+    \item \textbf{Client Devices:} A standard desktop computer, laptop, or mobile device capable of rendering modern web applications.
+    \item \textbf{Network:} A stable broadband internet connection is required for real-time data exchange with the cloud servers.
+\end{itemize}
 
-\item	Install wget on your OS (use rpm, apt-get or yum install)
-\item	Run the installer script install-tl.
-\begin{verbatim}
-	cd /your/download/directory
-	./install-tl
-\end{verbatim}
-\item	Enter command `i' for installation
+\subsection{Software Interfaces}
+\begin{itemize}
+    \item \textbf{User Interface (UI):} A web-based Graphical User Interface (GUI) built on React 18 and Material-UI, ensuring responsive, low-latency interactions across all devices.
+    \item \textbf{Backend Framework:} Django 5.0.2 acts as the core application layer, providing secure RESTful API endpoints.
+    \item \textbf{Database Management:} PostgreSQL handles relational data storage, utilizing the \texttt{pgcrypto} extension for data-at-rest encryption.
+    \item \textbf{External APIs:} The system interfaces with the Gmail API (via OAuth 2.0) for automated communication, bypassing strict security blocks, and Cloudinary for scalable Content Delivery Network (CDN) file storage.
+\end{itemize}
 
-\item	Post-Installation configuration:\\
-\href{http://www.tug.org/texlive/doc/texlive-en/texlive-en.html\#x1-320003.4.1}
-{http://www.tug.org/texlive/doc/texlive-en/texlive-en.html\#x1-320003.4.1} 
-\item	Set the path for the directory of TexLive binaries in your .bashrc file
-\end{enumerate}
+\section{Functional Requirements}
 
-\subsubsection*{For 32bit OS}
-For Bourne-compatible shells such as bash, and using Intel x86 GNU/Linux and a default directory setup as an example, the file to edit might be \begin{verbatim}
-edit $~/.bashrc file and add following lines
-PATH=/usr/local/texlive/2011/bin/i386-linux:$PATH; 
-export PATH 
-MANPATH=/usr/local/texlive/2011/texmf/doc/man:$MANPATH;
-export MANPATH 
-INFOPATH=/usr/local/texlive/2011/texmf/doc/info:$INFOPATH;
-export INFOPATH
-\end{verbatim}
-\subsubsection*{For 64bit OS}
-\begin{verbatim}
-edit $~/.bashrc file and add following lines
-PATH=/usr/local/texlive/2011/bin/x86_64-linux:$PATH;
-export PATH 
-MANPATH=/usr/local/texlive/2011/texmf/doc/man:$MANPATH;
-export MANPATH 
-INFOPATH=/usr/local/texlive/2011/texmf/doc/info:$INFOPATH;
-export INFOPATH
+\begin{itemize}
+    \item \textbf{Identity Management (authentication):} Secures access via the \texttt{/api/auth/} mount point. USC domain enforcement mandates that student registrations end in \texttt{@usc.edu.ph}. A \textbf{SafeList} registration feature maps authorized clinical emails to roles, bypassing standard MFA logic to automatically assign professional access.
+    \item \textbf{Clinical Records \& Retooling (patients):} Data entry uses a unified record component (\texttt{MedicalRecord.jsx} and \texttt{Dental.jsx}). \textbf{Retooling Focus:} An advanced real-time filtering architecture processes queries via dynamic parameter filtering (\texttt{year\_level} and \texttt{academic\_year}). This logic calculates Semesters autonomously to sort students accurately.
+    \item \textbf{Health Awareness (health\_info):} Manages the lifecycle of clinical announcements across 13 defined categories (e.g., VACCINATION). Visibility is purely governed by \texttt{start\_date} and \texttt{end\_date} parameters; manual status toggling is deprecated.
+    \item \textbf{Administrative Workflows (medical\_certificates):} Digitalizes the USC Form ACA-HSD-04F workflow. Nurses draft the certificate, but Doctors hold exclusive authority (\texttt{IsDoctorUser}) to approve the final document.
+    \item \textbf{Feedback \& Notifications (feedback, notifications):} Feedback is linked uniquely to clinical visits via backend constraints, restricting users to one submission per visit. Creating a health record executes a signal that schedules a mandatory 24-hour follow-up alert.
+    \item \textbf{Reports (reports):} Supports background processing logic (via Celery/Redis) to dynamically synthesize clinic reports, exporting data natively to PDF, Excel, and CSV without blocking HTTP threads.
+\end{itemize}
 
-\end{verbatim}
+\section{Data \& Security Requirements}
 
+\begin{itemize}
+    \item \textbf{Encryption-at-Rest:} Implements industry-level data encryption mapped to PostgreSQL's \texttt{pgcrypto} extension. Fields such as \texttt{illness\_enc} and \texttt{diagnosis\_enc} bypass plain-text memory and are converted strictly to \texttt{BinaryField} bytea hashes using backend signals upon database commits.
+    \item \textbf{Access Control:} Guarded globally by RBAC middleware using DRF \texttt{PermissionClasses}. Unauthenticated traffic is blocked by default. Files accessed under \texttt{/api/files/patient-documents/} are proxied strictly through authenticated backend streaming, blocking public CDN bypass attempts.
+\end{itemize}
 
+\subsection{System Accountability and Audit Logging}
+To ensure data integrity, operational transparency, and adherence to healthcare compliance standards, the USC-PIS implements a comprehensive tracking and logging architecture across its core modules.
 
-%\subsection{Installing directly using Linux packages} 
-\subsubsection*{Fedora/RedHat/CentOS:}
-\begin{verbatim} 
-sudo yum install texlive 
-sudo yum install psutils 
-\end{verbatim}
+\begin{itemize}
+    \item \textbf{Database Audit Trails:} The system enforces strict data accountability by embedding structural audit trails within the database schema. All critical entities, including patient profiles, medical records, and dental records, are automatically equipped with \texttt{created\_at} and \texttt{updated\_at} timestamp fields. This guarantees a precise, immutable history of when clinical data was first entered and subsequently modified.
+    \item \textbf{System Activity and Notification Logging:} To monitor administrative oversight and system interactions, the USC-PIS maintains a persistent log of all dispatched email and in-app communications. Administrators have access to detailed "System Activity Logs" via the Email Administration dashboard, which provides timestamped records of backend email events and error diagnostics. Crucially, this creates an explicit audit trail that tracks delivery statuses and identifies exactly which administrator triggered specific manual actions or system overrides.
+    \item \textbf{API Log Access and Compliance:} All user actions and email administration tasks are systematically logged to prevent unauthorized system manipulation and to ensure security. Furthermore, any manual email dispatches executed by the staff are explicitly documented for audit purposes. Authorized administrators can programmatically review these communication audit trails via the \texttt{/api/notifications/logs/} endpoint.
+\end{itemize}
 
+\section{Non-Functional Requirements \& Future Roadmap}
 
-\subsubsection*{SUSE:}
-\begin{verbatim}
-sudo zypper install texlive
-\end{verbatim}
+\subsection{Performance \& Security Benchmarks}
+System performance benchmarking explicitly addressed and resolved prior inefficiencies:
 
+\begin{table}[htbp]
+\centering
+\caption{System Benchmarks}
+\begin{tabular}{|p{0.2\textwidth}|p{0.6\textwidth}|p{0.15\textwidth}|}
+\hline
+\textbf{Requirement Area} & \textbf{Verified Benchmark} & \textbf{Audit Test ID} \\
+\hline
+\textbf{Search Latency} & Patient searches execute in \textbf{127.81ms} (Target: <500ms). & PT-04 \\
+\hline
+\textbf{PDF Generation} & Medical Certificate PDFs render in \textbf{122.93ms}. & PT-01 \\
+\hline
+\textbf{Concurrency} & Processes 20 concurrent requests in \textbf{0.66 seconds} (0\% failure). & PT-02 \\
+\hline
+\textbf{File Security} & \textbf{100\% rejection rate} against executable scripts (.EXE, .JS). & UT-06 \\
+\hline
+\end{tabular}
+\end{table}
 
-\subsubsection*{Debian/Ubuntu:}
-\begin{verbatim} 
-sudo apt-get install texlive texlive-latex-extra 
-sudo apt-get install psutils
-\end{verbatim}
+\subsection{Data Resilience}
+\textbf{Backup and Recovery:} The system is equipped with an automated data resilience module that allows authorized administrators to export the entire structured database, including patient identifiers, medical histories, and user accounts, into a single, highly compressed JSON file. This ensures business continuity and provides a rapid recovery point in the event of environment-level failures.
+
+\subsection{Future Roadmap}
+While current features solve immediate inefficiencies, the system's scalable architecture supports future enhancements:
+\begin{itemize}
+    \item \textbf{Mobile Progressive Web App (PWA):} Deploying a mobile application wrapper with offline capabilities and push notifications.
+    \item \textbf{Telemedicine Platform:} Expanding healthcare delivery to include video consultations and remote monitoring.
+    \item \textbf{AI/ML Integration:} Implementing machine learning models for predictive health analytics and diagnostic assistance.
+\end{itemize}
+
+\clearpage
+
+\chapter{Software Design Document (SDD)}
+\label{appendix:sdd}
+
+\section{System Architecture Design}
+
+\subsection{Three-Tier Architecture}
+The USC-DC Patient Information System (USC-PIS) is engineered upon a modern, highly scalable three-tier web architecture.
+\begin{itemize}
+    \item \textbf{Presentation Layer (Frontend):} Developed utilizing React 18 with a Vite build system and Material-UI components, providing a responsive, low-latency, and component-based Graphical User Interface (GUI) for clinic staff and patients.
+    \item \textbf{Application Layer (Backend):} Powered by Python and Django 5.0.2, integrated with the Django REST Framework (DRF) 3.14.0. This layer encapsulates the core business logic, API routing, and Role-Based Access Control (RBAC) middleware.
+    \item \textbf{Data Layer (Database):} Operates on a dual-database paradigm utilizing PostgreSQL 16.8 for production deployment and SQLite for local development. The system enforces vendor-aware logic to guarantee compatibility across environments.
+\end{itemize}
+
+\subsection{Enterprise Integrations}
+To support complex clinical operations, the architecture incorporates three primary enterprise integrations:
+\begin{itemize}
+    \item \textbf{Heroku:} Serves as the primary cloud hosting platform, providing automated CI/CD pipelines, secure Dyno management, and managed PostgreSQL database hosting.
+    \item \textbf{Cloudinary:} Operates as the system's scalable Content Delivery Network (CDN). It securely handles the persistent storage and rapid delivery of media, including Health Campaign PubMats and generated clinical PDF reports.
+    \item \textbf{Gmail API (OAuth 2.0):} Replaces standard SMTP protocols to bypass "less secure app" restrictions. It utilizes OAuth 2.0 tokens to reliably dispatch high-priority clinical communications, including Multi-Factor Authentication (MFA) codes and automated feedback reminders.
+\end{itemize}
+
+\section{Data Design \& Dictionary}
+
+\subsection{Database Normalization}
+The database architecture is designed in alignment with Third Normal Form (3NF) principles to eliminate data redundancy and ensure relationship integrity. Patient demographic data is logically decoupled from system authentication credentials (\texttt{authentication\_user}), while all clinical visits and assessments are mapped securely via explicitly constrained Foreign Keys (FK) with cascading or null-setting safeguards.
+
+\subsection{Data Dictionary}
+
+\begin{table}[htbp]
+\centering
+\caption{\texttt{authentication\_user} (Core System User)}
+\begin{tabular}{|p{0.2\textwidth}|p{0.2\textwidth}|p{0.55\textwidth}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). Unique identifier for the user. \\
+\hline
+\texttt{email} & String (varchar) & Unique Key (UK). Enforces \texttt{@usc.edu.ph} domain constraint. \\
+\hline
+\texttt{password} & String (varchar) & Securely hashed user password. \\
+\hline
+\texttt{role} & String (varchar) & RBAC identifier (ADMIN, DOCTOR, DENTIST, NURSE, STAFF, STUDENT). \\
+\hline
+\texttt{is\_verified} & Boolean & Flag indicating successful MFA OTP verification. \\
+\hline
+\texttt{illness\_enc} & BinaryField (bytea) & \texttt{pgcrypto} encrypted string of chronic illnesses. \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{\texttt{patients\_patient} (Clinical Profile)}
+\begin{tabular}{|p{0.2\textwidth}|p{0.2\textwidth}|p{0.55\textwidth}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). \\
+\hline
+\texttt{user\_id} & Integer & Foreign Key (FK) mapping to \texttt{authentication\_user.id}. \\
+\hline
+\texttt{usc\_id} & String (varchar) & 8-digit official University ID number. \\
+\hline
+\texttt{first\_name\_enc} & BinaryField (bytea) & \texttt{pgcrypto} encrypted first name payload. \\
+\hline
+\texttt{last\_name\_enc} & BinaryField (bytea) & \texttt{pgcrypto} encrypted last name payload. \\
+\hline
+\texttt{created\_at} & Datetime & Audit trail timestamp for record creation. \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{\texttt{patients\_medicalrecord} (Medical History)}
+\begin{tabular}{|p{0.2\textwidth}|p{0.2\textwidth}|p{0.55\textwidth}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). \\
+\hline
+\texttt{patient\_id} & Integer & Foreign Key (FK) mapping to \texttt{patients\_patient.id}. \\
+\hline
+\texttt{created\_by\_id} & Integer & Foreign Key (FK) mapping to the attending medical staff's \texttt{user\_id}. \\
+\hline
+\texttt{concern} & String (varchar) & Mandatory chief complaint or reason for clinical visit. \\
+\hline
+\texttt{diagnosis\_enc} & BinaryField (bytea) & \texttt{pgcrypto} encrypted clinical diagnosis payload. \\
+\hline
+\texttt{vital\_signs} & JSON & Structured JSON array capturing BP, HR, Temp, etc. \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{\texttt{patients\_dentalrecord} (Dental History)}
+\begin{tabular}{|p{0.2\textwidth}|p{0.2\textwidth}|p{0.55\textwidth}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). \\
+\hline
+\texttt{patient\_id} & Integer & Foreign Key (FK) mapping to \texttt{patients\_patient.id}. \\
+\hline
+\texttt{tooth\_numbers} & String (varchar) & CSV string of affected teeth enforcing FDI Notation limits. \\
+\hline
+\texttt{procedure\_performed} & String (varchar) & Defined choices constraint (e.g., CLEANING, EXTRACTION). \\
+\hline
+\texttt{tooth\_chart} & JSON & Structured representation of the visual dental diagram. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Clinical Logic Constraints}
+\begin{itemize}
+    \item \textbf{FDI Tooth Notation Enforcement:} The dental module actively restricts charting to the standard FDI numerical tooth identification system. It enforces regex constraints limiting input strictly to the 11-48 range.
+    \item \textbf{Encryption-at-Rest (\texttt{pgcrypto}):} Military-grade symmetric encryption (AES-256) is applied at the column level to safeguard Protected Health Information (PHI). Through Django \texttt{post\_save} signals, the PostgreSQL \texttt{pgp\_sym\_encrypt} function is executed upon database commits, instantly converting plaintext fields (such as clinical diagnoses and patient names) into secure \texttt{BinaryField} (\texttt{bytea}) hashes.
+\end{itemize}
+
+\section{Interface \& Security Design}
+
+\subsection{API Map \& RBAC Implementation}
+Access to backend endpoints is restricted via DRF \texttt{PermissionClasses} to enforce Role-Based Access Control (RBAC).
+
+\begin{table}[htbp]
+\centering
+\caption{API Authorization Map}
+\begin{tabular}{|p{0.3\textwidth}|p{0.15\textwidth}|p{0.25\textwidth}|p{0.2\textwidth}|}
+\hline
+\textbf{RESTful API Endpoint} & \textbf{HTTP Methods} & \textbf{DRF Permission Class} & \textbf{Authorized Roles} \\
+\hline
+\texttt{/api/auth/profile/me/} & GET, PATCH & \texttt{IsAuthenticated} & All Roles (Self-Data Only) \\
+\hline
+\texttt{/api/patients/} & GET, POST & \texttt{IsStaffUser} & ADMIN, STAFF, DOCTOR, NURSE, DENTIST \\
+\hline
+\texttt{/api/patients/records/} & POST, PATCH & \texttt{MedicalRecordPermission} & DOCTOR, NURSE, DENTIST \\
+\hline
+\texttt{/api/medical-certificates/} & GET, POST & \texttt{IsStaffOrMedicalPersonnel} & DOCTOR, NURSE \\
+\hline
+\texttt{/api/certificates/\{id\}/assess/} & POST & \texttt{IsDoctorUser} & DOCTOR (Exclusive Approval) \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Secure Proxy for Patient Documents}
+To guarantee data isolation and prevent unauthorized file exposure, direct CDN URL access for clinical attachments is blocked. The system utilizes an Authenticated Download Proxy mapped at \texttt{/api/files/patient-documents/\{id\}/download/}. Upon request, the file stream is proxied directly through the Django backend, verifying the active user's session and authorization credentials before successfully dispensing the \texttt{.PDF} or \texttt{.JPG} payload.
+
+\subsection{Audit Logging}
+The USC-PIS reinforces compliance standards via an immutable tracking architecture. Beyond standard \texttt{created\_at} and \texttt{updated\_at} database timestamps, the system implements custom middleware that automatically records the active User ID, the exact Timestamp, and the requested API Endpoint for every instance of clinical data access. This establishes a definitive audit trail to monitor user accountability and track system overrides by administrative staff.
+
+\section{Procedural \& Notification Design}
+
+\subsection{MFA Flow \& OTP Generation}
+To ensure stringent identity verification, the authentication module processes a 6-digit One-Time Password (OTP) sequence. Upon registration, the system strictly enforces the \texttt{@usc.edu.ph} domain constraint. Following validation, a secure OTP is generated, assigned a precise expiration timestamp (10 minutes), and transmitted directly to the user's inbox utilizing the Gmail API OAuth 2.0 integration.
+
+\subsection{Asynchronous Tasks \& Feedback Loop}
+To prevent HTTP bottlenecks during communication broadcasts, the architecture leverages a Celery and Redis pipeline for background task execution. When a \texttt{MedicalRecord} or \texttt{DentalRecord} is committed to the database, a \texttt{post\_save} signal (\texttt{schedule\_feedback\_email\_medical} or \texttt{schedule\_feedback\_email\_dental}) is triggered. This executes an asynchronous task placing a 24-hour delayed job in the Celery queue. Exactly 24 hours post-visit, the automated feedback loop dispatches an evaluation request to the patient, encouraging continuous, data-driven service refinement.
+
+\section{Data Privacy \& Encryption Workflow}
+
+To prevent unauthorized access to sensitive clinical attachments, the system enforces a \textbf{Secure Download Proxy} at \texttt{/api/files/patient-documents/\{id\}/download/}. Documents are streamed securely through the backend server utilizing full Django authentication, preventing any bypass of the CDN.
+
+The encryption workflow integrates industry-standard protection directly at the database level using native PostgreSQL \textbf{\texttt{pgcrypto}} functions. Upon a database commit involving Protected Health Information (PHI), a Django \textbf{\texttt{post\_save}} signal intercepts the plaintext payload and executes the \textbf{\texttt{pgp\_sym\_encrypt}} function. This converts sensitive data, such as clinical diagnoses, strictly into secure \textbf{\texttt{BinaryField}} bytea hashes before permanent storage on the disk.
+
+\section{Data Resilience \& Disaster Recovery Audit}
+
+\textbf{Data Resilience Module:} The USC-PIS architecture is equipped with a custom-engineered JSON Backup Engine managed by the \texttt{utils.services.BackupService} module. To ensure business continuity and protect sensitive clinical records, this engine performs a structured export of the entire database, including patient identifiers, medical histories, dental charts, and user profiles, packaging the relational data into a portable, highly compressed JSON payload.
+
+\textbf{Environment Portability \& Restoration:} This JSON-based backup architecture was explicitly designed to bypass vendor-specific SQL constraints, facilitating seamless, high-fidelity data migration between the Production and Development environments. Authorized administrative staff can manually trigger full system backups directly via the Database Monitor page to guarantee a permanent, offline recovery point in the event of environment-level failures.
+
+\textbf{Integrity Verification \& Automated Alerts:} To guarantee data fidelity upon restoration, the backup engine integrates a complete \texttt{create/verify/restore} lifecycle. It utilizes post-export verification logic to ensure that sensitive \texttt{pgcrypto} binary hashes remain intact and uncorrupted during the compression process.
