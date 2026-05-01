@@ -53,19 +53,58 @@ The architectural flow centers on the RESTful communication between the React fr
     \item \textbf{Data Layer (Database):} The system utilizes a dual-database paradigm: PostgreSQL 16.8 for production deployment and SQLite for local development, utilizing vendor-aware logic to ensure environment compatibility.
 \end{itemize}
 
-\subsection{Core System Features and Integration}
+\section{System Workflows and Visual Analysis}
 
-To support the clinic's operational workflows, the system implements several key clinical and administrative features:
+\subsection{Context Diagram}
+The Context Diagram provides a high-level overview of the USC-PIS and its interactions with external entities. The system acts as the central hub bridging the clinical staff and the student body. Students interact with the platform to access their personal health information and submit visit-linked feedback, while Clinic Staff (Doctors, Nurses, and Dentists) input clinical data, issue medical certificates, and manage health campaigns. All transactions are routed securely to the central Patient Database, ensuring real-time data synchronization across all user endpoints.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ContextDiagram}
+    \caption{Context Diagram of the USC-PIS}
+    \label{fig:context_diagram}
+\end{figure}
+
+\subsection{User Roles and Functionalities}
+To safeguard Protected Health Information (PHI) and Personally Identifiable Information (PII), the USC-PIS employs a strict Role-Based Access Control (RBAC) architecture enforced via Django REST Framework (DRF) permission classes. The system dynamically restricts access and capabilities across the following hierarchical user classes:
 
 \begin{itemize}
-    \item \textbf{Clinical Records and Retooling:} A unified interface manages both medical and dental data entry. The dental module specifically enforces FDI tooth notation (11-48) through regex validation. The backend incorporates an advanced real-time sorting logic to segment students by Academic Year and Semester.
-    \item \textbf{Medical Certificate Issuance:} The system digitalizes the USC Form ACA-HSD-04F workflow. Nurses are authorized to draft certificates, but strict RBAC implementation requires a user with a DOCTOR role to execute the final approval. Upon approval, a dual-engine module generates a landscape-formatted PDF.
-    \item \textbf{Health Campaigns and Feedback Loops:} Health awareness announcements are deployed to student dashboards governed strictly by active date ranges. When a clinical record is created, a background pipeline powered by Celery and Redis asynchronously schedules a 24-hour follow-up feedback evaluation request to the patient.
+    \item \textbf{Admin:} Possesses global system access, which includes managing RBAC adjustments, monitoring system health, administering the email notification system, and generating enterprise reports.
+    \item \textbf{Doctor and Dentist:} Both roles are endowed with full clinical and administrative access, allowing them to diagnose, prescribe treatments, and access all feedback analytics. However, the system's middleware explicitly grants only the Doctor role the exclusive authority to approve and issue medical certificates.
+    \item \textbf{Nurse:} Functions in a supervisory and clinical data-entry capacity. Nurses are authorized to manage patient intake, record vital signs, input treatment plans, and draft medical certificates (which remain pending until Doctor approval).
+    \item \textbf{Staff:} Responsible for clinic administration. This role manages patient intake processing, certificate issuance, asynchronous report generation, and the creation and deployment of health awareness campaigns.
+    \item \textbf{Student and Faculty (Patient):} This role is heavily restricted strictly to their own data. Patients are only permitted to view their personal medical and dental timelines via the Health Insights dashboard, submit visit-linked feedback, and view public health campaigns.
 \end{itemize}
 
-\subsection{Security Measures}
+\subsection{Authentication Workflow}
+The authentication sequence is designed to ensure stringent identity verification before granting system access. The sequential workflow begins with a student registering an account, where the system actively enforces a domain constraint, requiring the email to end in \texttt{@usc.edu.ph}. Upon validation, the Django backend generates a 6-digit One-Time Password (OTP) with a precise 10-minute expiration window. This OTP is transmitted to the user via the Gmail API OAuth 2.0 integration. Once the user inputs the correct OTP, the system authenticates the session and issues a secure JWT token, granting access to the role-gated dashboards.
 
-Data privacy is a foundational element of the USC-PIS design. The system utilizes PostgreSQL's native \texttt{pgcrypto} extension to apply military-grade symmetric encryption (AES-256) at the column level. Sensitive patient data, including names and clinical diagnoses, bypass standard plain-text storage and are strictly converted into secure \texttt{BinaryField} bytea hashes automatically via Django \texttt{post\_save} signals. Furthermore, all file uploads are governed by an interception proxy that strictly rejects executable scripts, maintaining a 100\% rejection rate against malicious payloads.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.85\textwidth]{AuthenticationWorkflow}
+    \caption{Sequential Authentication Workflow of the USC-PIS}
+    \label{fig:authentication_workflow}
+\end{figure}
+
+\subsection{Clinical Record and Security Pipeline}
+To comply with strict data privacy mandates, the USC-PIS employs a highly secure data flow pipeline for clinical records. When medical personnel utilize the Unified Record Component to enter vital signs and a clinical diagnosis, the data is transmitted to the Application Layer. Before the data is committed to the PostgreSQL database, a Django \texttt{post\_save} signal intercepts the transaction. This signal executes the \texttt{pgp\_sym\_encrypt} function, instantly converting plaintext Protected Health Information (PHI)—such as patient names and diagnoses—into secure \texttt{BinaryField} (\texttt{bytea}) hashes. This ensures military-grade encryption-at-rest with minimal computational overhead.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ClinicalRecordSecurityPipeline}
+    \caption{Clinical Record Data Flow and Security Pipeline}
+    \label{fig:clinical_record_pipeline}
+\end{figure}
+
+\subsection{The Medical Certificate Pipeline}
+The issuance of the USC Form ACA-HSD-04F Medical Certificate follows a digitized, role-gated sequential pipeline. The workflow initiates when a Nurse or Staff member accesses a patient's record to draft the certificate and input the ``Purpose/Requirement''. However, the system's RBAC middleware restricts the rendering of the document until a user with the DOCTOR role assesses the draft. The Doctor must select the Medical Fitness Status (``Fit'' or ``Not Fit'') and authorize the approval. Once the \texttt{IsDoctorUser} permission is validated, the backend dual-engine PDF module autonomously renders the landscape-formatted certificate for download.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.85\textwidth]{MedicalCertificatePipeline}
+    \caption{Role-Gated Medical Certificate Issuance Pipeline}
+    \label{fig:medical_certificate_pipeline}
+\end{figure}
 
 \section{Software Tools}
 

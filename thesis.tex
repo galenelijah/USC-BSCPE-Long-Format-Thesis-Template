@@ -3,7 +3,7 @@
 %
 % Original: Please have a look at the README.md file for info on how to use the template
 
-\documentclass[a4paper,12pt,numbered,print,times]{Classes/PhDThesisPSnPDF}
+\documentclass[a4paper,12pt,numbered,print,times,custommargin]{Classes/PhDThesisPSnPDF}
 
 % ******************************************************************************
 % ******************************* Class Options ********************************
@@ -127,6 +127,7 @@
 
 % *********************** Adding TOC and List of Figures ***********************
 
+\setcounter{tocdepth}{2} % Ensure depth is sufficient for TOC and LOF
 \tableofcontents
 \listoffigures
 \listoftables
