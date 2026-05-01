@@ -1,0 +1,60 @@
+% ******************************* Thesis Appendix C ****************************
+
+\chapter{Software Testing Results}
+\label{appendix:testing_results}
+
+This appendix provides the detailed results of the multi-layered testing pipeline executed for the USC-PIS. These results validate the system's functional correctness, security integrity, and operational performance.
+
+\section{Functional Testing Results}
+
+The functional testing phase verified the behavior of individual components and the end-to-end integration of clinical workflows.
+
+\subsection{Unit Testing}
+\begin{table}[htbp]
+    \centering
+    \caption{Unit Testing Results (Security \& Logic)}
+    \label{tab:app_unit_testing}
+    \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{3.5cm}|c|}
+        \hline
+        \textbf{Test ID} & \textbf{Requirement Evaluated} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Status} \\ \hline
+        UT-01 & pgcrypto SQL Encryption Audit & Binary storage for Name/Diagnosis & Binary (bytea) hashes detected & \textbf{PASS} \\ \hline
+        UT-02 & Academic Year-Level Logic & Filter 1st-4th Year accurately & 100\% Accuracy in filtering & \textbf{PASS} \\ \hline
+        UT-03 & MFA Token Expiration & Expired codes return invalid & \texttt{is\_expired()} logic triggered & \textbf{PASS} \\ \hline
+        UT-04 & Clinical Field Constraints & Regex validation for Dental FDI & "11,12" accepted; "1,2" blocked & \textbf{PASS} \\ \hline
+        UT-05 & Safe List Onboarding & Automatic Role Assignment & Assigned: DOCTOR / NURSE & \textbf{PASS} \\ \hline
+        UT-06 & File Upload Security & Reject .EXE, .JS, .PY files & 100\% Rejection rate & \textbf{PASS} \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Integration Testing}
+\begin{table}[htbp]
+    \centering
+    \caption{Integration Testing Results (Workflows \& RBAC)}
+    \label{tab:app_integration_testing}
+    \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{3.5cm}|c|}
+        \hline
+        \textbf{Test ID} & \textbf{Workflow / Requirement} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Status} \\ \hline
+        IT-01 & Clinical Certificate Pipeline & Nurse $\rightarrow$ Doctor $\rightarrow$ PDF Flow & Flow Completed (HTTP 200 OK) & \textbf{PASS} \\ \hline
+        IT-02 & Feedback Analytics & Persistence of Survey Data & Record successfully created in database & \textbf{PASS} \\ \hline
+        IT-03 & RBAC Security Stress Test & Cross-patient access restricted & HTTP 403 (Denied) / 404 (Hidden) & \textbf{PASS} \\ \hline
+        IT-04 & Academic Year Sort & Filter specific records via API & 1/1 Match (e.g., 4th Year isolated) & \textbf{PASS} \\ \hline
+        IT-05 & Health Campaign Flow & Student sees Admin alert & Visible in Student Dashboard Feed & \textbf{PASS} \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Non-Functional Testing Results}
+
+\subsection{Performance Benchmarking}
+\begin{table}[htbp]
+    \centering
+    \caption{Performance Benchmarking Results}
+    \label{tab:app_performance_benchmarking}
+    \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{3.5cm}|c|}
+        \hline
+        \textbf{Test ID} & \textbf{Performance Metric} & \textbf{Target Threshold} & \textbf{Measured Result} & \textbf{Status} \\ \hline
+        PT-01 & Report / PDF Latency & < 1000 ms & 124.53 ms & \textbf{PASS} \\ \hline
+        PT-02 & System Concurrency (20 Users) & 20 Concurrent Requests & 20/20 Success (0\% Drop) & \textbf{PASS} \\ \hline
+        PT-03 & Encryption Lag / Overhead & < 50 ms overhead & < 1 ms (Standard) & \textbf{PASS} \\ \hline
+        PT-04 & Search Query Efficiency & < 500 ms (for 100+ records) & 123.16 ms & \textbf{PASS} \\ \hline
+    \end{tabular}
+\end{table}
