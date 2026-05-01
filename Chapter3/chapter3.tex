@@ -5,16 +5,23 @@
 \chapter{Methodology}
 
 \ifpdf
-    \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/PDF/}{Chapter3/Figs/}}
+    \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/PDF/}{Chapter3/Figs/}{Figs/}}
 \else
-    \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
+    \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}{Figs/}}
 \fi
 
 This chapter details the methodology guiding the system design, core features, software tools utilized, and the overall deployment and testing strategies employed for the University of San Carlos Patient Information System (USC-PIS). The development process follows a highly structured, user-centered engineering approach tailored to modernize the clinic's healthcare delivery.
 
 \section{Conceptual Framework}
 
-The conceptual framework for developing the USC-PIS is anchored in a User-Centered Design (UCD) approach, which prioritizes the workflows of clinic staff and the accessibility needs of the students. The legacy system at the USC Clinic was heavily reliant on fragmented, paper-based records (such as the Daily Treatment Records) and basic Google Forms for feedback, which introduced significant inefficiencies in data retrieval and program evaluation.
+The conceptual framework for developing the USC-PIS (illustrated in Fig. \ref{fig:conceptual_framework}) is anchored in a User-Centered Design (UCD) approach, which prioritizes the workflows of clinic staff and the accessibility needs of the students. The legacy system at the USC Clinic was heavily reliant on fragmented, paper-based records (such as the Daily Treatment Records) and basic Google Forms for feedback, which introduced significant inefficiencies in data retrieval and program evaluation.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{ConceptualFramewor}
+    \caption{Conceptual Framework of the USC-PIS}
+    \label{fig:conceptual_framework}
+\end{figure}
 
 To resolve these bottlenecks, the modernized framework was constructed upon the following core pillars:
 
@@ -29,7 +36,16 @@ To resolve these bottlenecks, the modernized framework was constructed upon the 
 
 \subsection{System Architecture}
 
-The USC-PIS is engineered using a modern, scalable three-tier web architecture.
+The USC-PIS is engineered using a modern, scalable three-tier web architecture (illustrated in Fig. \ref{fig:system_architecture}). This design ensures a clean separation of concerns, allowing for independent scaling and maintenance of the presentation, logic, and data storage components.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{SystemArchitecture}
+    \caption{Top-Level System Architecture of the USC-PIS}
+    \label{fig:system_architecture}
+\end{figure}
+
+The architectural flow centers on the RESTful communication between the React frontend and the Django backend. As shown in the diagram, the backend serves as the central hub, managing secure data access to the PostgreSQL database while delegating time-consuming operations—such as PDF generation and automated email dispatch—to an asynchronous task queue managed by Celery and Redis.
 
 \begin{itemize}
     \item \textbf{Presentation Layer (Frontend):} Developed using React 18 with a Vite build system and Material-UI components, providing a highly responsive and low-latency Graphical User Interface (GUI) across various devices.
