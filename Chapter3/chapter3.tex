@@ -45,7 +45,7 @@ The USC-PIS is engineered using a modern, scalable three-tier web architecture (
     \label{fig:system_architecture}
 \end{figure}
 
-The architectural flow centers on the RESTful communication between the React frontend and the Django backend. As shown in the diagram, the backend serves as the central hub, managing secure data access to the PostgreSQL database while delegating time-consuming operations—such as PDF generation and automated email dispatch—to an asynchronous task queue managed by Celery and Redis.
+The architectural flow centers on the RESTful communication between the React frontend and the Django backend. As shown in the diagram, the backend serves as the central hub, managing secure data access to the PostgreSQL database while delegating time-consuming operations, such as PDF generation and automated email dispatch, to an asynchronous task queue managed by Celery and Redis.
 
 \begin{itemize}
     \item \textbf{Presentation Layer (Frontend):} Developed using React 18 with a Vite build system and Material-UI components, providing a highly responsive and low-latency Graphical User Interface (GUI) across various devices.
@@ -87,7 +87,7 @@ The authentication sequence is designed to ensure stringent identity verificatio
 \end{figure}
 
 \subsection{Clinical Record and Security Pipeline}
-To comply with strict data privacy mandates, the USC-PIS employs a highly secure data flow pipeline for clinical records. When medical personnel utilize the Unified Record Component to enter vital signs and a clinical diagnosis, the data is transmitted to the Application Layer. Before the data is committed to the PostgreSQL database, a Django \texttt{post\_save} signal intercepts the transaction. This signal executes the \texttt{pgp\_sym\_encrypt} function, instantly converting plaintext Protected Health Information (PHI)—such as patient names and diagnoses—into secure \texttt{BinaryField} (\texttt{bytea}) hashes. This ensures military-grade encryption-at-rest with minimal computational overhead.
+To comply with strict data privacy mandates, the USC-PIS employs a highly secure data flow pipeline for clinical records. When medical personnel utilize the Unified Record Component to enter vital signs and a clinical diagnosis, the data is transmitted to the Application Layer. Before the data is committed to the PostgreSQL database, a Django \texttt{post\_save} signal intercepts the transaction. This signal executes the \texttt{pgp\_sym\_encrypt} function, instantly converting plaintext Protected Health Information (PHI), such as patient names and diagnoses, into secure \texttt{BinaryField} (\texttt{bytea}) hashes. This ensures military-grade encryption-at-rest with minimal computational overhead.
 
 \begin{figure}[!ht]
     \centering
