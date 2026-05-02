@@ -1,0 +1,46 @@
+% ******************************* Thesis Appendix G ****************************
+
+\chapter{Technical Audit and Validation Summary}
+\label{appendix:technical_audit}
+
+\section{Software Quality Assurance (SQA) Audit Summary}
+The system’s operational efficiency was rigorously evaluated under the quantitative parameters defined in the performance test suite (PT-01 to PT-04). The benchmarks confirm that the architectural optimizations successfully eliminated legacy latency issues. Specifically, search query optimizations yield a latency ranging strictly between \textbf{123.16ms and 127.81ms}, nearly four times faster than the 500ms threshold. Furthermore, the dual-engine PDF module generates official Medical Certificates in \textbf{122.93ms to 124.53ms}, safely below the 1000ms limit.
+
+To guarantee reliability during peak registration, concurrency was audited via test PT-02. The architecture successfully handled \textbf{20 simultaneous HTTP requests in 0.66 seconds} with a 0\% data drop rate. Additionally, a cybersecurity audit (UT-06) confirmed a \textbf{100\% rejection rate} against high-risk extensions (.EXE, .JS, and .PY), neutralizing potential system vulnerabilities.
+
+\section{Requirement Traceability Matrix (RTM)}
+The following matrix maps the core functional and security requirements derived from the SRS directly to their verified implementation and automated test outcomes.
+
+\begin{table}[htbp]
+\centering
+\caption{Requirement Traceability Matrix}
+\begin{tabular}{|p{0.2\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|p{0.1\textwidth}|p{0.1\textwidth}|}
+\hline
+\textbf{Requirement Category} & \textbf{Core Requirement Description} & \textbf{Verified Implementation} & \textbf{Audit Test ID} & \textbf{Status} \\
+\hline
+\textbf{Data Security} & Column-Level Database Encryption & PostgreSQL \texttt{pgcrypto} binary storage & UT-01 & \textbf{PASS} \\
+\hline
+\textbf{Application Retooling} & Academic Year \& Semester Filtering & Dynamic parameter filtering via \texttt{PatientViewSet} & IT-04 & \textbf{PASS} \\
+\hline
+\textbf{Clinical Logic} & FDI Notation Enforcement (11-48) & Strict regex validation within Dental records & UT-04 & \textbf{PASS} \\
+\hline
+\textbf{System Security} & Secure File Upload Integrity & Interception and rejection of executable scripts & UT-06 & \textbf{PASS} \\
+\hline
+\textbf{Clinical Workflows} & End-to-End Medical Certification & Issuance pipeline: Nurse draft to Doctor approval & IT-01 & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Preliminary User Acceptance Testing (UAT) Summary}
+
+\subsection{Staff Evaluation}
+Preliminary User Acceptance Testing (UAT) was conducted utilizing feedback from a clinical sample of Clinic Staff (N=7, comprised of Nurses, Doctors, and Dentists). The quantitative and qualitative returns indicate strong efficiency improvements compared to the legacy manual operations. Staff explicitly noted that "generating data is easier" and that the workflow is "fast and easy". Early testing bottlenecks, such as the request to add a feature to sort students by academic year, were immediately verified and resolved during the Application Retooling phase. One Doctor highlighted rigorous expectations for data privacy and the necessity of documentation security, fully validating the architectural decision to integrate PostgreSQL \texttt{pgcrypto} for encrypted clinical records.
+
+\subsection{Student Evaluation (UAT Results)}
+Preliminary User Acceptance Testing (UAT) was conducted with the student demographic to evaluate the system's usability, accessibility, and feature relevance. Based on the survey responses, the system received overwhelmingly positive feedback, with the vast majority of students rating their overall satisfaction at 4 or 5 out of 5.
+
+\begin{itemize}
+    \item \textbf{Usability \& Accessibility:} Students consistently highlighted the system's clean user interface and smooth navigation, giving exceptionally high ratings for the ease of logging in and the ability to access their records anytime and anywhere.
+    \item \textbf{Highest Rated Features:} When asked which features were most useful, the student body overwhelmingly praised the \textbf{Patient Medical Dashboard}, the \textbf{Medical Certificate Issuance}, and the automated \textbf{BMI Calculation} tools. Students noted that "ordering" a medical certificate without waiting in physical queues was a massive operational improvement.
+    \item \textbf{Constructive Feedback \& Roadmap:} While technical issues were minimal, the most recurring constructive feedback was a request for a \textbf{"Dark Mode"} toggle and better responsiveness to ensure the application fits perfectly on narrower mobile screens.
+\end{itemize}

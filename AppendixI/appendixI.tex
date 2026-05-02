@@ -1,0 +1,117 @@
+% ******************************* Thesis Appendix I ****************************
+
+\chapter{USC-PIS User Manuals}
+\label{appendix:user_manuals}
+
+\section{Manual 1: Clinical \& Administrative Staff Guide}
+
+\textbf{Target Audience:} Doctors, Nurses, Dentists, and Clinic Staff.
+
+\subsection{1. Secure Onboarding}
+\begin{enumerate}
+    \item Navigate to the registration portal and enter your pre-authorized clinic email address.
+    \item The system automatically cross-references the email against the backend \textbf{SafeEmail} table.
+    \item Upon validation, the system bypasses the 6-digit Multi-Factor Authentication (MFA) step and instantly assigns your professional clinical role.
+\end{enumerate}
+\textbf{Technical Note: RBAC \& Security:} Staff authorizations are globally protected via Django REST Framework \textbf{\texttt{PermissionClasses}}. Access to patient databases is strictly gated to medical personnel, neutralizing unauthorized data exposure.
+
+\subsection{2. Advanced Patient Discovery}
+\begin{enumerate}
+    \item Navigate to the \textbf{Patients} module and use the global search bar to query a patient's Name, Email, or USC ID.
+    \item Click the \textbf{Filters} button to expand the Application Retooling Filter Bar.
+    \item Apply the \textbf{Academic Year} filter (e.g., 2025-2026), \textbf{Semester} logic (1st Sem: Aug-Dec, 2nd Sem: Jan-May), and \textbf{Year Level} to isolate specific student groups.
+\end{enumerate}
+\textbf{Technical Note: Search Efficiency:} Database query optimizations verify that patient search results among 100+ records are returned with a latency of \textbf{127.81ms}, nearly four times faster than the benchmark limit.
+
+\subsection{3. The Unified Record Workflow}
+\begin{itemize}
+    \item \textbf{Medical Documentation:} Navigate to the \textbf{Medical Records} tab, input the mandatory "Concern / Reason for Visit", record vital signs, and click "Save".
+    
+    \textbf{Technical Note:} Upon saving, PostgreSQL's \textbf{\texttt{pgp\_sym\_encrypt}} function hashes sensitive patient data into a secure binary format invisibly in the background (< 1.0ms overhead).
+    
+    \item \textbf{Dental Documentation:} Navigate to the \textbf{Dental Records} tab and use the \textbf{FDI 11-48} numerical system to input tooth conditions. For rapid checks, use the streamlined "Consultation/Referral" mode.
+\end{itemize}
+
+\subsection{4. Medical Certificate Management \& Issuance}
+\begin{enumerate}
+    \item Navigate to \textbf{Medical Certificates -> Create New Certificate}.
+    \item Select the patient; the system will autonomously autofill their Name, Year Level, and Full Course Name.
+    \item Select the \textbf{USC Clinic Template ACA-HSD-04F} and enter the "Purpose/Requirement".
+    \item A \textbf{DOCTOR} must assess the draft, select Medical Fitness Status ("Fit"/"Not Fit"), and authorize approval. The dual-engine PDF system will instantly render the certificate for download.
+\end{enumerate}
+
+\subsection{5. System Maintenance \& Data Backups}
+\begin{itemize}
+    \item \textbf{Generating a Backup:} To ensure the safety of clinical records, Administrative Staff can trigger a full system backup via the Database Monitor page.
+    \item \textbf{Mechanism:} The system captures all active records (Medical history, dental charts, and user profiles) and packages them into a portable JSON format.
+    \item \textbf{Storage:} It is recommended to download and store this compressed file in a secure university-approved location monthly to ensure a permanent offline copy of the clinic's digital database.
+\end{itemize}
+
+\subsection{6. Email Administration \& Notification Templates}
+The system features a massive automated communication engine requiring administrative oversight.
+
+\begin{table}[htbp]
+\centering
+\caption{Email Administration}
+\begin{tabular}{|p{0.2\textwidth}|p{0.75\textwidth}|}
+\hline
+\textbf{Management Tab} & \textbf{Description \& Functionality} \\
+\hline
+\textbf{Routing \& Status} & Monitor the 7 core diagnostics (Database, Email, Backups, Security, Performance, Storage, Cache). Use the \textbf{Global Master Switch} to instantly disable all automated emails during emergencies. \\
+\hline
+\textbf{Email Templates} & Manage content lifecycle. Edit subjects and bodies using dynamic placeholders (e.g., \texttt{\{\{user\_name\}\}}, \texttt{\{\{appointment\_date\}\}}). \\
+\hline
+\textbf{Sent Notifications} & View a real-time history of all communications and track status (SENT, READ, FAILED). \\
+\hline
+\textbf{Staff Access} & Instantly enable or disable In-App Notifications and Email Alerts on a per-staff member basis. \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item \textbf{Customizing Notification Templates:} Access the Django Admin portal (\texttt{/admin}) and navigate to \textbf{\texttt{NotificationTemplates}}. Utilize placeholders to personalize the messages, and test the template logic via the API before deploying.
+\end{itemize}
+
+\subsection{7. Patient Health Insights \& Enterprise Reporting}
+\begin{itemize}
+    \item \textbf{Health Insights (\texttt{/health-insights}):} Review unified medical and dental timelines. Document attachments listed within the unified timeline are rendered non-interactive to enforce strict data privacy.
+    \item \textbf{Enterprise Reporting (\texttt{/reports}):} Access available analytical templates (e.g., Visit Trends, Feedback Analysis).
+\end{itemize}
+\textbf{Technical Note:} Heavy data aggregations are processed asynchronously via Celery and Redis. PDF generation utilizes a Dual-Engine strategy (\textbf{\texttt{xhtml2pdf}} with a \textbf{\texttt{ReportLab}} fallback) and exports are programmatically capped at the first 200 items per section to maintain document stability. Excel/CSV exports offer unlimited deep data analysis.
+
+\section{Manual 2: Student \& Faculty Portal Guide}
+
+\textbf{Target Audience:} Patients (Students and Faculty).
+
+\subsection{1. Identity \& MFA}
+\begin{enumerate}
+    \item Navigate to the registration portal and enter an official university email address.
+    \item The system enforces strict domain validation; the email must end in \textbf{\texttt{@usc.edu.ph}}.
+    \item Check the university inbox for the automated \textbf{6-digit verification code} dispatched via the Gmail API.
+    \item Input the code into the portal before the 24-hour expiration threshold to activate your account.
+\end{enumerate}
+
+\subsection{2. The Student Medical Record (SMR)}
+\begin{enumerate}
+    \item Log into the portal and navigate to the \textbf{Patient Medical History} link in the sidebar (\textbf{\texttt{/health-insights}}).
+    \item The interface displays a Unified Timeline separated into Medical Records, Dental Records, and Health Insights.
+    \item Click the \textbf{Health Insights} tab to view personalized health analytics, monthly visit frequency patterns, and visual trend indicators.
+\end{enumerate}
+\textbf{Technical Note: Data Privacy:} The Student Medical Record dashboard is governed by strict access controls limiting visibility exclusively to the record owner and authorized medical staff. All clinical documents are proxied securely through an authenticated backend stream.
+
+\subsection{3. Health Awareness}
+\begin{enumerate}
+    \item Navigate to the \textbf{Campaigns} tab (\textbf{\texttt{/campaigns}}) in the navigation sidebar.
+    \item Browse active health awareness campaigns, which are categorically organized.
+    \item Select a campaign to open the \textbf{Universal Document Viewer}.
+    \item Interact with high-quality image PubMats via zooming, or execute direct, secure downloads of attached health guidelines.
+\end{enumerate}
+
+\subsection{4. The Feedback Loop}
+\begin{enumerate}
+    \item Exactly 24 hours following the conclusion of a Medical or Dental consultation, the system automatically dispatches a Feedback Request reminder to your university email.
+    \item Open the email and click the embedded rating links, or log directly into the portal and navigate to the \textbf{Feedback} tab.
+    \item Select the specific clinical visit to evaluate.
+    \item Input a 1-5 star "Overall Experience" rating, answer Yes/No to the "Staff Courtesy" metric, and provide qualitative comments.
+\end{enumerate}
+\textbf{Technical Note: Feedback Constraints:} To ensure data integrity, the system architecture implements a \textbf{\texttt{UniqueConstraint}} on the backend. This restricts users to exactly one feedback submission per clinical visit, preventing skewed satisfaction analytics.
