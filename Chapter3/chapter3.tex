@@ -203,6 +203,148 @@ The core of the clinic's digital operations is handled by the \texttt{Medical Re
 \subsection{Medical Certificates and Administrative Workflows}
 Crucially, the database schema seamlessly integrates the \texttt{Medical Certificates} entity to manage the digital issuance of the USC Form ACA-HSD-04F. This table is directly linked to the patient (\texttt{patient\_id}) and securely captures the \texttt{fitness\_status}, \texttt{fitness\_reason}, \texttt{diagnosis}, and \texttt{recommendations}. It also defines the exact validity timeframe via the \texttt{valid\_from} and \texttt{valid\_until} fields. To enforce strict clinical hierarchies and data integrity, the workflow is governed by two distinct tracking fields: \texttt{issued\_by} and \texttt{approved\_by}. This schema constraint ensures that while clinical staff can draft and issue the initial document, an authorized Doctor must execute the final approval (\texttt{approved\_at}) before the backend dual-engine PDF rendering is unlocked.
 
+\section{Database Schema and Data Dictionary}
+While the ERD visualizes the high-level entity relationships, the physical database schema dictates the strict data types, cryptographic boundaries, and structural constraints required for healthcare data management. The USC-PIS is normalized to eliminate data redundancy and ensure relationship integrity. The following data dictionaries outline the core tables powering the system's authentication and clinical operations.
+
+\subsection{Identity and Authentication Schema}
+The \texttt{authentication\_user} table serves as the core identity provider for the Role-Based Access Control (RBAC) middleware. To comply with data privacy protocols, sensitive health preconditions collected during registration are instantly encrypted into binary hashes.
+
+\begin{table}[htbp]
+\centering
+\caption{Data Dictionary for authentication\_user}
+\begin{tabular}{|l|l|p{7cm}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Constraint / Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). Unique identifier for the user. \\
+\hline
+\texttt{email} & String (varchar) & Unique Key (UK). Enforces the \texttt{@usc.edu.ph} domain constraint. \\
+\hline
+\texttt{password} & String (varchar) & Securely hashed user password. \\
+\hline
+\texttt{role} & String (varchar) & RBAC identifier (ADMIN, DOCTOR, NURSE, DENTIST, STAFF, STUDENT). \\
+\hline
+\texttt{is\_verified} & Boolean & Flag indicating successful MFA OTP verification. \\
+\hline
+\texttt{illness\_enc} & BinaryField (bytea) & \texttt{pgcrypto} encrypted string of chronic illnesses. \\
+\hline
+\texttt{allergies\_enc} & BinaryField (bytea) & \texttt{pgcrypto} encrypted string of patient allergies. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Clinical Profile Schema}
+The \texttt{patients\_patient} table acts as the comprehensive demographic profile. It is logically decoupled from the authentication credentials to resolve over-normalization risks.
+
+\begin{table}[htbp]
+\centering
+\caption{Data Dictionary for patients\_patient}
+\begin{tabular}{|l|l|p{7cm}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Constraint / Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). \\
+\hline
+\texttt{user\_id} & Integer & Foreign Key (FK) mapping to \texttt{authentication\_user.id}. \\
+\hline
+\texttt{usc\_id} & String (varchar) & 8-digit official University ID number. \\
+\hline
+\texttt{academic\_year} & String (varchar) & Retooling filter field (e.g., 2025-2026) for cohort isolation. \\
+\hline
+\texttt{first\_name\_enc} & BinaryField (bytea) & \texttt{pgcrypto} encrypted first name payload. \\
+\hline
+\texttt{last\_name\_enc} & BinaryField (bytea) & \texttt{pgcrypto} encrypted last name payload. \\
+\hline
+\texttt{created\_at} & Datetime & Immutable audit trail timestamp for record creation. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Clinical Records Schema}
+The \texttt{patients\_medicalrecord} and \texttt{patients\_dentalrecord} tables capture the specialized clinical data. These tables enforce rigorous validation, such as JSON structuring for vitals and regex validation for FDI dental notation.
+
+\begin{table}[htbp]
+\centering
+\caption{Data Dictionary for patients\_medicalrecord}
+\begin{tabular}{|l|l|p{7cm}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Constraint / Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). \\
+\hline
+\texttt{patient\_id} & Integer & Foreign Key (FK) mapping to \texttt{patients\_patient.id}. \\
+\hline
+\texttt{created\_by\_id} & Integer & Foreign Key (FK) mapping to the attending medical staff's \texttt{user\_id}. \\
+\hline
+\texttt{concern} & String (varchar) & Mandatory chief complaint or reason for clinical visit. \\
+\hline
+\texttt{diagnosis\_enc} & BinaryField (bytea) & \texttt{pgcrypto} encrypted clinical diagnosis payload. \\
+\hline
+\texttt{vital\_signs} & JSON & Structured JSON array capturing BP, HR, Temp, and SpO2. \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Data Dictionary for patients\_dentalrecord}
+\begin{tabular}{|l|l|p{7cm}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Constraint / Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). \\
+\hline
+\texttt{patient\_id} & Integer & Foreign Key (FK) mapping to \texttt{patients\_patient.id}. \\
+\hline
+\texttt{tooth\_numbers} & String (varchar) & CSV string of affected teeth enforcing FDI Notation (11-48) limits. \\
+\hline
+\texttt{procedure\_performed} & String (varchar) & Defined choices constraint (e.g., CLEANING, EXTRACTION). \\
+\hline
+\texttt{tooth\_chart} & JSON & Structured representation of the visual dental diagram. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Administrative Workflow Schema}
+The \texttt{medical\_certificates} table manages the End-to-End issuance of the USC Form ACA-HSD-04F. It utilizes dual Foreign Keys to track both the staff member who drafted the document and the Doctor who finalized it.
+
+\begin{table}[htbp]
+\centering
+\caption{Data Dictionary for medical\_certificates}
+\begin{tabular}{|l|l|p{7cm}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Constraint / Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). \\
+\hline
+\texttt{patient\_id} & Integer & Foreign Key (FK) mapping to \texttt{patients\_patient.id}. \\
+\hline
+\texttt{fitness\_status} & String (varchar) & Constrained to choices: 'fit' or 'not\_fit'. \\
+\hline
+\texttt{approval\_status} & String (varchar) & Tracks document state: 'draft', 'pending', 'approved', 'rejected'. \\
+\hline
+\texttt{issued\_by} & Integer & Foreign Key (FK) mapping to the Nurse/Staff who drafted the form. \\
+\hline
+\texttt{approved\_by} & Integer & Foreign Key (FK) mapping strictly to an authorized Doctor. \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Network Configuration and Deployment Architecture}
+To guarantee high availability and real-time synchronization between the clinic staff and student users, the USC-PIS utilizes a robust cloud-based deployment architecture. The infrastructure is specifically configured to handle enterprise-level healthcare operations, leveraging several cloud services to manage hosting, media delivery, and secure communications.
+
+\subsection{CI/CD Pipeline and Cloud Hosting}
+The application is hosted on Heroku, which serves as the primary deployment platform for the backend Application Layer. To ensure that no critical bugs or security vulnerabilities enter the production environment, the deployment process utilizes a Continuous Integration and Continuous Deployment (CI/CD) pipeline engineered via GitHub Actions. This automated DevOps pipeline mandates that all code commits must successfully pass 15 rigorous automated tests—ranging from unit tests (UT-01 to UT-06) to integration and performance tests (PT-01 to PT-04)—before the system permits the build to be deployed to the live Heroku dynos.
+
+\subsection{Dual-Database Environment}
+The system employs a dual-database paradigm to balance rapid development with secure production data handling. During local testing and development, the system utilizes SQLite to allow for lightweight operations. However, the live production environment is powered by a PostgreSQL 16.8 server hosted on Heroku. To prevent crashes between the two environments, "Vendor-Aware" logic is implemented within the system's backend migrations, ensuring that PostgreSQL-exclusive functions (such as \texttt{pgcrypto} cryptographic extensions) are safely bypassed in the local environment but strictly enforced in the cloud.
+
+\subsection{Scalable Content Delivery Network (CDN)}
+Due to the significant file storage requirements of digital health records, including PubMats, campaign banners, and PDF attachments, the system offloads media storage from the primary database. Cloudinary is integrated as a scalable Content Delivery Network (CDN) to manage these file uploads natively. By offloading media processing to Cloudinary, the primary Django application is relieved of heavy bandwidth tasks, ensuring the HTTP threads remain unblocked and patient data loads seamlessly across devices.
+
+\subsection{Secure Communications Integration}
+To automate clinic communications such as verification codes, patient feedback reminders, and password resets, the system interfaces directly with the Gmail API. Instead of relying on traditional SMTP configurations, which are prone to being flagged by strict firewall policies, the USC-PIS implements an OAuth 2.0 protocol. This ensures reliable, uninterrupted delivery of automated clinic alerts directly to the students' \texttt{@usc.edu.ph} institutional inboxes.
+
 \section{Development and Testing Strategy}
 
 The development adhered to an Agile methodology, ensuring iterative cycles that adapted to clinical staff feedback. To ensure software quality and alignment with functional requirements, the system underwent a rigorous, multi-layered testing pipeline.
