@@ -1,0 +1,252 @@
+% ******************************* Thesis Appendix F ****************************
+
+\chapter{Exhaustive Manual Software Testing Results}
+\label{appendix:manual_testing}
+
+This appendix provides the complete, exhaustive results of the manual system feature validation conducted for the USC-PIS. These test cases ensure that all front-facing modules and role-specific dashboards function as intended under various scenarios.
+
+\section{Authentication and Role-Based Access Control}
+The following test cases validate the integrity of the system's entry points, ensuring secure session management, strict domain enforcement, and proper role routing.
+
+\subsection{Login and Authentication Validation}
+\begin{table}[htbp]
+\centering
+\caption{Login and Authentication Validation}
+\begin{tabular}{|l|p{2cm}|p{2cm}|p{3cm}|p{3cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+AUTH-01 & Student login Success & Student account exists & Email: student@usc.edu.ph, Pass: ValidPass@123 & User redirected to Dashboard. & \textbf{PASS} \\
+\hline
+AUTH-02 & Incorrect Password & User account exists & Correct Email, Incorrect Password & Access Denied; Error: "Invalid password" & \textbf{PASS} \\
+\hline
+AUTH-03 & Non-existent User & Email not in DB & Email: random@gmail.com & Error: "No account found with this email" & \textbf{PASS} \\
+\hline
+AUTH-04 & Empty Login Fields & On Login Page & Email: [empty], Password: [empty] & Error: Email address/Password is required & \textbf{PASS} \\
+\hline
+AUTH-05 & Non-USC email & Invalid email format & Email: test@gmail.com & Error: "Invalid email format" & \textbf{PASS} \\
+\hline
+AUTH-06 & Session Persistence & Logged in user & Close \& Reopen Browser & User remains authenticated via stored token. & \textbf{PASS} \\
+\hline
+AUTH-07 & Unauthorized Access & User logged out & Enter /staff/dashboard in URL & System detects no session; redirects to Login. & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Registration Module Validation}
+\begin{table}[htbp]
+\centering
+\caption{Registration Module Validation}
+\begin{tabular}{|l|p{2cm}|p{2cm}|p{3cm}|p{3cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+REG-01 & Successful Registration & On Register Page & Email: 6090146@usc.edu.ph, Pass: P@ssw0rd2024 & Account created in PostgreSQL; redirect to Login. & \textbf{PASS} \\
+\hline
+REG-02 & Duplicate Email & Email in DB & Existing Email: 6090146@usc.edu.ph & Error: "user with this email already exists." & \textbf{PASS} \\
+\hline
+REG-03 & Invalid Email Format & On Register Page & Email: ronvanz@gmail.com & Error: "Only USC email addresses (@usc.edu.ph) are allowed" & \textbf{PASS} \\
+\hline
+REG-04 & Password Mismatch & On Register Page & Pass: Password@123, Confirm: Password@456 & Error: "Passwords do not match" & \textbf{PASS} \\
+\hline
+REG-05 & Short Password & On Register Page & Pass: 123 & Error: "Password must be at least 8 characters long" & \textbf{PASS} \\
+\hline
+REG-06 & No Input Password & On Register Page & Pass: [empty] & Error: "Password is required" & \textbf{PASS} \\
+\hline
+REG-07 & Weak Password & On Register Page & Pass: 123456789abc & Error: "Password must contain upper, lower, number, special" & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Role-Based Access Control (RBAC) Validation}
+\begin{table}[htbp]
+\centering
+\caption{Role-Based Access Control (RBAC) Validation}
+\begin{tabular}{|l|p{2.5cm}|p{2.5cm}|p{3.5cm}|p{3.5cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+RBAC-01 & Student Login Success & Account is student & student@usc.edu.ph & Redirected to Student Dashboard. & \textbf{PASS} \\
+\hline
+RBAC-02 & Staff Login Success & Account is staff & nurse@usc.edu.ph & Redirected to Staff Dashboard. & \textbf{PASS} \\
+\hline
+RBAC-03 & Admin Login Success & Account is admin & system@usc.edu.ph & Redirected to Admin Dashboard. & \textbf{PASS} \\
+\hline
+RBAC-04 & Student to Staff URL & Logged in Student & Enter URL: /patients & Access Denied & \textbf{PASS} \\
+\hline
+RBAC-05 & Student to Admin URL & Logged in Student & Enter URL: /database-monitor & Access Denied & \textbf{PASS} \\
+\hline
+RBAC-06 & Staff to Admin URL & Logged in Staff & Enter URL: /user-management & Access Denied & \textbf{PASS} \\
+\hline
+RBAC-07 & Public to Dashboard & Not Logged In & Enter URL: /home & Redirect to Login Page & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Clinic Features and Operations}
+The following test cases validate the End-to-End processing of clinical data, spanning search functionalities, medical/dental charting, medical certificate issuance, and health campaigns.
+
+\subsection{Patient Search Functionality}
+\begin{table}[htbp]
+\centering
+\caption{Patient Search Functionality}
+\begin{tabular}{|l|p{2cm}|p{3cm}|p{4.5cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+PSF-01 & Search by USC ID & Search input: 21100727 & System displays patient Galen Sabequil accurately. & \textbf{PASS} \\
+\hline
+PSF-02 & Search by First Name & Search input: Galen & System filters and displays matching records. & \textbf{PASS} \\
+\hline
+PSF-03 & Search by Last Name & Search input: Sabequil & System filters and displays matching records. & \textbf{PASS} \\
+\hline
+PSF-04 & Search by Email & Search input: 21100727@usc.edu.ph & System filters and displays matching records. & \textbf{PASS} \\
+\hline
+PSF-05 & Student Filter & Filter Role: Student & System only displays student patients. & \textbf{PASS} \\
+\hline
+PSF-06 & Teacher Filter & Filter Role: Teacher & System only displays teacher/faculty patients. & \textbf{PASS} \\
+\hline
+PSF-07 & Program Filter & Filter: BS CpE & System only displays computer engineering patients. & \textbf{PASS} \\
+\hline
+PSF-08 & Year Level Filter & Filter: 1st Year & System dynamically isolates only 1st-year students. & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Medical Record Management}
+\begin{table}[htbp]
+\centering
+\caption{Medical Record Management}
+\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+MRM-01 & Create Record & Temp: 38.4°C, Concern: Fever & New record is generated and stored accurately. & \textbf{PASS} \\
+\hline
+MRM-02 & Edit Record & Change Temp to 38.8°C & Record is updated accurately in the database. & \textbf{PASS} \\
+\hline
+MRM-03 & Search (Patient) & Input: Galen Elijah & Only records matching the patient are filtered. & \textbf{PASS} \\
+\hline
+MRM-04 & Search (Concern) & Input: Stomach & Only records matching the concern are filtered. & \textbf{PASS} \\
+\hline
+MRM-05 & Date Filter & Input: 04/01 to 04/22 & Only records within the date range appear. & \textbf{PASS} \\
+\hline
+MRM-06 & Delete Record & Select record to delete & Record successfully removed from the database. & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Dental Record Management}
+\begin{table}[htbp]
+\centering
+\caption{Dental Record Management}
+\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+DRM-01 & Create Record & Proc: Cleaning, Diag: Gingivitis & New dental record generated successfully. & \textbf{PASS} \\
+\hline
+DRM-02 & Edit Record & Change Oral Hygiene to Fair & Record updated accurately in the database. & \textbf{PASS} \\
+\hline
+DRM-03 & Attach PDF & Dental form PDF sample & PDF file attached and downloadable via proxy. & \textbf{PASS} \\
+\hline
+DRM-04 & Attach JPG & Dental form JPG sample & JPG file attached and viewable. & \textbf{PASS} \\
+\hline
+DRM-05 & Search (Patient) & Input: Galen Elijah & Records matching patient are isolated. & \textbf{PASS} \\
+\hline
+DRM-06 & Search (Concern) & Input: Gingivitis & Records matching concern are filtered. & \textbf{PASS} \\
+\hline
+DRM-07 & Date Filter & Input: 04/01 to 04/23 & Records within exact date range isolated. & \textbf{PASS} \\
+\hline
+DRM-08 & Delete Record & Select record to delete & Record removed securely from medical history. & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Medical Certificate Issuance (ACA-HSD-04F)}
+\begin{table}[htbp]
+\centering
+\caption{Medical Certificate Issuance}
+\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+MCM-01 & Create Certificate & Purpose: CPE Week & New draft is created with "Pending" status. & \textbf{PASS} \\
+\hline
+MCM-02 & Edit Certificate & Change Purpose & Record updated, status remains pending. & \textbf{PASS} \\
+\hline
+MCM-03 & Approve (Doctor) & Fitness: Fit, Approval: Approved & Certificate approved and unlocked for PDF render. & \textbf{PASS} \\
+\hline
+MCM-04 & Reject (Doctor) & Fitness: Not Fit, Approval: Rejected & Certificate marked as rejected successfully. & \textbf{PASS} \\
+\hline
+MCM-05 & Search (Patient) & Input: Galen & Certificates with name "Galen" filtered. & \textbf{PASS} \\
+\hline
+MCM-09 & Filter (All) & Status: All Status & All certificates (Pending, Approved, Rejected) shown. & \textbf{PASS} \\
+\hline
+MCM-10 & Filter Approved & Status: Approved & Only approved certificates are shown. & \textbf{PASS} \\
+\hline
+MCM-11 & Filter Rejected & Status: Rejected & Only rejected certificates are shown. & \textbf{PASS} \\
+\hline
+MCM-12 & Filter Pending & Status: Pending & Only pending drafts are shown. & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Health Campaign Management}
+\begin{table}[htbp]
+\centering
+\caption{Health Campaign and Information Management}
+\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+HCM-01 & Create Campaign & Title: Scrub Up, Priority: High & New campaign broadcasts to active student feed. & \textbf{PASS} \\
+\hline
+HCM-02 & Edit Campaign & Change Priority to Medium & Campaign updates dynamically across endpoints. & \textbf{PASS} \\
+\hline
+HCM-03 & Notification & Verify Feed / Notifications & Campaign is found and pushed to notifications. & \textbf{PASS} \\
+\hline
+HCM-04 & Delete Campaign & Select Record to Delete & Record successfully removed from the library. & \textbf{PASS} \\
+\hline
+HIM-01 & Create Info & Title: Academic Burnout & Health content successfully categorized and published. & \textbf{PASS} \\
+\hline
+HIM-02 & Edit Info & Change title & Record updates accurately in the database. & \textbf{PASS} \\
+\hline
+HIM-03 & Delete Info & Select Record to Delete & Record successfully removed from the library. & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Analytics and Reporting Engine}
+The background reporting engine was rigorously tested to ensure the system can aggregate massive datasets and export them into diverse formats.
+
+\subsection{Reporting Engine Format Export Validation}
+\begin{table}[htbp]
+\centering
+\caption{Reporting Engine Format Export Validation}
+\begin{tabular}{|p{5cm}|p{5cm}|c|}
+\hline
+\textbf{Report Category Tested} & \textbf{Formats Successfully Generated \& Downloaded} & \textbf{Execution Status} \\
+\hline
+Health Campaign Performance (HCP 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+Dental Health Report (DHP 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+Patient Feedback Analysis (PFA 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+Health Metrics Report (HMP 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+Medical Statistics Dashboard (MSD 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+Patient Summary Report (PSR 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+Treatment Outcomes Report (TOR 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+User Activity Report (UAR 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+Monthly Visit Trends (MVT 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Discussion for Reporting Validation:} By validating 45 distinct export scenarios across nine diverse reporting categories, the testing confirms that the backend can successfully query the PostgreSQL database and render complex summaries without data loss. The flawless execution across all export types (PDF, Excel, CSV, JSON, and HTML) guarantees that the USC Clinic can maintain both digital and physical records for compliance, administrative review, and health trend analysis within the university community.

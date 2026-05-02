@@ -1,0 +1,347 @@
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Reporting & Analytics,,,,,,,,,,,
+,This shows the system can process large amounts of data to give insights to the Clinic Coordinator.,,,,,,,,,,,
+,,,,,,,,,,,,
+,Health Campaign Performance,,,,,,,,,,, 
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,HCP-01,Health Campaign Performance,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title:Health Campaign Performance
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file",PASS,,,,,
+,HCP-02,Health Campaign Performance,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Health Campaign Performance
+Date: 2/1/2026 - 4/7/2026
+Format: Excel Spreadsheet Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document",PASS,,,,,
+,HCP-03,Health Campaign Performance,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Health Campaign Performance
+Date: 2/1/2026 - 4/7/2026
+Format: CSV File","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file",PASS,,,,,
+,HCP-04,Health Campaign Performance,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Health Campaign Performance
+Date: 2/1/2026 - 4/7/2026
+Format: Json Data","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file",PASS,,,,,
+,HCP-05,Health Campaign Performance,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Health Campaign Performance
+Date: 2/1/2026 - 4/7/2026
+Format: HTML Report","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file",PASS,,,,,
+,,,,,,,,,,,,
+,Dental Health Report,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,DHP-01,Dental Health Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Dental Health Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file",PASS,,,,,
+,DHP-02,Dental Health Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Dental Health Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document",PASS,,,,,
+,DHP-03,Dental Health Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Dental Health Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file",PASS,,,,,
+,DHP-04,Dental Health Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Dental Health Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file",PASS,,,,,
+,DHP-05,Dental Health Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Dental Health Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file",PASS,,,,,
+,,,,,,,,,,,,
+,Patient Feedback Analysis,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,PFA-01,Patient Feedback Analysis,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Feedback Analysis
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file",PASS,,,,,
+,PFA-02,Patient Feedback Analysis,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Feedback Analysis
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document",PASS,,,,,
+,PFA-03,Patient Feedback Analysis,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Feedback Analysis
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file",PASS,,,,,
+,PFA-04,Patient Feedback Analysis,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Feedback Analysis
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file",PASS,,,,,
+,PFA-05,Patient Feedback Analysis,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Feedback Analysis
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file",PASS,,,,,
+,,,,,,,,,,,,
+,Health Metrics Report,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,HMP-01,Health Metrics Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Health Metrics Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file",PASS,,,,,
+,HMP-02,Health Metrics Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Health Metrics Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document",PASS,,,,,
+,HMP-03,Health Metrics Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Health Metrics Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file",PASS,,,,,
+,HMP-04,Health Metrics Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Health Metrics Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file",PASS,,,,,
+,HMP-05,Health Metrics Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Health Metrics Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file",PASS,,,,,
+,,,,,,,,,,,,
+,Medical Statistics Dashboard,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,MSD-01,Medical Statistics Dashboard,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Medical Statistics Dashboard
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file",PASS,,,,,
+,MSD-02,Medical Statistics Dashboard,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Medical Statistics Dashboard
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document",PASS,,,,,
+,MSD-03,Medical Statistics Dashboard,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Medical Statistics Dashboard
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file",PASS,,,,,
+,MSD-04,Medical Statistics Dashboard,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Medical Statistics Dashboard
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file",PASS,,,,,
+,MSD-05,Medical Statistics Dashboard,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Medical Statistics Dashboard
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file",PASS,,,,,
+,,,,,,,,,,,,
+,Patient Summary Report,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,PSR-01,Patient Summary Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Summary Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file",PASS,,,,,
+,PSR-02,Patient Summary Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Summary Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document",PASS,,,,,
+,PSR-03,Patient Summary Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Summary Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file",PASS,,,,,
+,PSR-04,Patient Summary Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Summary Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file",PASS,,,,,
+,PSR-05,Patient Summary Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Patient Summary Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file",PASS,,,,,
+,,,,,,,,,,,,
+,Treatment Outcomes Report,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,TOR-01,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file",PASS,,,,,
+,TOR-02,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document",PASS,,,,,
+,TOR-03,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file",PASS,,,,,
+,TOR-04,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file",PASS,,,,,
+,TOR-05,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file",PASS,,,,,
+,,,,,,,,,,,,
+,User Activity Report,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,UAR-01,User Activity Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: User Activity Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file",PASS,,,,,
+,UAR-02,User Activity Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: User Activity Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document",PASS,,,,,
+,UAR-03,User Activity Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: User Activity Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file",PASS,,,,,
+,UAR-04,User Activity Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: User Activity Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file",PASS,,,,,
+,UAR-05,User Activity Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: User Activity Report
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file",PASS,,,,,
+,,,,,,,,,,,,
+,Monthly Visit Trends,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,MVT-01,Monthly Visit Trends,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Monthly Visit Trends
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file","Report starts generating. 
+Status: Complete.
+Downloadable as PDF file",PASS,,,,,
+,MVT-02,Monthly Visit Trends,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Monthly Visit Trends
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document","Report starts generating. 
+Status: Complete.
+Downloadable as Excel Document",PASS,,,,,
+,MVT-03,Monthly Visit Trends,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Monthly Visit Trends
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file","Report starts generating. 
+Status: Complete.
+Downloadable as CSV file",PASS,,,,,
+,MVT-04,Monthly Visit Trends,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Monthly Visit Trends
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file","Report starts generating. 
+Status: Complete.
+Downloadable as JSON file",PASS,,,,,
+,MVT-05,Monthly Visit Trends,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Monthly Visit Trends
+Date: 2/1/2026 - 4/7/2026
+Format: PDF Document","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file","Report starts generating. 
+Status: Complete.
+Downloadable as HTML file",PASS,,,,,
+,"The Reporting and Analytics module serves as the primary data processing engine of the system, designed to transform raw clinical data into actionable insights for the clinic coordinator and medical staff. These test cases evaluate the system's ability to aggregate large datasets and export them into various professional formats, including PDF, Excel, CSV, JSON, and HTML. By validating diverse reporting categories ranging from dental health and health metrics to treatment outcomes and user activity, the testing confirms that the backend can successfully query the PostgreSQL database and render complex summaries without data loss. The successful execution across all export types ensures that the USC Clinic can maintain both digital and physical records for compliance, administrative review, and health trend analysis within the university community.",,,,,,,,,,,

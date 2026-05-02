@@ -1,60 +1,53 @@
-% ******************************* Thesis Appendix C ****************************
+% ******************************* Thesis Appendix H ****************************
 
-\chapter{Software Testing Results}
-\label{appendix:testing_results}
+\chapter{Comprehensive Training Plan (Deliverable D4): USC-PIS}
+\label{appendix:training_plan}
 
-This appendix provides the detailed results of the multi-layered testing pipeline executed for the USC-PIS. These results validate the system's functional correctness, security integrity, and operational performance.
+\section{Program Overview}
 
-\section{Functional Testing Results}
+\textbf{Objectives:} The primary objective is to equip all users with the digital competency required to operate the fully digital USC-PIS, reducing patient record retrieval time to well under 1 second (capitalizing on the 127.81ms search benchmark).
 
-The functional testing phase verified the behavior of individual components and the end-to-end integration of clinical workflows.
+\textbf{Delivery Methods:} Training will be executed via a hybrid delivery approach, using hands-on demonstration modules supplemented by the comprehensive User Manuals.
 
-\subsection{Unit Testing}
-\begin{table}[htbp]
-    \centering
-    \caption{Unit Testing Results (Security \& Logic)}
-    \label{tab:app_unit_testing}
-    \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{3.5cm}|c|}
-        \hline
-        \textbf{Test ID} & \textbf{Requirement Evaluated} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Status} \\ \hline
-        UT-01 & pgcrypto SQL Encryption Audit & Binary storage for Name/Diagnosis & Binary (bytea) hashes detected & \textbf{PASS} \\ \hline
-        UT-02 & Academic Year-Level Logic & Filter 1st-4th Year accurately & 100\% Accuracy in filtering & \textbf{PASS} \\ \hline
-        UT-03 & MFA Token Expiration & Expired codes return invalid & \texttt{is\_expired()} logic triggered & \textbf{PASS} \\ \hline
-        UT-04 & Clinical Field Constraints & Regex validation for Dental FDI & "11,12" accepted; "1,2" blocked & \textbf{PASS} \\ \hline
-        UT-05 & Safe List Onboarding & Automatic Role Assignment & Assigned: DOCTOR / NURSE & \textbf{PASS} \\ \hline
-        UT-06 & File Upload Security & Reject .EXE, .JS, .PY files & 100\% Rejection rate & \textbf{PASS} \\ \hline
-    \end{tabular}
-\end{table}
+\section{System Adoption Strategy (Addressing Bottlenecks)}
 
-\subsection{Integration Testing}
-\begin{table}[htbp]
-    \centering
-    \caption{Integration Testing Results (Workflows \& RBAC)}
-    \label{tab:app_integration_testing}
-    \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{3.5cm}|c|}
-        \hline
-        \textbf{Test ID} & \textbf{Workflow / Requirement} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Status} \\ \hline
-        IT-01 & Clinical Certificate Pipeline & Nurse $\rightarrow$ Doctor $\rightarrow$ PDF Flow & Flow Completed (HTTP 200 OK) & \textbf{PASS} \\ \hline
-        IT-02 & Feedback Analytics & Persistence of Survey Data & Record successfully created in database & \textbf{PASS} \\ \hline
-        IT-03 & RBAC Security Stress Test & Cross-patient access restricted & HTTP 403 (Denied) / 404 (Hidden) & \textbf{PASS} \\ \hline
-        IT-04 & Academic Year Sort & Filter specific records via API & 1/1 Match (e.g., 4th Year isolated) & \textbf{PASS} \\ \hline
-        IT-05 & Health Campaign Flow & Student sees Admin alert & Visible in Student Dashboard Feed & \textbf{PASS} \\ \hline
-    \end{tabular}
-\end{table}
+Initial database audits revealed critical system underutilization (e.g., 3 medical records for 9 patients, 1 dental record, and 0 file uploads). To solve this adoption issue, training will incorporate:
+\begin{itemize}
+    \item \textbf{Workflow Integration:} Practical demonstrations on incorporating the software directly into the clinic's daily operational workflows.
+    \item \textbf{Incentives \& Benefits:} Showcasing how digital record-keeping eliminates redundant paperwork and provides instant clinical insights.
+\end{itemize}
 
-\section{Non-Functional Testing Results}
+\section{Module 1: Clinical Operations (For Doctors \& Nurses)}
 
-\subsection{Performance Benchmarking}
-\begin{table}[htbp]
-    \centering
-    \caption{Performance Benchmarking Results}
-    \label{tab:app_performance_benchmarking}
-    \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{3.5cm}|c|}
-        \hline
-        \textbf{Test ID} & \textbf{Performance Metric} & \textbf{Target Threshold} & \textbf{Measured Result} & \textbf{Status} \\ \hline
-        PT-01 & Report / PDF Latency & < 1000 ms & 124.53 ms & \textbf{PASS} \\ \hline
-        PT-02 & System Concurrency (20 Users) & 20 Concurrent Requests & 20/20 Success (0\% Drop) & \textbf{PASS} \\ \hline
-        PT-03 & Encryption Lag / Overhead & < 50 ms overhead & < 1 ms (Standard) & \textbf{PASS} \\ \hline
-        PT-04 & Search Query Efficiency & < 500 ms (for 100+ records) & 123.16 ms & \textbf{PASS} \\ \hline
-    \end{tabular}
-\end{table}
+\begin{itemize}
+    \item \textbf{Patient Intake:} Staff will learn to utilize the \textbf{Application Retooling Filter Bar} to segment patient datasets in real-time by \textbf{Role, Program, Year Level, and Registration Period}. Instruction will explicitly cover the Academic Year and Semester logic (e.g., filtering 1st Semester from August 1 to December 31) to route targeted student groups.
+    \item \textbf{Record Management \& Security:} Users will master the \textbf{Unified Record Component} for entering vitals and the mandatory "Concern / Reason for Visit" fields. A highly technical segment will focus on the \textbf{\texttt{pgcrypto} encryption architecture}, explaining how patient diagnoses and names are automatically hashed as secure \textbf{\texttt{BinaryField}} strings via backend signals.
+\end{itemize}
+
+\section{Module 2: Specialized Clinical Workflows (For Dentists)}
+
+\begin{itemize}
+    \item \textbf{Dental Charting \& Streamlined Entry:} Dentists will be instructed on charting tooth conditions using the \textbf{FDI notation (11-48)} numerical range, strictly enforced via regex. To accelerate high-volume clinic days, Dentists will master the \textbf{"Consultation Only" mode}, which makes full diagnoses optional, and utilize the explicit "Referral To" field.
+\end{itemize}
+
+\section{Module 3: Administrative Output (For Staff \& Admins)}
+
+\begin{itemize}
+    \item \textbf{Certificate Issuance:} Staff will learn the workflow for generating the \textbf{ACA-HSD-04F Medical Certificate} directly from a health record. Training will emphasize that while Nurses may draft the certificate, the system mandates secure approval executed solely by the \textbf{Doctor} before the PDF is rendered.
+    \item \textbf{Reporting:} Staff will practice generating \textbf{Visit Trends} and \textbf{Treatment Outcome Reports} using the Celery-powered asynchronous reporting module, achieving data outputs in under 1 second without blocking the interface.
+\end{itemize}
+
+\section{Module 4: Student Engagement (For Students \& Faculty)}
+
+\begin{itemize}
+    \item \textbf{Personal Health Access \& Feedback:} Students will be trained on navigating their personalized \textbf{Student Medical Record (SMR)} via the \textbf{/health-insights} tab to view non-interactive timelines. They will also learn how to respond to automated post-visit emails by submitting evaluations and interacting with Health Campaigns.
+\end{itemize}
+
+\section{Assessment \& Evaluation}
+
+\textbf{Training Success \& Adoption Metrics:} Rather than utilizing formal proficiency exams, the success of the training program and system adoption will be evaluated during the Pilot Deployment phase (targeting 70\% of 1st-year CpE students and selected clinic staff). The evaluation will be based on two realistic pillars:
+
+\begin{itemize}
+    \item \textbf{Direct User Feedback \& Issue Reporting:} Success will be measured by qualitative feedback gathered from the clinic staff and pilot students regarding the system's intuitiveness, as well as tracking any reported bugs or workflow bottlenecks.
+    \item \textbf{Real-World System Performance:} Evaluating whether trained staff can execute operational tasks efficiently under real clinic loads, ensuring that benchmarks, such as the sub-500ms patient search latency and rapid PDF generation, are maintained during daily operations.
+\end{itemize}

@@ -63,6 +63,70 @@ Integration testing verified that different modules, such as frontend forms, bac
 
 Integration testing evaluated the seamless interaction between the React frontend, the Django REST Framework APIs, and external enterprise tools. Test IT-01 successfully validated the End-to-End Medical Certificate issuance pipeline, confirming that while a Nurse can draft the USC Form ACA-HSD-04F, the system's middleware strictly requires a Doctor's authorization before the backend dual-engine PDF module renders the final document. Additionally, IT-03 stress-tested the Role-Based Access Control (RBAC) architecture; malicious attempts to access cross-patient records were successfully blocked, returning HTTP 403 (Denied) or 404 (Not Found) errors, proving data isolation between students. IT-04 also confirmed the success of the "Application Retooling" feature, proving that the API can dynamically sort, filter, and isolate specific student cohorts by Academic Year and Semester in real-time, effectively resolving the clinic's previous reporting inefficiencies.
 
+\subsection{Manual System Feature Validation}
+In addition to the automated testing pipelines, an exhaustive manual system feature validation was conducted to ensure that all front-facing User Interface (UI) modules and role-specific dashboards functioned intuitively for the Clinic Staff, Administrators, and Students. This manual audit was divided into three primary modules: Authentication and Security, Clinic Operations, and Analytics \& Reporting.
+
+To demonstrate the rigorous nature of this validation phase, representative test matrices for critical system features are presented below.
+
+\begin{table}[htbp]
+\centering
+\caption{Sample Validation - Login and Authentication}
+\label{tab:sample_auth}
+\begin{tabular}{|l|p{2.5cm}|p{2.5cm}|p{3cm}|p{3cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-condition} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+AUTH-01 & Student login Success & Student account exists & Email: student@usc.edu.ph, Pass: ValidPass@123 & User redirected to Dashboard. & \textbf{PASS} \\
+\hline
+AUTH-02 & Incorrect Password & User account exists & Correct Email, Incorrect Password & Access Denied; Error: "Invalid password" & \textbf{PASS} \\
+\hline
+AUTH-05 & Non-USC email & Invalid email format & Email: test@gmail.com & Error: "Invalid email format" & \textbf{PASS} \\
+\hline
+AUTH-06 & Persistent Session & User is logged in & Close \& Reopen Browser & User remains authenticated via stored token. & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Sample Validation - Medical Record Management}
+\label{tab:sample_mrm}
+\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\hline
+\textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
+\hline
+MRM-01 & Create New Clinical Record & Temp: 38.4°C, BP: 120/80, Diagnosis: Fever, Treatment: Paracetamol & New record is generated and stored accurately. & \textbf{PASS} \\
+\hline
+MRM-02 & Edit Clinical Record & Change Temp to 38.8°C & Record is updated accurately in the database. & \textbf{PASS} \\
+\hline
+MRM-04 & Search Clinical Record (Concern) & Search Input: Stomach & Only records matching the exact concern are filtered. & \textbf{PASS} \\
+\hline
+MRM-06 & Delete Clinical Record & Select record and confirm delete & Record successfully removed from the medical history. & \textbf{PASS} \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Sample Validation - Reporting Engine Formats}
+\label{tab:sample_reports}
+\begin{tabular}{|p{4cm}|p{6cm}|c|}
+\hline
+\textbf{Report Category Tested} & \textbf{Formats Successfully Generated \& Downloaded} & \textbf{Execution Status} \\
+\hline
+Health Campaign Performance & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+Patient Feedback Analysis & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+Monthly Visit Trends & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Discussion and Analysis for Manual Validation:} The manual testing evaluated precise data inputs, expected system behaviors, and error-handling capabilities under real-world human interaction. The validation confirmed that the Role-Based Access Control (RBAC) securely isolated dashboards, clinical records correctly processed complex medical inputs (such as vital signs and FDI dental charting), and the background reporting engine successfully synthesized large datasets into five distinct export formats without data loss. All manual test scenarios yielded a 100\% pass rate.
+
+\textit{Note: The complete, exhaustive tables detailing all test scenarios, specific inputs, and results across the entire system can be found in Appendix F (Software Testing Results).}
+
 \section{Non-Functional Testing Results}
 
 To ensure the system could handle peak clinical loads and address the operational inefficiencies of the legacy paper-based method, rigorous non-functional performance benchmarking was conducted.

@@ -1,0 +1,58 @@
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Login & Authentication,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,AUTH-01,Student login Success,Student account exists,"Email: student@usc.edu.ph
+Pass: ValidPass@123",User redirected to Dashboard.,User redirected to Dashboard.,PASS,,,,, 
+,AUTH-02,Incorrect Password,User account exists,"Correct Email 
+Incorrect Password","Access Denied; Error: ""Invalid password""","Access Denied; Error: ""Invalid password""",PASS,,,,,
+,AUTH-03,Non-existent User,Email not in DB,Email: random@gmail.com,"Error: ""No account found with this email""","Error: ""No account found with this email""",PASS,,,,,
+,AUTH-04,Empty Login Fields,User is on Login Page,"Email: [empty] 
+Password: [empty]","Error: Email address is required
+Password is required","Error: Email address is required
+Password is required",PASS,,,,,
+,AUTH-05,Non usc email,Invalid email format,Email: test@gmail.com,"Error: ""Invalid email format""","Error: ""Invalid email format""",PASS,,,,,
+,AUTH-06,Persistent Session,User is logged in,Close & Reopen Browser,User remains authenticated via stored token.,User remains authenticated via stored token.,PASS,,,,,
+,AUTH-07,Unauthorized Access,User is logged out,Enter /staff/dashboard in URL,System detects no session; redirects user to Login page.,System detects no session; redirects user to Login page.,PASS,,,,,
+,"The Login and Authentication module serves as the system's primary security layer designed to regulate entry and verify the identity of users attempting to access the patient information system. These test cases focus on the reliability of the authentication handshake and the robustness of session security. By evaluating a range of inputs from valid credentials to invalid email formats and non-existent accounts, the testing confirms that the system effectively prevents unauthorized access to sensitive medical data. Furthermore, the inclusion of tests for session persistence and direct URL manipulation verifies that the system correctly maintains or terminates user sessions according to security best practices. This ensures that clinic data remains protected against unauthorized navigation and that the application strictly enforces institutional access requirements.",,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Registration Module,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,REG-01,Successful Registration,User is on Register Page,"Email: 6090146@usc.edu.ph
+Pass: P@ssw0rd2024",Account created in PostgreSQL; success message shown; redirect to Login.,Account created in PostgreSQL; success message shown; redirect to Login.,PASS,,,,,
+,REG-02,Duplicate Email,Email already exists in DB,Existing Email: 6090146@usc.edu.ph,"System blocks entry; Error: ""user with this email already exists.""","System blocks entry; Error: ""user with this email already exists.""",PASS,,,,,
+,REG-03,Invalid Email Format,User is on Register Page,Email: ronvanz@gmail.com,"Client-side validation blocks submission; ""Only USC email addresses (@usc.edu.ph) are allowed""","Client-side validation blocks submission; ""Only USC email addresses (@usc.edu.ph) are allowed""",PASS,,,,,
+,REG-04,Password Mismatch,User is on Register Page,"Pass: Password@123
+Confirm:Password@456","Registration fails; Error: ""Passwords do not match""","Registration fails; Error: ""Passwords do not match""",PASS,,,,,
+,REG-05,Short Password,User is on Register Page,Pass: 123,"Error: ""Password must be at least 8 characters long""","Error: ""Password must be at least 8 characters long""",PASS,,,,,
+,REG-06,No Input Password,User is on Register Page,Pass: [empty],"Error: ""Password is required""","Error: ""Password is required""",PASS,,,,,
+,REG-07,Weak Password,User is on Register Page,Pass: 123456789abc,"Error: ""Password must contain at least one uppercase letter, lowercase letter, number, and special character""","Error: ""Password must contain at least one uppercase letter, lowercase letter, number, and special character""",PASS,,,,,
+,"The Registration Module test cases focus on the critical areas of data integrity and input validation to ensure that the user database remains accurate and secure. By evaluating scenarios such as successful account creation, duplicate email detection, and strict institutional email requirements, the system demonstrates its ability to filter out invalid or unauthorized entries at the point of origin. Furthermore, the validation logic for password complexity and field consistency ensures that all registered accounts meet established security standards. These results confirm that the system successfully mitigates common errors and security risks, such as duplicate data entry and weak credential creation, while maintaining compliance with the required institutional email domain for the university clinic environment.",,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Role Based Access Control (RBAC),,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,RBAC-01,Student Login Success,Account must be student,"Email: student@usc.edu.ph
+Pass: ValidPass@123",User redirected to Student Dashboard.,User redirected to Student Dashboard.,PASS,,,,,
+,RBAC-02,Staff Role Login Success,"Account must be staff role (doctor,nurse,staff, dentist)","Email: nurse@usc.edu.ph
+Pass: ValidPass@123",User redirected to Staff Dashboard.,User redirected to Staff Dashboard.,PASS,,,,,
+,RBAC-03,Admin Login Success,Admin account exists,"Email: system@usc.edu.ph
+Pass: ValidPass@123",User redirected to Admin Dashboard.,User redirected to Admin Dashboard.,PASS,,,,,
+,RBAC-04,Student Accessing Staff URL,Logged in as Student,"Enter URL:
+/patients
+/health-insights
+/health-records
+/dental-records
+/medical-certificates",Access Denied,Access Denied,PASS,,,,,
+,RBAC-05,Student Accessing Admin URL,Logged in as Student,"Enter URL: 
+/database-monitor
+/email-administration
+/user-management",Access Denied,Access Denied,PASS,,,,,
+,RBAC-06,Clinic Staff Accessing Admin URL,Logged in as Staff,"Enter URL: 
+/database-monitor
+/email-administration
+/user-management",Access Denied,Access Denied,PASS,,,,,
+,RBAC-07,Public Access to Dashboard,Not Logged In/ No Access Token,Enter URL: /home,Redirect to Login Page,Redirect to Login Page,PASS,,,,,
+,"The Role Based Access Control validation focuses on the enforcement of user permissions and the isolation of data across different account levels within the clinic system. These test cases ensure that the application correctly identifies the authority of students, staff, and administrators to provide a tailored user experience while maintaining strict security boundaries. By testing successful login redirections alongside unauthorized attempts to access sensitive medical and administrative URLs, the results confirm that the system effectively prevents both horizontal and vertical privilege escalation. The successful rejection of unauthenticated public requests further validates the robustness of the backend security filters, ensuring that the patient information and system configurations remain accessible only to verified personnel with the appropriate authorization level.",,,,,,,,,,,

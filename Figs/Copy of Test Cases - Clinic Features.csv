@@ -1,0 +1,301 @@
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Patient Search Funcionality,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,PSF-01,Search functionality using usc id,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search input: 21100727,"Should display patient Galen Sabequil
+USC id: 21100727
+Name: Galen Elijah Sabequil
+Course: Bachelor of Science in Computer Enginnering
+Email: 21100727@usc.edu.ph","system shows patient Galen Sabequil
+USC id: 21100727
+Name: Galen Elijah Sabequil
+Course: Bachelor of Science in Computer Enginnering
+Email: 21100727@usc.edu.ph",PASS,,,,, 
+,PSF-02,Search functionality using first name,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search input: Galen,"Should display patient Galen Sabequil
+USC id: 21100727
+Name: Galen Elijah Sabequil
+Course: Bachelor of Science in Computer Enginnering
+Email: 21100727@usc.edu.ph","system shows patient Galen Sabequil
+USC id: 21100727
+Name: Galen Elijah Sabequil
+Course: Bachelor of Science in Computer Enginnering
+Email: 21100727@usc.edu.ph",PASS,,,,,
+,PSF-03,Search functionality using last name,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search input: Sabequil,"Should display patient Galen Sabequil
+USC id: 21100727
+Name: Galen Elijah Sabequil
+Course: Bachelor of Science in Computer Enginnering
+Email: 21100727@usc.edu.ph","system shows patient Galen Sabequil
+USC id: 21100727
+Name: Galen Elijah Sabequil
+Course: Bachelor of Science in Computer Enginnering
+Email: 21100727@usc.edu.ph",PASS,,,,,
+,PSF-04,Search functionality using email,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search input: 21100727@usc.edu.ph,"Should display patient Galen Sabequil
+USC id: 21100727
+Name: Galen Elijah Sabequil
+Course: Bachelor of Science in Computer Enginnering
+Email: 21100727@usc.edu.ph","system shows patient Galen Sabequil
+USC id: 21100727
+Name: Galen Elijah Sabequil
+Course: Bachelor of Science in Computer Enginnering
+Email: 21100727@usc.edu.ph",PASS,,,,,
+,PSF-05,Student Search Filter,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Filter Role: Student,System should only display student patients,shows only student patients,PASS,,,,,
+,PSF-06,Teacher Search Filter,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Filter Role: Teacher,System should only display teacher patients,shows only teacher patients,PASS,,,,,
+,PSF-07,Program Search Filter,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Filter Program: Bachelor of Science in Computer Engineering,System should only display computer engineering patients,shows only computer engineering patients,PASS,,,,,
+,PSF-08,Year Level Search Filter,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Filter Year Level: 1st Year ,System should only display 1st year students,shows only 1st year students,PASS,,,,,
+,"The Patient Search Functionality validation focuses on the efficiency and accuracy of data retrieval within the PostgreSQL database. These test cases evaluate the system's ability to locate specific medical records using various identifiers such as USC ID, first name, last name, and institutional email address. Beyond basic keyword matching, the results confirm the reliability of the system's filtering logic, which allows clinic staff to categorize patients by role, academic program, and year level. By successfully returning precise results for each unique query and filter combination, the testing demonstrates that the application provides a robust search architecture capable of handling a large volume of student and staff data. This functionality is essential for minimizing administrative delays and ensuring that medical personnel can access patient information quickly during clinic consultations.",,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Medical Record Managemet,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,MRM-01,Create New Clinical Record (fever),"Account must be admin or staff role (doctor,nurse,staff, dentist)","Patient: Galen Elijah Sabequil
+Temp: 38.4°C
+Blood Pressure: 120/80 mmHg
+Pulse Rate: 109bpm
+Respiratory Rate: 24/min
+Concern: Fever
+Diagnosis: fatigue, dry cough, mild sore throat.
+Treatment Plan: Paracetamol 500mg every 4–6 hours.
+Minimum of 2.5–3 Liters of fluids per day.
+Strict bed rest.
+","A new record is generated
+Date: 2026-04-09
+Patient: Galen Elijah Sabequil
+Temp: 38.4°C
+Blood Pressure: 120/80 mmHg
+Pulse Rate: 109bpm
+Respiratory Rate: 24/min
+Concern: Fever
+Diagnosis:fatigue, dry cough, mild sore throat.
+Treatment Plan: Paracetamol 500mg every 4–6 hours.
+Minimum of 2.5–3 Liters of fluids per day.
+Strict bed rest.","A new record is generated
+Date: 2026-04-09
+Patient: Galen Elijah Sabequil
+Temp: 38.4°C
+Blood Pressure: 120/80 mmHg
+Pulse Rate: 109bpm
+Respiratory Rate: 24/min
+Concern: Fever
+Diagnosis:fatigue, dry cough, mild sore throat.
+Treatment Plan: Paracetamol 500mg every 4–6 hours.
+Minimum of 2.5–3 Liters of fluids per day.
+Strict bed rest.",PASS,,,,,
+,MRM-02,Edit Clinical Record (fever),"Account must be admin or staff role (doctor,nurse,staff, dentist)","Change Date to 2026-04-08
+Change temp to 38.8
+Change Diagnosis to fatigue, sore throat.","record is updated
+Date: 2026-04-08
+Patient: Galen Elijah Sabequil
+Temp: 38.8°C
+Blood Pressure: 120/80 mmHg
+Pulse Rate: 109bpm
+Respiratory Rate: 24/min
+Concern: Fever
+Diagnosis: fatigue, sore throat.
+Treatment Plan: Paracetamol 500mg every 4–6 hours.
+Minimum of 2.5–3 Liters of fluids per day.
+Strict bed rest.","record is updated
+Date: 2026-04-08
+Patient: Galen Elijah Sabequil
+Temp: 38.8°C
+Blood Pressure: 120/80 mmHg
+Pulse Rate: 109bpm
+Respiratory Rate: 24/min
+Concern: Fever
+Diagnosis: fatigue, sore throat.
+Treatment Plan: Paracetamol 500mg every 4–6 hours.
+Minimum of 2.5–3 Liters of fluids per day.
+Strict bed rest.",PASS,,,,,
+,MRM-03,Search Clinical Record (Patient),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search Input: Galen Elijah Sabequil,Only the records of Galen Elijah Sabequil should be filtered,Only the records of Galen Elijah Sabequil are filtered,PASS,,,,,
+,MRM-04,Search Clinical Record (Concern),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search Input: Stomach,Only the records of patients who have stomach concerns should be filtered,Only the records of patients who have stomach concerns are filtered,PASS,,,,,
+,MRM-05,Search Date Filter,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Date input: From 04/01/2026 to 04/22/2026,Only the records within 04/01/2026 to 04/22/2026 should be filtered,Only the records 04/01/2026 to 04/22/2026 input are filtered,PASS,,,,,
+,MRM-06,Delete Clinical Record,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Delete Record
+Date: 2026-04-08
+Patient: Galen Elijah Sabequil
+Concern: Fever
+Diagnosis: fatigue, sore throat.
+",Record should not be found in the medical records and in history records,Only the records within the date input are filtered,PASS,,,,,
+,"The Medical Record Management module focuses on the fundamental lifecycle of patient health data, encompassing the creation, modification, and deletion of clinical entries. These test cases evaluate the system's capacity to process complex medical inputs such as vital signs, diagnoses, and treatment plans while ensuring data persistence in the backend. By testing critical functions like record editing and date-specific filtering, the results confirm that medical personnel can maintain accurate and chronological patient histories. Furthermore, the successful execution of deletion and search protocols demonstrates the system's reliability in managing database transactions, ensuring that the USC Clinic can efficiently track patient health trends while maintaining a clean and organized digital repository",,,,,,,,,,,
+,,,,,,,,,,,,
+,Dental Record Managemet,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,DRM-01,Create New Dental Record (fever),"Account must be admin or staff role (doctor,nurse,staff, dentist)","Patient: Galen Elijah Sabequil
+Procedure: Dental Cleaning
+Diagnosis: Generalized Mild Gingivitis
+Treatment Performed: Ultrasonic Scaling, Prophy Paste, Fluoride Treatment
+Oral Hygiene Status: Poor
+Gum Condition: Gingivitis
+Pain Level: 2
+","A new record is generated
+Date: 2026-04-23
+Patient: Galen Elijah Sabequil
+Procedure: Dental Cleaning
+Diagnosis: Generalized Mild Gingivitis
+Treatment Performed: Ultrasonic Scaling, Prophy Paste, Fluoride Treatment
+Oral Hygiene Status: Poor
+Gum Condition: Gingivitis
+Pain Level: 2
+","A new record is generated
+Date: 2026-04-23
+Patient: Galen Elijah Sabequil
+Procedure: Dental Cleaning
+Diagnosis: Generalized Mild Gingivitis
+Treatment Performed: Ultrasonic Scaling, Prophy Paste, Fluoride Treatment
+Oral Hygiene Status: Poor
+Gum Condition: Gingivitis
+Pain Level: 2
+",PASS,,,,,
+,DRM-02,Edit Dental Record (fever),"Account must be admin or staff role (doctor,nurse,staff, dentist)","Change Oral Hygiene Status to Fair
+Change Pain level to 1","record is updated
+Date: 2026-04-23
+Patient: Galen Elijah Sabequil
+Procedure: Dental Cleaning
+Diagnosis: Generalized Mild Gingivitis
+Treatment Performed: Ultrasonic Scaling, Prophy Paste, Fluoride Treatment
+Oral Hygiene Status: Fair
+Gum Condition: Gingivitis
+Pain Level: 1","record is updated
+Date: 2026-04-23
+Patient: Galen Elijah Sabequil
+Procedure: Dental Cleaning
+Diagnosis: Generalized Mild Gingivitis
+Treatment Performed: Ultrasonic Scaling, Prophy Paste, Fluoride Treatment
+Oral Hygiene Status: Fair
+Gum Condition: Gingivitis
+Pain Level: 1",PASS,,,,,
+,DRM-03,Attach a pdf document,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Dental form pdf file sample,PDF file should be found on Attachments & Documents. File should be downloadable,PDF file is be found on Attachments & Documents. File should be downloadable,PASS,,,,,
+,DRM-04,Attach a jpg document,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Dental form jpg file sample,JPG file should be found on Attachments & Documents. File should be downloadable,JPG  file is be found on Attachments & Documents. File should be downloadable,PASS,,,,,
+,DRM-05,Search Dental Record (Patient),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search Input: Galen Elijah Sabequil,Only the records of Galen Elijah Sabequil should be filtered,Only the records of Galen Elijah Sabequil are filtered,PASS,,,,,
+,DRM-06,Search Dental Record (Concern),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search Input: Gingivitis,Only the records of patients who have stomach concerns should be filtered,Only the records of patients who have stomach concerns are filtered,PASS,,,,,
+,DRM-07,Search Date Filter,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Date input: From 04/01/2026 to 04/23/2026,Only the records within  04/01/2026 to 04/23/2026 should be filtered,Only the records within  04/01/2026 to 04/23/2026 are filtered,PASS,,,,,
+,DRM-08,Delete Dental Record,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Delete Record
+Date: 2026-04-23
+Patient: Galen Elijah Sabequil
+Procedure: Dental Cleaning
+Diagnosis: Generalized Mild Gingivitis
+Treatment Performed: Ultrasonic Scaling, Prophy Paste, Fluoride Treatment
+Oral Hygiene Status: Fair
+Gum Condition: Gingivitis",Record should not be found in the medical records and in history records,Only the records within the date input are filtered,PASS,,,,,
+,"The Dental Record Management module focuses on the specialized documentation and storage of oral health services provided by the university clinic. These test cases validate the system's ability to handle domain-specific data such as oral hygiene status, gum condition, and specific dental procedures while supporting multi-format file attachments like PDF and JPG for external dental forms. By testing the end-to-end process of creating, editing, and deleting records, the results confirm that the system maintains high data granularity and accessibility. Furthermore, the successful implementation of search filters and date-based queries ensures that the dental staff can retrieve historical patient information efficiently, providing a comprehensive digital framework for managing long-term dental care within the USC community.",,,,,,,,,,,
+,,,,,,,,,,,,
+,Medical Certificates Module,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,MCM-01,Create Medical Certificate,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Patient: Galen Elijah Sabequil
+Purpose: CPE Week Basketball
+Valid from: 4/24/2026 to 4/30/2026","New Medical record is created
+Patient: Galen Elijah Sabequil
+Purpose: CPE Week Basketball
+Valid from: 4/24/2026 to 4/30/2026
+Approval Status: Pending","New Medical record is created
+Patient: Galen Elijah Sabequil
+Purpose: CPE Week Basketball
+Valid from: 4/24/2026 to 4/30/2026
+Approval Status: Pending",PASS,,,,,
+,MCM-02,Edit Medical Certificate,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Change Purpose to Engineering Week Basketball,"Medical record is updated
+Patient: Galen Elijah Sabequil
+Purpose: Engineering Week Basketball
+Valid from: 4/24/2026 to 4/30/2026
+Approval Status: Pending","Medical record is updated
+Patient: Galen Elijah Sabequil
+Purpose: Engineering Week Basketball
+Valid from: 4/24/2026 to 4/30/2026
+Approval Status: Pending",PASS,,,,,
+,MCM-03,Approve Medical Certificate,Account must be doctor,"Medical Fitness Status: Fit
+Approval Status: Approved","Medical record is updated
+Patient: Galen Elijah Sabequil
+Purpose: Engineering Week Basketball
+Valid from: 4/24/2026 to 4/30/2026
+Fitness Status: Fit
+Approval Status: Approved","Medical record is updated
+Patient: Galen Elijah Sabequil
+Purpose: Engineering Week Basketball
+Valid from: 4/24/2026 to 4/30/2026
+Fitness Status: Fit
+Approval Status: Approved",PASS,,,,,
+,MCM-04,Reject Medical Certificate,Account must be doctor,"Medical Fitness Status: Not FIt
+Approval Status: Rejected","Medical record is updated
+Patient: Galen Elijah Sabequil
+Purpose: Engineering Week Basketball
+Valid from: 4/24/2026 to 4/30/2026
+Fitness Status: Not Fit
+Approval Status: Rejected","Medical record is updated
+Patient: Galen Elijah Sabequil
+Purpose: Engineering Week Basketball
+Valid from: 4/24/2026 to 4/30/2026
+Fitness Status: Not Fit
+Approval Status: Rejected",PASS,,,,,
+,MCM-05,Search Medical Certificate (Patient),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search input: Galen,"All Medical Certificates with the name ""Galen"" are filtered","All Medical Certificates with the name ""Galen"" are filtered",PASS,,,,,
+,MCM-06,Search Medical Certificate (Purpose),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search input: Engineering Week,"All Medical Certificates with ""Engineering Week"" are filtered","All Medical Certificates with ""Engineering Week"" are filtered",PASS,,,,,
+,MCM-07,Search Medical Certificate,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search input: Fit,"All Medical Certificates with  ""Fit"" status are filtered","All Medical Certificates with  ""Fit"" status are filtered",PASS,,,,,
+,MCM-08,Search Medical Certificate,"Account must be admin or staff role (doctor,nurse,staff, dentist)",Search input: Not Fit,"All Medical Certificates with  ""Not Fit"" status are filtered","All Medical Certificates with  ""Not Fit"" status are filtered",PASS,,,,,
+,MCM-09,Search Status Filter Medical Certificate (All Status),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Status Filter: All Status,All Medical Certificates are shown,All Medical Certificates are shown,PASS,,,,,
+,MCM-10,Search Status Filter Medical Certificate (Appproved),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Status Filter: Approved,All Medical Certificates with Approved status are filtered,All Medical Certificates with Approved status are filtered,PASS,,,,,
+,MCM-11,Search Status Filter Medical Certificate (Rejected),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Status Filter: Rejected,All Medical Certificates Rejected status are filtered,All Medical Certificates Rejected status are filtered,PASS,,,,,
+,MCM-12,Search Status Filter Medical Certificate (Pending),"Account must be admin or staff role (doctor,nurse,staff, dentist)",Status Filter: Pending,All Medical Certificates with  Pending status are filtered,All Medical Certificates with  Pending status are filtered,PASS,,,,,
+,"The Medical Certificates Module focuses on the generation and administrative workflow required for official health clearances within the university. These test cases evaluate the system's ability to handle certificate requests, allowing for the creation, modification, and approval of medical fitness documentation for specific institutional purposes such as sports or academic requirements. By testing the distinct approval and rejection logic reserved for medical doctors, the results confirm that the system maintains a strict clinical hierarchy and ensures that only authorized personnel can finalize a student's fitness status. Furthermore, the extensive validation of search and status filters demonstrates that the application effectively tracks the lifecycle of each request from pending to approved or rejected, providing an organized digital trail that significantly reduces the time required for manual certificate processing at the USC Clinic.",,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Health Campaign Module,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,HIM-01,Create new Campaign,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Scrub Up & Stay Sharp
+Campaign Type: Health and Safety
+Summary: reduce seasonal illnesses through proper hand hygiene and respiratory etiquette.
+Campaign Description: teaching effective handwashing techniques and the importance of sanitization
+Priority: High
+Date: 4/28/2026 - 5/28/2026","New Campaing Created
+""Title: Scrub Up & Stay Sharp
+Campaign Type: Health and Safety
+Summary: reduce seasonal illnesses through proper hand hygiene and respiratory etiquette.
+Campaign Description: teaching effective handwashing techniques and the importance of sanitization
+Priority: High
+Date: 4/28/2026 - 5/28/2026""","New Campaing Created
+""Title: Scrub Up & Stay Sharp
+Campaign Type: Health and Safety
+Summary: reduce seasonal illnesses through proper hand hygiene and respiratory etiquette.
+Campaign Description: teaching effective handwashing techniques and the importance of sanitization
+Priority: High
+Date: 4/28/2026 - 5/28/2026""",PASS,,,,,
+,HIM-02,Edit Campaign,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Change Priority to Medium
+Change end date to 5/20/2026","Campaing Updated
+""Title: Scrub Up & Stay Sharp
+Campaign Type: Health and Safety
+Summary: reduce seasonal illnesses through proper hand hygiene and respiratory etiquette.
+Campaign Description: teaching effective handwashing techniques and the importance of sanitization
+Priority: Medium
+Date: 4/28/2026 - 5/20/2026""","Campaing Updated
+""Title: Scrub Up & Stay Sharp
+Campaign Type: Health and Safety
+Summary: reduce seasonal illnesses through proper hand hygiene and respiratory etiquette.
+Campaign Description: teaching effective handwashing techniques and the importance of sanitization
+Priority: Medium
+Date: 4/28/2026 - 5/20/2026""",PASS,,,,,
+,HIM-03,Campaign Notification,Any user,User must be in notifcations page,Scrub Up & Stay Sharp Campaign should be found in notifications.,Scrub Up & Stay Sharp Campaign is found in notifications.,PASS,,,,,
+,HIM-04,Delete Campaign,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Delete Record
+Title: Scrub Up & Stay Sharp
+Campaign Type: Health and Safety
+Summary: reduce seasonal illnesses through proper hand hygiene and respiratory etiquette.
+Campaign Description: teaching effective handwashing techniques and the importance of sanitization
+Priority: High
+Date: 4/28/2026 - 5/28/2026",Scrub Up & Stay Sharp Campaign should not be found.,Scrub Up & Stay Sharp Campaign should is not found.,PASS,,,,,
+,"The Health Campaign Module test cases focus on the administrative lifecycle of public health initiatives within the university clinic. These tests evaluate the system's ability to create, edit, and manage health campaigns designed to improve student wellness and awareness. By validating fields such as campaign titles, descriptions, and priority levels, the results confirm that medical personnel can effectively organize seasonal health programs and distribute critical information regarding hygiene and respiratory etiquette. Furthermore, the successful execution of campaign notifications and deletion protocols ensures that the system maintains an accurate and up-to-date schedule of clinic events, allowing for the streamlined management of health and safety campaigns across the campus.",,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Health Information Module,,,,,,,,,,,
+,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
+,HIM-01,Create Health Information ,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Understanding and Managing Academic Burnout
+Category: Mental Wellness / Student Health
+Date: 4/28/2026","Created new Health Information
+Title: Understanding and Managing Academic Burnout
+Category: Mental Wellness / Student Health","Created new Health Information
+Title: Understanding and Managing Academic Burnout
+Category: Mental Wellness / Student Health",PASS,,,,,
+,HIM-02,Edit Health Information ,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Change title to How to manage academic burnout
+","Updated Health Information
+Title: How to manage academic burnout
+Category: Mental Wellness / Student Health","Updated Health Information
+Title: How to manage academic burnout
+Category: Mental Wellness / Student Health",PASS,,,,,
+,HIM-03,Delete Health Information,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Delete Record
+Title: How to manage academic burnout
+Category: Mental Wellness / Student Health",How to manage academic burnout not be found in healrh information.,How to manage academic burnout not be found in healrh information.,PASS,,,,,
+,"The Health Information Module test cases evaluate the administrative capacity to manage educational health resources intended for the student body. These tests confirm the system's ability to create, update, and remove informational content focused on student wellness, such as academic burnout management and mental health categories. By validating the entry of titles, specific categories, and publication dates, the results ensure that medical staff can curate a relevant and dynamic library of health information. The successful execution of these operations demonstrates that the system maintains data integrity during content modifications and deletions, providing a reliable platform for the clinic to disseminate important health guidance to the university community.",,,,,,,,,,,

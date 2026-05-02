@@ -1,3 +1,104 @@
 % ******************************* Thesis Appendix B ****************************
-% This file is currently empty or contains deprecated content.
-% Relevant sections have been moved to Appendices G, H, and I.
+
+\chapter{Software Design Document (SDD)}
+\label{appendix:sdd}
+
+\section{System Architecture Design}
+
+\subsection{Three-Tier Architecture}
+The USC-DC Patient Information System (USC-PIS) is engineered upon a modern, highly scalable three-tier web architecture.
+
+\begin{itemize}
+    \item \textbf{Presentation Layer (Frontend):} Developed utilizing React 18 with a Vite build system and Material-UI components, providing a responsive, low-latency, and component-based Graphical User Interface (GUI) for clinic staff and patients.
+    \item \textbf{Application Layer (Backend):} Powered by Python and Django 5.0.2, integrated with the Django REST Framework (DRF) 3.14.0. This layer encapsulates the core clinical business logic, API routing, and Role-Based Access Control (RBAC) middleware.
+    \item \textbf{Data Layer (Database):} Operates on a dual-database paradigm utilizing PostgreSQL 16.8 for production deployment and SQLite for local development. The system enforces vendor-aware logic to guarantee compatibility across environments.
+\end{itemize}
+
+\subsection{Enterprise Integrations}
+To support complex clinical operations, the architecture incorporates three primary enterprise integrations:
+
+\begin{itemize}
+    \item \textbf{Heroku:} Serves as the primary cloud hosting platform, providing automated CI/CD pipelines, secure Dyno management, and managed PostgreSQL database hosting.
+    \item \textbf{Cloudinary:} Operates as the system's scalable Content Delivery Network (CDN). It securely handles the persistent storage and rapid delivery of media, including Health Campaign PubMats and generated clinical PDF reports.
+    \item \textbf{Gmail API (OAuth 2.0):} Replaces standard SMTP protocols to bypass "less secure app" restrictions. It utilizes OAuth 2.0 tokens to reliably dispatch high-priority clinical communications, including Multi-Factor Authentication (MFA) codes and automated feedback reminders.
+\end{itemize}
+
+\section{Data Design \& Dictionary}
+
+\subsection{Database Normalization}
+The database architecture is designed in alignment with Third Normal Form (3NF) principles to eliminate data redundancy and ensure relationship integrity. Patient demographic data is logically decoupled from system authentication credentials (\texttt{authentication\_user}), while all clinical visits and assessments are mapped securely via explicitly constrained Foreign Keys (FK) with cascading or null-setting safeguards.
+
+\subsection{Data Dictionary}
+
+\begin{table}[htbp]
+\centering
+\caption{Table 1: authentication\_user (Core System User)}
+\begin{tabular}{|l|l|p{7cm}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). Unique identifier for the user. \\
+\hline
+\texttt{email} & String & Unique Key (UK). Enforces @usc.edu.ph domain constraint. \\
+\hline
+\texttt{password} & String & Securely hashed user password. \\
+\hline
+\texttt{role} & String & RBAC identifier (ADMIN, DOCTOR, DENTIST, NURSE, STAFF, STUDENT). \\
+\hline
+\texttt{is\_verified} & Boolean & Flag indicating successful MFA OTP verification. \\
+\hline
+\texttt{illness\_enc} & BinaryField & \texttt{pgcrypto} encrypted string of chronic illnesses. \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Table 2: patients\_patient (Clinical Profile)}
+\begin{tabular}{|l|l|p{7cm}|}
+\hline
+\textbf{Field Name} & \textbf{Data Type} & \textbf{Description} \\
+\hline
+\texttt{id} & Integer & Primary Key (PK). \\
+\hline
+\texttt{user\_id} & Integer & Foreign Key (FK) mapping to \texttt{authentication\_user.id}. \\
+\hline
+\texttt{usc\_id} & String & 8-digit official University ID number. \\
+\hline
+\texttt{first\_name\_enc} & BinaryField & \texttt{pgcrypto} encrypted first name payload. \\
+\hline
+\texttt{last\_name\_enc} & BinaryField & \texttt{pgcrypto} encrypted last name payload. \\
+\hline
+\texttt{created\_at} & Datetime & Audit trail timestamp for record creation. \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Interface \& Security Design}
+
+\subsection{API Map \& RBAC Implementation}
+Access to backend endpoints is restricted via DRF \texttt{PermissionClasses} to enforce Role-Based Access Control (RBAC).
+
+\begin{table}[htbp]
+\centering
+\caption{API Authorization Map}
+\begin{tabular}{|p{4cm}|l|p{3cm}|p{3cm}|}
+\hline
+\textbf{RESTful API Endpoint} & \textbf{HTTP Methods} & \textbf{DRF Permission Class} & \textbf{Authorized Roles} \\
+\hline
+\texttt{/api/auth/profile/me/} & GET, PATCH & \texttt{IsAuthenticated} & All Roles (Self-Data Only) \\
+\hline
+\texttt{/api/patients/} & GET, POST & \texttt{IsStaffUser} & ADMIN, STAFF, DOCTOR, NURSE, DENTIST \\
+\hline
+\texttt{/api/patients/records/} & POST, PATCH & \texttt{MedicalRecordPermission} & DOCTOR, NURSE, DENTIST \\
+\hline
+\texttt{/api/certificates/\{id\}/assess/} & POST & \texttt{IsDoctorUser} & DOCTOR (Exclusive Approval) \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Secure Proxy for Patient Documents}
+To guarantee data isolation and prevent unauthorized file exposure, direct CDN URL access for clinical attachments is blocked. The system utilizes an Authenticated Download Proxy mapped at \texttt{/api/files/patient-documents/\{id\}/download/}. Upon request, the file stream is proxied directly through the Django backend, verifying the active user's session and authorization credentials before successfully dispensing the .PDF or .JPG payload.
+
+\subsection{Audit Logging}
+The USC-PIS reinforces compliance standards via an immutable tracking architecture. Beyond standard \texttt{created\_at} and \texttt{updated\_at} database timestamps, the system implements custom middleware that automatically records the active User ID, the exact Timestamp, and the requested API Endpoint for every instance of clinical data access. This establishes a definitive audit trail to monitor user accountability and track system overrides by administrative staff.
