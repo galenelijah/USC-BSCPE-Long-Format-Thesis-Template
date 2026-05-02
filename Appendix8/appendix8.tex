@@ -1,9 +1,60 @@
 % ******************************* Thesis Appendix H ****************************
 
-\chapter{Medical and Dental Forms}
-\label{appendix:medical_dental_forms}
+\chapter{Project Schedule and Sprint Checklist}
+\label{appendix:project_schedule}
 
-This appendix contains the standard medical certificate forms and the unified dental and medical forms utilized by the USC Clinic, which have been digitalized by the USC-PIS.
+This appendix details the extended Agile development lifecycle of the USC Patient Information System (USC-PIS). Due to the sensitive nature of Electronic Medical Records (EMRs), the project timeline was deliberately extended across two academic years to ensure rigorous security hardening, complex database cryptography, and iterative application retooling based on direct clinical feedback.
 
-\includepdf[pages=-, scale=0.8, pagecommand={}]{Figs/appendixPDFS/Medical_Certificate_Forms.pdf}
-\includepdf[pages=-, scale=0.8, pagecommand={}]{Figs/appendixPDFS/DentalAndMedicalForms.pdf}
+\section{Project Development Schedule}
+The following table outlines the macro-level development phases of the system from its initial conceptualization to its final production deployment.
+
+\begin{table}[htbp]
+\centering
+\caption*{Table H.1: Project Development Schedule (2024--2026)}
+\begin{tabular}{|p{3cm}|p{8cm}|p{3cm}|}
+\hline
+\textbf{Development Phase} & \textbf{Key Activities and Milestones} & \textbf{Timeframe} \\
+\hline
+\textbf{Phase 1: Planning and System Design} & Needs assessment with the USC Clinic, formulation of the Software Requirements Specification (SRS), ERD design, and formal proposal presentation. & March 2024 -- April 2024 \\
+\hline
+\textbf{Phase 2: Core Development \& Security Hardening} & Architecture setup, implementation of vendor-aware dual-database environments, strict RBAC middleware integration, and rigorous benchmarking of PostgreSQL \texttt{pgcrypto} column-level encryption. & June 2024 -- October 2025 \\
+\hline
+\textbf{Phase 3: Application Retooling \& Refinement} & Iterative system refinement based on early staff prototypes. Development of the advanced real-time Academic Year filtering architecture and the dual-engine PDF module for medical certificates. & November 2025 -- February 2026 \\
+\hline
+\textbf{Phase 4: UAT and Final Deployment} & Automated system load testing, User Acceptance Testing (UAT) at the USC clinics, final data collection, and live production deployment to Heroku. & March 2026 -- May 2026 \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Agile Sprint Checklist}
+The development of the USC-PIS was executed utilizing the Agile Scrum methodology. The following checklist breaks down the technical user stories and tasks completed across the project's specialized development sprints.
+
+\begin{longtable}{|p{3.5cm}|p{8cm}|c|}
+\caption*{Table H.2: Agile Sprint Checklist} \\
+\hline
+\textbf{Sprint (Focus Area)} & \textbf{Task / User Story} & \textbf{Status} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Sprint (Focus Area)} & \textbf{Task / User Story} & \textbf{Status} \\
+\hline
+\endhead
+\hline
+\endfoot
+\textbf{Sprint 1: Architecture \& Design} & Draft ERD, design normalized database schema, and finalize Material-UI frontend mockups for patient and staff dashboards. & Completed \\
+\hline
+\textbf{Sprint 2: Authentication \& RBAC} & Implement SafeList onboarding protocol, enforce \texttt{@usc.edu.ph} domain constraints, and establish global DRF \texttt{PermissionClasses} for role routing. & Completed \\
+\hline
+\textbf{Sprint 3: Security \& Cryptography} & Integrate PostgreSQL \texttt{pgcrypto} extension. Intercept plaintext inputs via Django \texttt{post\_save} signals to hash Protected Health Information (PHI). & Completed \\
+\hline
+\textbf{Sprint 4: Clinical Core Modules} & Develop Unified Record Interface for Medical and Dental charting. Implement FDI notation regex validation for dental charts. & Completed \\
+\hline
+\textbf{Sprint 5: Administrative Workflows} & Engineer the Medical Certificate (ACA-HSD-04F) issuance pipeline. Program the backend \texttt{xhtml2pdf} / \texttt{ReportLab} fallback rendering engine. & Completed \\
+\hline
+\textbf{Sprint 6: Application Retooling} & Halt standard deployment to engineer advanced real-time data filtering by Academic Year and Semester, as requested by clinic staff. & Completed \\
+\hline
+\textbf{Sprint 7: Async Reporting Engine} & Implement background processing logic via Celery and Redis to synthesize clinic reports (PDF, CSV, Excel) without HTTP thread blocking. & Completed \\
+\hline
+\textbf{Sprint 8: Final UAT \& Deployment} & Conduct manual feature validation, execute empirical latency benchmarking, perform cybersecurity audits, and hand over the live Heroku system. & Completed \\
+\hline
+\end{longtable}
