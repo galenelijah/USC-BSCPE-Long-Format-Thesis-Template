@@ -82,17 +82,17 @@ Access to backend endpoints is restricted via DRF \texttt{PermissionClasses} to 
 \begin{table}[htbp]
 \centering
 \caption{API Authorization Map}
-\begin{tabular}{|p{4cm}|l|p{3cm}|p{3cm}|}
+\begin{tabular}{|p{4.5cm}|p{2cm}|p{3.5cm}|p{3.5cm}|}
 \hline
 \textbf{RESTful API Endpoint} & \textbf{HTTP Methods} & \textbf{DRF Permission Class} & \textbf{Authorized Roles} \\
 \hline
-\texttt{/api/auth/profile/me/} & GET, PATCH & \texttt{IsAuthenticated} & All Roles (Self-Data Only) \\
+\url{/api/auth/profile/me/} & GET, PATCH & \texttt{IsAuthenticated} & All Roles (Self-Data Only) \\
 \hline
-\texttt{/api/patients/} & GET, POST & \texttt{IsStaffUser} & ADMIN, STAFF, DOCTOR, NURSE, DENTIST \\
+\url{/api/patients/} & GET, POST & \texttt{IsStaffUser} & ADMIN, STAFF, DOCTOR, NURSE, DENTIST \\
 \hline
-\texttt{/api/patients/records/} & POST, PATCH & \texttt{MedicalRecordPermission} & DOCTOR, NURSE, DENTIST \\
+\url{/api/patients/records/} & POST, PATCH & \texttt{MedicalRecordPermission} & DOCTOR, NURSE, DENTIST \\
 \hline
-\texttt{/api/certificates/\{id\}/assess/} & POST & \texttt{IsDoctorUser} & DOCTOR (Exclusive Approval) \\
+\url{/api/certificates/{id}/assess/} & POST & \texttt{IsDoctorUser} & DOCTOR (Exclusive Approval) \\
 \hline
 \end{tabular}
 \end{table}

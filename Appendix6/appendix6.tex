@@ -66,19 +66,19 @@ REG-07 & Weak Password & On Register Page & Pass: 123456789abc & Error: "Passwor
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
-RBAC-01 & Student Login Success & Account is student & student@usc.edu.ph & Redirected to Student Dashboard. & \textbf{PASS} \\
+RBAC-01 & Student Login Success & Account is student & \url{student@usc.edu.ph} & Redirected to Student Dashboard. & \textbf{PASS} \\
 \hline
-RBAC-02 & Staff Login Success & Account is staff & nurse@usc.edu.ph & Redirected to Staff Dashboard. & \textbf{PASS} \\
+RBAC-02 & Staff Login Success & Account is staff & \url{nurse@usc.edu.ph} & Redirected to Staff Dashboard. & \textbf{PASS} \\
 \hline
-RBAC-03 & Admin Login Success & Account is admin & system@usc.edu.ph & Redirected to Admin Dashboard. & \textbf{PASS} \\
+RBAC-03 & Admin Login Success & Account is admin & \url{system@usc.edu.ph} & Redirected to Admin Dashboard. & \textbf{PASS} \\
 \hline
-RBAC-04 & Student to Staff URL & Logged in Student & Enter URL: /patients & Access Denied & \textbf{PASS} \\
+RBAC-04 & Student to Staff URL & Logged in Student & Enter URL: \url{/patients} & Access Denied & \textbf{PASS} \\
 \hline
-RBAC-05 & Student to Admin URL & Logged in Student & Enter URL: /database-monitor & Access Denied & \textbf{PASS} \\
+RBAC-05 & Student to Admin URL & Logged in Student & Enter URL: \url{/database-monitor} & Access Denied & \textbf{PASS} \\
 \hline
-RBAC-06 & Staff to Admin URL & Logged in Staff & Enter URL: /user-management & Access Denied & \textbf{PASS} \\
+RBAC-06 & Staff to Admin URL & Logged in Staff & Enter URL: \url{/user-management} & Access Denied & \textbf{PASS} \\
 \hline
-RBAC-07 & Public to Dashboard & Not Logged In & Enter URL: /home & Redirect to Login Page & \textbf{PASS} \\
+RBAC-07 & Public to Dashboard & Not Logged In & Enter URL: \url{/home} & Redirect to Login Page & \textbf{PASS} \\
 \hline
 \end{tabular}
 \end{table}
@@ -100,7 +100,7 @@ PSF-02 & Search by First Name & Search input: Galen & System filters and display
 \hline
 PSF-03 & Search by Last Name & Search input: Sabequil & System filters and displays matching records. & \textbf{PASS} \\
 \hline
-PSF-04 & Search by Email & Search input: 21100727@usc.edu.ph & System filters and displays matching records. & \textbf{PASS} \\
+PSF-04 & Search by Email & Search input: \url{21100727@usc.edu.ph} & System filters and displays matching records. & \textbf{PASS} \\
 \hline
 PSF-05 & Student Filter & Filter Role: Student & System only displays student patients. & \textbf{PASS} \\
 \hline
