@@ -171,6 +171,38 @@ The system's dual-engine PDF module autonomously generates the USC Form ACA-HSD-
 \section{Data Privacy and Cryptographic Architecture}
 Beyond basic role-gated access, the USC-PIS addresses the critical necessity of medico-legal documentation security. To safeguard Protected Health Information (PHI) and Personally Identifiable Information (PII), the system integrates advanced cryptographic measures at the database level. Utilizing the PostgreSQL \texttt{pgcrypto} extension, the platform enforces column-level symmetric encryption. All sensitive clinical inputs are instantly converted into secure \texttt{bytea} (BinaryField) hashes upon database commit, shielding plaintext data from unauthorized backend exposure. This ensures military-grade encryption-at-rest with an entirely negligible computational overhead of less than 1.0ms, allowing the clinic to maintain strict data privacy compliance without sacrificing system speed. Furthermore, the file upload module implements stringent validation, rejecting high-risk executable formats (e.g., \texttt{.EXE}, \texttt{.JS}) to prevent malicious script injections.
 
+\section{Entity Relationship Diagram (ERD) and Database Schema}
+To ensure high data integrity, secure role-based access, and rapid query retrieval, the USC-PIS database is normalized and structured into highly interdependent relational tables. The Entity Relationship Diagram (ERD) illustrates the complete core architecture of the system, defining how user identities specialize into distinct profiles, and how clinical records and official certificates are securely mapped within the PostgreSQL environment.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{ERD_Final}
+    \caption{Entity Relationship Diagram (ERD) of the USC-PIS}
+    \label{fig:erd_final}
+\end{figure}
+
+\subsection{User Identity and Role Authorization}
+The foundation of the system's architecture relies on the central \texttt{USER} entity, which stores core credentials such as the unique \texttt{email} (enforcing the Unique Key constraint), \texttt{password\_hash}, and foundational demographic data including \texttt{contact}, \texttt{address}, and \texttt{emergency\_contact\_name}. To enforce the system's strict Role-Based Access Control (RBAC) middleware, the \texttt{USER} table is directly linked via a Foreign Key (\texttt{role\_id}) to the \texttt{ROLES} entity. This table defines the absolute privileges of the account, specifically categorizing users as "Admin, Doctor, Nurse, Staff, Student, Faculty".
+
+\subsection{Entity Specialization: Patients and Clinic Staff}
+To eliminate data redundancy and cleanly separate clinical responsibilities, the database employs an entity specialization hierarchy. The base \texttt{USER} entity specializes into two distinct tables, utilizing \texttt{user\_id} as both a Primary Key and Foreign Key:
+
+\begin{itemize}
+    \item \textbf{CLINIC STAFF:} This table isolates medical personnel (Doctors, Nurses, Dentists, etc.) and associates them with their specific \texttt{department}. As illustrated in the schema, this entity holds the explicitly defined authority to "create" medical records, dental records, and certificates.
+    \item \textbf{PATIENT:} This table captures extensive academic and medical metadata for students and faculty. It maps the unique \texttt{usc\_id}, \texttt{course}, \texttt{school}, and \texttt{year\_level}. Furthermore, it acts as a comprehensive health profile by tracking longitudinal data such as \texttt{childhood\_diseases}, \texttt{existing\_medical\_condition}, \texttt{surgical\_procedures}, \texttt{allergies}, and \texttt{medications}.
+\end{itemize}
+
+\subsection{Medical and Dental Record Management}
+The core of the clinic's digital operations is handled by the \texttt{Medical Records} and \texttt{Dental Records} entities. The ERD explicitly illustrates that these records accumulate under a specific patient (via \texttt{patient\_id}) and are permanently audited to the staff member who created them (via \texttt{staff\_id}).
+
+\begin{itemize}
+    \item \textbf{Medical Records:} This entity tracks the \texttt{visit\_date}, chief concern, and the resulting \texttt{diagnosis} and \texttt{treatment}. It also features dedicated fields for comprehensive \texttt{vital\_signs}, \texttt{physical\_examination} inputs, and additional clinical notes. (\textit{Note: As detailed in Section 3.6, sensitive text payloads within these clinical fields are intercepted by backend signals and cryptographically hashed at rest using pgcrypto}).
+    \item \textbf{Dental Records:} The dental entity is highly specialized to accommodate complex oral health charting. It captures specific clinical metrics including \texttt{oral\_hygiene\_status}, \texttt{gum\_condition}, \texttt{pain\_level}, and \texttt{materials\_used}. It also maps exact oral geography through the \texttt{tooth\_numbers} and \texttt{affected\_teeth\_display} fields, which restrict input to standard FDI notation boundaries.
+\end{itemize}
+
+\subsection{Medical Certificates and Administrative Workflows}
+Crucially, the database schema seamlessly integrates the \texttt{Medical Certificates} entity to manage the digital issuance of the USC Form ACA-HSD-04F. This table is directly linked to the patient (\texttt{patient\_id}) and securely captures the \texttt{fitness\_status}, \texttt{fitness\_reason}, \texttt{diagnosis}, and \texttt{recommendations}. It also defines the exact validity timeframe via the \texttt{valid\_from} and \texttt{valid\_until} fields. To enforce strict clinical hierarchies and data integrity, the workflow is governed by two distinct tracking fields: \texttt{issued\_by} and \texttt{approved\_by}. This schema constraint ensures that while clinical staff can draft and issue the initial document, an authorized Doctor must execute the final approval (\texttt{approved\_at}) before the backend dual-engine PDF rendering is unlocked.
+
 \section{Development and Testing Strategy}
 
 The development adhered to an Agile methodology, ensuring iterative cycles that adapted to clinical staff feedback. To ensure software quality and alignment with functional requirements, the system underwent a rigorous, multi-layered testing pipeline.
