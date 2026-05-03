@@ -9,9 +9,9 @@ This appendix provides the complete, exhaustive results of the manual system fea
 The following test cases validate the integrity of the system's entry points, ensuring secure session management, strict domain enforcement, and proper role routing.
 
 \subsection{Login and Authentication Validation}
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Login and Authentication Validation}
+\caption{Manual Validation of Login and Authentication Mechanisms}
 \begin{tabular}{|l|p{2cm}|p{2cm}|p{3cm}|p{3cm}|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
@@ -34,9 +34,9 @@ AUTH-07 & Unauthorized Access & User logged out & Enter /staff/dashboard in URL 
 \end{table}
 
 \subsection{Registration Module Validation}
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Registration Module Validation}
+\caption{Manual Validation of User Registration and Account Creation}
 \begin{tabular}{|l|p{2cm}|p{2cm}|p{3cm}|p{3cm}|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
@@ -59,9 +59,9 @@ REG-07 & Weak Password & On Register Page & Pass: 123456789abc & Error: "Passwor
 \end{table}
 
 \subsection{Role-Based Access Control (RBAC) Validation}
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Role-Based Access Control (RBAC) Validation}
+\caption{Manual Validation of Role-Based Access Controls}
 \begin{tabular}{|l|p{2.5cm}|p{2.5cm}|p{3.5cm}|p{3.5cm}|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
@@ -87,9 +87,9 @@ RBAC-07 & Public to Dashboard & Not Logged In & Enter URL: \url{/home} & Redirec
 The following test cases validate the End-to-End processing of clinical data, spanning search functionalities, medical/dental charting, medical certificate issuance, and health campaigns.
 
 \subsection{Patient Search Functionality}
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Patient Search Functionality}
+\caption{Manual Validation of Patient Search and Filtering Functionalities}
 \begin{tabular}{|l|p{2cm}|p{3cm}|p{4.5cm}|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
@@ -114,9 +114,9 @@ PSF-08 & Year Level Filter & Filter: 1st Year & System dynamically isolates only
 \end{table}
 
 \subsection{Medical Record Management}
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Medical Record Management}
+\caption{Manual Validation of Clinical Medical Record Management}
 \begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
@@ -137,9 +137,9 @@ MRM-06 & Delete Record & Select record to delete & Record successfully removed f
 \end{table}
 
 \subsection{Dental Record Management}
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Dental Record Management}
+\caption{Manual Validation of Dental Record Entry and File Attachments}
 \begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
@@ -164,9 +164,9 @@ DRM-08 & Delete Record & Select record to delete & Record removed securely from 
 \end{table}
 
 \subsection{Medical Certificate Issuance (ACA-HSD-04F)}
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Medical Certificate Issuance}
+\caption{Manual Validation of Medical Certificate Workflows (ACA-HSD-04F)}
 \begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
@@ -193,9 +193,9 @@ MCM-12 & Filter Pending & Status: Pending & Only pending drafts are shown. & \te
 \end{table}
 
 \subsection{Health Campaign Management}
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Health Campaign and Information Management}
+\caption{Manual Validation of Health Campaigns and Educational Content}
 \begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
@@ -221,9 +221,9 @@ HIM-03 & Delete Info & Select Record to Delete & Record successfully removed fro
 The background reporting engine was rigorously tested to ensure the system can aggregate massive datasets and export them into diverse formats.
 
 \subsection{Reporting Engine Format Export Validation}
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
-\caption{Reporting Engine Format Export Validation}
+\caption{Manual Validation of Multi-Format Reporting Engine Exports}
 \begin{tabular}{|p{5cm}|p{5cm}|c|}
 \hline
 \textbf{Report Category Tested} & \textbf{Formats Successfully Generated \& Downloaded} & \textbf{Execution Status} \\
