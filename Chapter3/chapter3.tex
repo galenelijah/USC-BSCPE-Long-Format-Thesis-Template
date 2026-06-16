@@ -16,12 +16,16 @@ This chapter details the methodology guiding the system design, core features, s
 
 The conceptual framework for developing the USC-PIS (illustrated in Fig. \ref{fig:conceptual_framework}) is anchored in a User-Centered Design (UCD) approach, which prioritizes the workflows of clinic staff and the accessibility needs of the students. The legacy system at the USC Clinic was heavily reliant on fragmented, paper-based records (such as the Daily Treatment Records) and basic Google Forms for feedback, which introduced significant inefficiencies in data retrieval and program evaluation.
 
-\begin{figure}[!ht]
+\FloatBarrier
+\begin{landscape}
+\begin{figure}[H]
     \centering
-    \makebox[\textwidth][c]{\includegraphics[width=1.25\textwidth]{ConceptualFramewor}}
+    \includegraphics[width=1.35\linewidth]{ConceptualFramewor}
     \caption{Conceptual Framework of the USC-PIS}
     \label{fig:conceptual_framework}
 \end{figure}
+\end{landscape}
+\FloatBarrier
 
 To resolve these bottlenecks, the modernized framework was constructed upon the following core pillars:
 
@@ -38,12 +42,16 @@ To resolve these bottlenecks, the modernized framework was constructed upon the 
 
 The USC-PIS is engineered using a modern, scalable three-tier web architecture (illustrated in Fig. \ref{fig:system_architecture}). This design ensures a clean separation of concerns, allowing for independent scaling and maintenance of the presentation, logic, and data storage components.
 
-\begin{figure}[!ht]
+\FloatBarrier
+\begin{landscape}
+\begin{figure}[H]
     \centering
-    \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{SystemArchitecture}}
+    \includegraphics[width=1.35\linewidth]{SystemArchitecture}
     \caption{Top-Level System Architecture of the USC-PIS}
     \label{fig:system_architecture}
 \end{figure}
+\end{landscape}
+\FloatBarrier
 
 The architectural flow centers on the RESTful communication between the React frontend and the Django backend. As shown in the diagram, the backend serves as the central hub, managing secure data access to the PostgreSQL database while delegating time-consuming operations, such as PDF generation and automated email dispatch, to an asynchronous task queue managed by Celery and Redis.
 
@@ -178,12 +186,16 @@ Beyond basic role-gated access, the USC-PIS addresses the critical necessity of 
 \section{Entity Relationship Diagram (ERD) and Database Schema}
 To ensure high data integrity, secure role-based access, and rapid query retrieval, the USC-PIS database is normalized and structured into highly interdependent relational tables. The Entity Relationship Diagram (ERD) illustrates the complete core architecture of the system, defining how user identities specialize into distinct profiles, and how clinical records and official certificates are securely mapped within the PostgreSQL environment.
 
-\begin{figure}[!ht]
+\FloatBarrier
+\begin{landscape}
+\begin{figure}[H]
     \centering
-    \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{ERD_Final}}
+    \includegraphics[width=1.4\linewidth]{ERD_Final}
     \caption{Entity Relationship Diagram (ERD) of the USC-PIS}
     \label{fig:erd_final}
 \end{figure}
+\end{landscape}
+\FloatBarrier
 
 \subsection{User Identity and Role Authorization}
 The foundation of the system's architecture relies on the central \texttt{USER} entity, which stores core credentials such as the unique \texttt{email} (enforcing the Unique Key constraint), \texttt{password\_hash}, and foundational demographic data including \texttt{contact}, \texttt{address}, and \texttt{emergency\_contact\_name}. To enforce the system's strict Role-Based Access Control (RBAC) middleware, the \texttt{USER} table is directly linked via a Foreign Key (\texttt{role\_id}) to the \texttt{ROLES} entity. This table defines the absolute privileges of the account, specifically categorizing users as "Admin, Doctor, Nurse, Staff, Student, Faculty".

@@ -36,13 +36,13 @@ This document provides a comprehensive, section-by-section audit trail of all mo
 *   **Section 3.5 (GUI Design):** Confirmed resolution of all panel-identified visual corrections and **full mobile responsiveness**.
 *   **Section 3.8.4 (Administrative Workflow Schema):** Updated **Table 3.5 (Data Dictionary)** to reflect the `issued_by_doctor` and `issued_at` fields and corrected the string constraints.
 *   **Section 3.10.4 (Secondary Comparative Simulation):** Added explicit 6-step protocols for students and 5-step protocols for staff.
-*   **Visual Enhancements:** 
-    *   **Fig 3.1 (Conceptual Framework):** Enlarged to **1.25x** width.
-    *   **Fig 3.2 (Architecture):** Enlarged to **1.3x** width.
+*   **Visual Enhancements (Landscape Implementation):** 
+    *   **Fig 3.1 (Conceptual Framework):** Moved to a dedicated **Landscape Page** and enlarged to **1.35x** width. Secured in place with **FloatBarriers**.
+    *   **Fig 3.2 (System Architecture):** Moved to a dedicated **Landscape Page** and enlarged to **1.35x** width. Secured in place with **FloatBarriers**.
+    *   **Fig 3.12 (ERD):** Moved to a dedicated **Landscape Page** and enlarged to **1.4x** width, secured with **FloatBarriers** to ensure it stays within the Database Schema section.
     *   **Fig 3.3 (Context Diagram):** Enlarged to **1.15x** width.
     *   **Figs 3.4-3.6 (Workflows & Pipelines):** Enlarged to **1.25x** width.
     *   **Figs 3.7-3.11 (GUI Dashboard Previews):** Maintained at **1.1x** width.
-    *   **Fig 3.12 (ERD):** Enlarged to **1.2x** width.
 
 ---
 
