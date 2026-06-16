@@ -35,7 +35,7 @@ This document provides a comprehensive, section-by-section audit trail of all mo
 *   **Section 3.3.5 (The Medical Certificate Pipeline):** Updated terminology to **"Issued"**, restricted fitness to **"physically fit/unfit"**, and added the student-facing **"Ready to be Claimed"** status.
 *   **Section 3.5 (GUI Design):** Confirmed resolution of all panel-identified visual corrections and **full mobile responsiveness**.
 *   **Section 3.8.4 (Administrative Workflow Schema):** Updated **Table 3.5 (Data Dictionary)** to reflect the `issued_by_doctor` and `issued_at` fields and corrected the string constraints.
-*   **Section 3.10.4 (Secondary Comparative Simulation):** Added explicit 6-step protocols for students and 5-step protocols for staff.
+*   **Section 3.10.4 (Secondary Comparative Simulation):** Explicitly added the exact 6-step testing protocols for students (Dashboard, Campaigns, Certificates, Feedback) and 5-step protocols for staff (Filtering, Attributed Remarks, Certificates, Reporting). Added the explanation of the "dual-survey methodology" confirming usability and objective attainment.
 *   **Visual Enhancements (Final Optimized Layout):** 
     *   **Fig 3.1 (Conceptual Framework):** Implemented as a **SidewaysFigure** on a dedicated page for maximum scale and readability.
     *   **Fig 3.2 (System Architecture):** Implemented as a **SidewaysFigure** on a dedicated page.
@@ -57,19 +57,21 @@ This document provides a comprehensive, section-by-section audit trail of all mo
     *   **Performance Matrix (Table 4.10):** Documented direct comparisons showing 83.3\% improvement in Data Collection and Record Retrieval.
     *   **Student Metrics (Tables 4.11-4.12):** Validated usability means (Avg: 4.67) and comparative operational gains (Avg: 4.75).
 *   **Section 4.3.6 (Qualitative Proof):** Inserted direct quotes from participants validating the "fast system flow" and "home access to records."
+*   **Section 4.3.7 (Attainment of Project Objectives):** Added a new section directly mathematically justifying the successful achievement of Objectives 1 through 5 using the N=30/N=8 comparative variances.
 *   **Visualization Migration:** Moved all 42+ individual survey parameter charts to the new **Appendix Q**.
 
 ---
 
 ## 5. Chapter 5: Conclusions
-*   **Section 5.2 (Conclusions):** Appended final assessment stating the secondary simulation proved the system resolved specific legacy manual bottlenecks in reporting and certificate speed.
+*   **Section 5.2 (Conclusions):** Completely rewrote the first paragraph to explicitly declare: "The empirical data gathered from the secondary comparative simulation definitively justifies the attainment of all five project objectives," confirming massive, mathematically proven operational upgrades over the manual baseline.
 
 ---
 
 ## 6. Appendices
 *   **Appendix Q (Exhaustive Secondary UAT Parameter Charts):** 
-    *   Created a new 99-line appendix containing 42+ individual graphical visualizations for every survey question.
+    *   Created a new 100+ line appendix containing 42+ individual graphical visualizations for every survey question.
     *   Included frequency distributions, pie charts for demographics, and validated mean scores for all staff and student sets.
+*   **Appendix R (Secondary UAT Evaluation Instruments and Results):** Created a new appendix directly embedding the 4 official raw PDF data/survey files using the `pdfpages` package.
 *   **Appendix C (Training Plan):** Updated Module 3 to refer to **"Clinic Operational Density Reports"**.
 *   **Appendix D (User Manuals):** 
     *   Added official **Video Tutorial Link**: `https://bit.ly/usc-pis-tutorial`.
