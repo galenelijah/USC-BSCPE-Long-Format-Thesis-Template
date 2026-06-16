@@ -40,7 +40,7 @@ Unit testing evaluated the foundational components and security middleware of th
     \end{tabular}
 \end{table}
 
-The unit testing phase systematically verified the foundational security and clinical constraints of the system. Specifically, UT-01 confirmed the successful integration of the PostgreSQL \texttt{pgcrypto} extension, ensuring that all Protected Health Information (PHI), such as patient diagnoses and names, is strictly converted into binary \texttt{bytea} hashes upon database commit, shielding data from plaintext exposure. Clinical logic was also rigorously validated in UT-04, where the system successfully applied backend regex constraints to restrict dental charting strictly to the FDI notation range (11-48), preventing erroneous user data entry. Furthermore, UT-05 confirmed the efficiency of the SafeList onboarding protocol, automatically assigning clinical roles (DOCTOR/NURSE) to pre-authorized emails, bypassing the standard student routing. Finally, UT-06 demonstrated robust cybersecurity measures by actively intercepting and rejecting high-risk executable files (such as \texttt{.EXE} and \texttt{.JS}) while safely processing valid clinical documents.
+The unit testing phase systematically verified the foundational security and clinical constraints of the system. Specifically, UT-01 confirmed the successful integration of the PostgreSQL \texttt{pgcrypto} extension, ensuring that all Protected Health Information (PHI), such as patient diagnoses and names, is strictly converted into binary \texttt{bytea} hashes upon database commit, shielding data from plaintext exposure. Clinical logic was also rigorously validated in UT-04, where the system successfully applied backend regex constraints to restrict dental records strictly to the FDI notation range (11-48), preventing erroneous user data entry. Furthermore, UT-05 confirmed the efficiency of the SafeList onboarding protocol, automatically assigning clinical roles (DOCTOR/NURSE) to pre-authorized emails, bypassing the standard student routing. Finally, UT-06 demonstrated robust cybersecurity measures by actively intercepting and rejecting high-risk executable files (such as \texttt{.EXE} and \texttt{.JS}) while safely processing valid clinical documents.
 
 \subsection{Integration Testing}
 
@@ -123,7 +123,7 @@ Service Satisfaction \& Sentiment & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (
 \end{tabular}
 \end{table}
 
-\textbf{Discussion and Analysis for Manual Validation:} The manual testing evaluated precise data inputs, expected system behaviors, and error-handling capabilities under real-world human interaction. The validation confirmed that the Role-Based Access Control (RBAC) securely isolated dashboards, clinical records correctly processed complex medical inputs (such as vital signs and FDI dental charting), and the background reporting engine successfully synthesized large datasets into five distinct export formats without data loss. All manual test scenarios yielded a 100\% pass rate across all nine reporting categories.
+\textbf{Discussion and Analysis for Manual Validation:} The manual testing evaluated precise data inputs, expected system behaviors, and error-handling capabilities under real-world human interaction. The validation confirmed that the Role-Based Access Control (RBAC) securely isolated dashboards, clinical records correctly processed complex medical inputs (such as vital signs and FDI dental record notation), and the background reporting engine successfully synthesized large datasets into five distinct export formats without data loss. All manual test scenarios yielded a 100\% pass rate across all nine reporting categories.
 
 \textit{Note: The complete, exhaustive tables detailing all test scenarios, specific inputs, and results across the entire system can be found in Appendix F (Software Testing Results).}
 
@@ -226,29 +226,239 @@ For the clinical staff (N=7), the quantitative results yielded a moderate overal
 For the student evaluation, the overall satisfaction yielded an impressive mean of 4.76. Students overwhelmingly praised the Patient Medical Dashboard and the Medical Certificate Issuance feature, noting that the ability to obtain a medical certificate without waiting in physical queues was a massive operational improvement. The most recurring constructive feedback from the student body was a request for aesthetic UI optimizations, specifically the addition of a ``Dark Mode'' toggle and enhanced responsiveness to ensure the application fits perfectly on narrower mobile screens.
 
 \subsection{Comparative Operational Analysis}
-To further validate the system's impact, a secondary comparative simulation was conducted with N=30 students and N=8 clinic staff members who had extensive experience with the legacy manual clinic processes. This analysis aimed to directly compare the old paper-based baseline with the digital USC-PIS results.
+To further validate the system's impact, a secondary comparative simulation was conducted with N=30 students and N=8 clinic staff members who had extensive experience with the legacy manual clinic processes. This analysis aimed to directly compare the old paper-based baseline with the digital USC-PIS results across all primary operational objectives.
 
-\begin{itemize}
-    \item \textbf{Staff Operational Comparison:} In the initial UAT, staff rated the ease of generating reports at a mean of 3.29. Following the implementation of the system updates and the Application Retooling filter bar, this score improved significantly to approximately 3.66. According to the ``Operational Indicator Comparison Matrix,'' staff rated key metrics such as \textit{Data Collection}, \textit{Record Retrieval}, and \textit{Campaign Reach} as either ``Better'' or ``Much Better'' compared to the manual baseline.
-    \item \textbf{Student Operational Comparison:} The targeted student group overwhelmingly agreed that the digital system optimized clinical workflows compared to the manual process. In the comparative analysis, students awarded top marks (4s and 5s on the Likert scale) for \textit{Record Management}, \textit{Timely Alerts}, and \textit{Time Efficiency} for medical certificate processing. This demonstrates that the digital transition effectively resolved the primary bottlenecks of the legacy system.
-\end{itemize}
+\subsubsection{Clinic Staff Comparative Assessment}
+The clinic staff evaluation (N=8) focused on three primary functional objectives: record streamlining, health awareness orchestration, and medical certificate workflows. Table 4.9 presents the comprehensive means for every quantitative metric evaluated by the staff demographic.
+
+\begin{table}[htbp]
+\centering
+\caption{Comprehensive Staff Workflow Efficiency Comparison}
+\label{tab:staff_efficiency}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Operational Metric Evaluated} & \textbf{Mean Score (1-5)} \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Objective \#1: Records Streamlining}} \\
+\hline
+Patient records are easy to create and maintain. & 3.75 \\
+\hline
+Patient information is complete and organized. & 4.00 \\
+\hline
+Retrieving patient records is fast. & 4.12 \\
+\hline
+Updating patient records is efficient. & 4.00 \\
+\hline
+Duplicate records are minimized. & 4.12 \\
+\hline
+Missing information is minimized. & 3.75 \\
+\hline
+The system reduces paperwork. & 3.75 \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Objective \#2: Campaign Management}} \\
+\hline
+Health campaign materials are easy to disseminate. & 4.12 \\
+\hline
+Students and employees are reached effectively. & 3.88 \\
+\hline
+Campaign updates can be posted quickly. & 4.12 \\
+\hline
+The system improves visibility of health campaigns. & 4.12 \\
+\hline
+The system helps increase health awareness. & 3.88 \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Objective \#6: Medical Certificate Issuance}} \\
+\hline
+Patient information is available during cert preparation. & 4.00 \\
+\hline
+Medical certificates can be generated quickly. & 4.00 \\
+\hline
+Errors in certificates are minimized. & 4.12 \\
+\hline
+The process reduces staff workload. & 4.25 \\
+\hline
+The system improves overall cert efficiency. & 4.12 \\
+\hline
+\multicolumn{2}{|c|}{\textbf{Part V: Reporting, Usability, \& Security}} \\
+\hline
+Generating reports is easy. & 4.14 \\
+\hline
+Sufficient tools for analyzing patient data. & 4.14 \\
+\hline
+Feedback analysis feature is helpful. & 4.14 \\
+\hline
+Logs and audit trails are sufficient. & 4.14 \\
+\hline
+The interface is intuitive and easy to use. & 4.14 \\
+\hline
+Technical issues are minimal. & 4.00 \\
+\hline
+\textbf{Overall Satisfaction (Staff)} & \textbf{4.14} \\
+\hline
+\end{tabular}
+\end{table}
+
+The results indicate that clinic staff perceived the greatest improvements in the reduction of workload for medical certificates (Mean: 4.25) and the speed of record retrieval (Mean: 4.12). Table 4.10 further details the direct performance comparison matrix, mapping the perceived change in operational indicators compared to the legacy manual baseline.
+
+\begin{table}[htbp]
+\centering
+\caption{Staff Direct Performance Comparison Matrix}
+\label{tab:staff_comparison_matrix}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Operational Indicator} & \textbf{Better/Much Better} & \textbf{Same} & \textbf{Worse} \\
+\hline
+Data Collection & 87.5\% & 12.5\% & 0\% \\
+\hline
+Record Retrieval & 87.5\% & 12.5\% & 0\% \\
+\hline
+Data Accuracy & 75\% & 25\% & 0\% \\
+\hline
+Campaign Reach & 87.5\% & 12.5\% & 0\% \\
+\hline
+Cert Processing Speed & 62.5\% & 37.5\% & 0\% \\
+\hline
+Overall Clinic Efficiency & 75\% & 25\% & 0\% \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Student Comparative Assessment}
+The student demographic (N=30) who possessed prior experience with the manual system provided a re-evaluation of general usability and a detailed comparison against the paper-based process. Table 4.11 and Table 4.12 map these comprehensive results.
+
+\begin{table}[htbp]
+\centering
+\caption{Student General Usability Re-Evaluation}
+\label{tab:student_usability}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Usability Metric} & \textbf{Mean Score (1-5)} \\
+\hline
+Easy to log in and access records. & 4.50 \\
+\hline
+Health information displayed is clear. & 4.70 \\
+\hline
+System is responsive and works smoothly. & 4.73 \\
+\hline
+Accessible anytime and anywhere. & 4.60 \\
+\hline
+Certificate issuance process is clear and easy. & 4.80 \\
+\hline
+System features are helpful. & 4.79 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Exhaustive Student Comparative Operational Assessment}
+\label{tab:student_comparative}
+\begin{tabular}{|p{10cm}|c|}
+\hline
+\textbf{Comparative Operational Statement} & \textbf{Mean Score} \\
+\hline
+Significantly easier to provide, update, and view history. & 4.80 \\
+\hline
+Accessing personal health data more convenient. & 4.73 \\
+\hline
+Increases awareness of health initiatives. & 4.80 \\
+\hline
+Accessing health educational materials easier/engaging. & 4.73 \\
+\hline
+More convenient to provide feedback. & 4.80 \\
+\hline
+Effectively provides timely alerts and notifications. & 4.73 \\
+\hline
+Significantly reduces time for medical certificates. & 4.67 \\
+\hline
+Acquiring medical certificate is less of a hassle. & 4.70 \\
+\hline
+Massive improvement for record management. & 4.77 \\
+\hline
+Navigating system is more intuitive/less frustrating. & 4.77 \\
+\hline
+\textbf{Overall Satisfaction (Student)} & \textbf{4.73} \\
+\hline
+\end{tabular}
+\end{table}
 
 \subsection{Qualitative Proof of Operational Upgrade}
-The secondary simulation also captured direct qualitative evidence of the system's success in modernizing the clinic's operations. The following quotes from the participants highlight the tangible benefits of the digital transition:
+The secondary simulation captured direct qualitative evidence of the system's success in modernizing the clinic's operations. The following representative quotes from the participants highlight the tangible benefits of the digital transition:
 
 \begin{itemize}
     \item \textbf{Clinic Staff Perspectives:}
     \begin{itemize}
         \item ``The system provides an easy and fast system flow compared to the old manual way.''
-        \item ``The organization of patient profiles makes everything a lot more organized and easier to find during busy hours.''
+        \item ``The organization of patient profile, it makes everything a lot more organized and easier to find during busy hours.''
+        \item ``Lessen the time needed to patients’ concern.''
+        \item ``Dental record management and overall oral health record of every patient is significantly more organized.''
+        \item ``The system allows us to increase data capacity for the entire university.''
     \end{itemize}
     \item \textbf{Student Perspectives:}
     \begin{itemize}
-        \item ``I can finally access my own medical records at home without having to visit the clinic in person.''
-        \item ``The issuing of an electronic medical certificate is a much faster and more organized way of keeping records.''
+        \item ``I can finally access my own medical records at home. This is very useful when also visiting other clinics or hospitals for reference.''
+        \item ``The issuing of an electronic medical certificate is a much faster and more organized way of keeping records compared to paper.''
+        \item ``It’s easier to look back at previous consultations and keep track with medical updates.''
         \item ``The notifications feature keeps me updated with health campaigns and clinic announcements in real-time.''
+        \item ``I appreciated how straightforward and easy it is to input data into the new platform.''
     \end{itemize}
 \end{itemize}
+
+% Insert Secondary Simulation Staff Figures
+\surveysection{Secondary Simulation: Staff Operational Evaluation (N=8)}
+\begin{center}
+    \begin{multicols}{2}
+        \surveypie{3/Dentist, 3/Nurse, 2/Physician}{Staff Role in the Clinic}
+        \surveybar{0}{0}{4}{2}{2}{Patient records are easy to create and maintain.}
+        \surveybar{0}{0}{2}{4}{2}{Patient information is complete and organized.}
+        \surveybar{0}{0}{1}{5}{2}{Retrieving patient records is fast.}
+        \surveybar{0}{0}{2}{4}{2}{Updating patient records is efficient.}
+        \surveybar{0}{0}{1}{5}{2}{Duplicate records are minimized.}
+        \surveybar{0}{0}{4}{2}{2}{Missing information is minimized.}
+        \surveybar{0}{2}{1}{2}{3}{The system reduces paperwork.}
+        \surveybar{0}{0}{1}{5}{2}{Health campaign materials are easy to disseminate.}
+        \surveybar{0}{0}{3}{3}{2}{Students and employees are reached effectively.}
+        \surveybar{0}{0}{1}{5}{2}{Campaign updates can be posted quickly.}
+        \surveybar{0}{0}{1}{5}{2}{The system improves visibility of health campaigns.}
+        \surveybar{0}{0}{3}{3}{2}{The system helps increase health awareness.}
+        \surveybar{0}{0}{2}{4}{2}{Patient information is available during cert preparation.}
+        \surveybar{0}{0}{2}{4}{2}{Medical certificates can be generated quickly.}
+        \surveybar{0}{0}{1}{5}{2}{Errors in certificates are minimized.}
+        \surveybar{0}{0}{1}{4}{3}{The process reduces staff workload.}
+        \surveybar{0}{0}{1}{5}{2}{The system improves overall cert efficiency.}
+        \surveybar{0}{0}{1}{4}{2}{Generating reports (medical, statistical) is easy.}
+        \surveybar{0}{0}{1}{4}{2}{Sufficient tools for analyzing patient data.}
+        \surveybar{0}{0}{1}{4}{2}{Feedback analysis feature is helpful.}
+        \surveybar{0}{0}{1}{4}{2}{Logs and audit trails are sufficient.}
+        \surveybar{0}{0}{1}{4}{2}{The interface is intuitive and easy to use.}
+        \surveybar{0}{0}{2}{3}{2}{Technical issues are minimal.}
+        \surveybar{0}{0}{1}{4}{2}{Overall, staff satisfaction.}
+    \end{multicols}
+\end{center}
+
+% Insert Secondary Simulation Student Figures
+\surveysection{Secondary Simulation: Student Comparative Evaluation (N=30)}
+\begin{center}
+    \begin{multicols}{2}
+        \studentsurveybar{0}{0}{3}{9}{18}{Easy to log in and access records.}
+        \studentsurveybar{0}{0}{0}{9}{21}{Health information displayed is clear.}
+        \studentsurveybar{0}{0}{0}{8}{22}{System is responsive and worked smoothly.}
+        \studentsurveybar{0}{0}{1}{10}{19}{Accessible anytime and anywhere.}
+        \studentsurveybar{0}{0}{0}{6}{24}{Certificate issuance process was clear and easy.}
+        \studentsurveybar{0}{0}{0}{6}{23}{Features are helpful to me as a student.}
+        \studentsurveybar{0}{0}{0}{6}{24}{Significantly easier to securely view history.}
+        \studentsurveybar{0}{0}{0}{8}{22}{Accessing health data is more convenient.}
+        \studentsurveybar{0}{0}{0}{6}{24}{Increases awareness of health initiatives.}
+        \studentsurveybar{0}{0}{0}{8}{22}{Accessing educational materials is easier.}
+        \studentsurveybar{0}{0}{0}{6}{24}{More convenient to provide feedback.}
+        \studentsurveybar{0}{0}{0}{8}{22}{Effectively provides timely alerts.}
+        \studentsurveybar{0}{0}{0}{10}{20}{Significantly reduces time for certificates.}
+        \studentsurveybar{0}{0}{0}{9}{21}{Acquiring certificate is less of a hassle.}
+        \studentsurveybar{0}{0}{0}{7}{23}{Massive improvement for record management.}
+        \studentsurveybar{0}{0}{0}{7}{23}{Navigating system is more intuitive.}
+        \studentsurveybar{0}{0}{0}{8}{22}{Overall, student satisfaction.}
+    \end{multicols}
+\end{center}
 
 \section{Database Analysis and Data Quality Assessment}
 To validate the reliability of the system under real-world clinical operations, an extensive empirical database analysis was executed targeting the production PostgreSQL 16.8 server. This analysis evaluated data consistency, table normalization, and query latency across the system's 39 normalized tables.

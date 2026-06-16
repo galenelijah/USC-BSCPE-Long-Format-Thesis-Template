@@ -1,74 +1,78 @@
-# Comprehensive Manuscript Changes Summary (June 16, 2026)
+# Definitive Manuscript Changes Summary (June 16, 2026)
 
-This document provides a definitive audit trail of all edits, additions, and corrections applied to the USC-PIS manuscript during this session to align with committee recommendations and system finalization.
-
-## 1. Global Sample Size & Participant Standardization
-| Category | Former Value | Final Manuscript Value | Status |
-| :--- | :--- | :--- | :--- |
-| **Secondary Simulation (Students)** | N=38 | **N=30** | **Updated** |
-| **Secondary Simulation (Staff)** | N=7 | **N=8** | **Updated** |
-| **Primary UAT Baseline (Students)** | N=70 | **N=70** | **Preserved** |
-| **Primary UAT Baseline (Staff)** | N=7 | **N=7** | **Preserved** |
+This document provides a comprehensive, section-by-section audit trail of all modifications applied to the USC-PIS manuscript during this finalization session.
 
 ---
 
-## 2. Structural & Content Edits
-
-### Front Matter & Abstract
-*   **Secondary Simulation Results:** Appended comparative data documenting significant operational upgrades in record retrieval, medical certificate issuance, and health information dissemination compared to the legacy manual baseline.
-
-### Chapter 1: Introduction
-*   **Terminology Refinement:** Removed all mentions of "Treatment Outcomes" from the project's objectives (Section 1.3) and scope (Section 1.6). These were replaced with **"Clinical Case Distribution"** to better reflect the system's focus on clinical statistics rather than long-term efficacy tracking.
-
-### Chapter 3: Methodology (The Technical Architecture)
-*   **User Role Expansion (Section 3.2.2):**
-    *   **Admin:** Integrated comprehensive **Audit Logging** for data mutations (CREATE, UPDATE, DELETE).
-    *   **Dentist:** Implemented the **Visual Teeth Chart** and dynamic disabling of irrelevant medical fields.
-    *   **Reporting (Doctors/Nurses/Dentists):** Standardized capability text to: *"Both roles, along with the Nurse role, have the authority to generate comprehensive clinical reports featuring charts, graphs, dynamic filtering capabilities, and fixed formatting. Furthermore, medical-related reports are tailored to show all relevant clinical information."*
-*   **Authentication (Section 3.3.3):** Added documentation for auto-captured USC IDs, auto-assigned roles, and **GMail OAuth 2.0 auto sign-in**.
-*   **Clinical Records (Section 3.3.4):**
-    *   Added the **Attributed Clinical Remarks System** facilitating inter-professional peer review.
-    *   Documented robust **Validation & Error Trapping** (BMI calculation, future-date blocking, and vital sign range enforcement).
-*   **Medical Certificate Pipeline (Section 3.3.5 & Table 3.5):**
-    *   **Schema Update:** Standardized `fitness_status` to strictly display **"physically fit"** or **"unfit"**.
-    *   **Status Logic:** Updated `approval_status` to **"pending"**, **"issued"**, or **"rejected"** (removing the word "approved").
-    *   **Administrative Logic:** Blocked editing of rejected certificates and added the student status: **"Ready to be Claimed"**.
-*   **Secondary Simulation Protocols (Section 3.10.4):**
-    *   **Student Workflow (N=30):** Register -> Profile Navigation -> Interactive Posts -> Certificate Acquisition -> Notifications -> Feedback.
-    *   **Staff Workflow (N=8):** Advanced Filtering -> Attributed Remarks Review -> Certificate Issuance -> Campaign Posting -> Asynchronous Reporting.
-
-### Chapter 4: Results & Discussion
-*   **Reporting Engine Validation:** Updated Table 4.5 and Table 4.6 to reflect the **9 Finalized Categories** (8 Workshops + 1 Audit Report).
-*   **Operational Benchmarks:** Noted that staff report generation satisfaction improved from **3.29 to 3.66** following the "Application Retooling" phase.
-*   **Qualitative Evidence:** Added participant quotes confirming the system's success in providing "fast system flow" and "home access to records."
-
-### Chapter 5: Conclusions
-*   **Final Assessment:** Updated to state that the secondary comparative simulation definitively resolved specific manual bottlenecks, proving the system's maturity and production-readiness.
+## 1. Front Matter & Abstract
+*   **Abstract:** Appended summary of the secondary comparative simulation. Updated demographics to **N=30 students** and **N=8 clinic staff**. Confirmed significant operational upgrades in record retrieval and certificate issuance.
 
 ---
 
-## 3. Appendices & Supporting Data
-
-### Appendix C: Training Plan
-*   **Reporting Module:** Replaced "Treatment Outcome Reports" with **"Clinic Operational Density Reports"** to align with the Workshop curriculum.
-
-### Appendix D: User Manuals
-*   **Visual Supplement:** Added the **Video Tutorial Link** (`https://bit.ly/usc-pis-tutorial`).
-*   **Manual Directive:** Mandated the replacement of all screenshots to show the **Attributed Clinical Remarks**, **Visual Teeth Chart**, and **Unified Timeline**.
-
-### Appendix F: Software Testing Results
-*   **New Test Case (MRM-07):** Documented the successful validation of the Attributed Clinical Remarks feature (Status: **PASS**).
-*   **Reporting Table Standardization:** Updated categories to the **9 Finalized Workshops**:
-    1. Detailed Health Campaigns Breakdown
-    2. Population & Academic Distribution
-    3. Service Satisfaction & Sentiment
-    4. Clinical Diagnostic
-    5. Clinical Capacity & Visit Volume
-    6. Clinic Operational Flow & Density
-    7. Oral Health Services \& Clinical Capacity
-    8. Medical Fitness \& Certification
-    9. System Audit Report (Admin Exclusive)
-*   **Scenario Count:** Updated from 45 scenarios across 9 categories to reflect the **100% pass rate** on all export formats (PDF, Excel, CSV, JSON, HTML).
+## 2. Chapter 1: Introduction
+*   **Section 1.3 (Objectives):** Removed "Treatment Outcomes" and replaced with **"Clinical Case Distribution"** to align with the finalized reporting modules.
+*   **Section 1.5.1 (Scope):**
+    *   Updated record storage details to specifically mention medical histories (concerns, vitals, diagnoses) and dental records (FDI notation).
+    *   Explained measurement of user-friendliness via 5.00-point Likert scale during UAT.
+    *   Specified that feedback reminders are dispatched in-app and via email.
+    *   Defined the medical certificate as a digital e-template for **USC Form ACA-HSD-04F**.
+    *   Documented that the platform is **fully mobile responsive**.
+    *   Included future scaling iterations, such as university-wide deployment and PWA integration.
+*   **Section 1.6 (Scope and Limitations):** Standardized reporting scope to focus on clinical statistics and feedback analysis rather than long-term outcomes.
 
 ---
-*End of Comprehensive Summary*
+
+## 3. Chapter 3: Methodology
+*   **Section 3.1 (Conceptual Framework):** Elaborated on the centralization of medical histories, detailing the transition from fragmented paper records to a unified digital repository that aggregates medical consultations, dental records, and health insights into a single patient-centric timeline.
+*   **Section 3.2.2 (User Roles):** 
+    *   *Admin:* Added documentation for the **Audit Logging** dashboard.
+    *   *Dentist:* Documented the **Visual Dental Interface** and dynamic disabling of medical fields.
+    *   *Reporting:* Standardized text describing Doctor/Dentist/Nurse authority to generate comprehensive reports with fixed formatting.
+*   **Section 3.3.3 (Authentication Workflow):** Added auto-capture of USC IDs, auto-assignment of roles, and **GMail OAuth 2.0 auto sign-in**.
+*   **Section 3.3.4 (Clinical Record Security Pipeline):** 
+    *   Inserted the **Attributed Clinical Remarks System** paragraph.
+    *   Detailed **Validation & Error Trapping** (BMI automation, birthday trapping, and vital sign range validation).
+*   **Section 3.3.5 (The Medical Certificate Pipeline):** Updated terminology to **"Issued"**, restricted fitness to **"physically fit/unfit"**, and added the student-facing **"Ready to be Claimed"** status.
+*   **Section 3.5 (GUI Design):** Confirmed resolution of all panel-identified visual corrections and **full mobile responsiveness**.
+*   **Section 3.8.4 (Administrative Workflow Schema):** Updated **Table 3.5 (Data Dictionary)** to reflect the `issued_by_doctor` and `issued_at` fields and corrected the string constraints.
+*   **Section 3.10.4 (Secondary Comparative Simulation):** Added explicit 6-step protocols for students and 5-step protocols for staff.
+*   **Visual Enhancements:** 
+    *   **Fig 3.3 (ERD):** Enlarged to **1.2x** width.
+    *   **Fig 3.2 (Architecture):** Enlarged to **1.15x** width.
+    *   **Figs 3.1, 3.4-3.11:** Enlarged all workflow and GUI diagrams to **1.1x** width.
+
+---
+
+## 4. Chapter 4: Results & Discussion
+*   **Section 4.1.1 (Unit Testing):** Verified Table 4.1 remains consistent with finalized logic.
+*   **Section 4.3.2 & 4.3.3:** Preserved the original **N=70 student baseline** and initial staff scores.
+*   **Section 4.3.5 (Comparative Operational Analysis):** Completely rewritten with finalized simulation data:
+    *   **Table 4.9:** Mapping all Staff Objective means (Report generation mean improved to **4.14**).
+    *   **Table 4.10:** Staff Performance Comparison Matrix (87.5% "Better" rating).
+    *   **Table 4.11 & 4.12:** Student Usability Re-Evaluation and Comparative Assessment (Satisfaction mean: **4.73**).
+*   **Section 4.3.6 (Qualitative Proof):** Inserted direct quotes from participants validating the "fast system flow" and "home access to records."
+*   **New Visual Data Sections:** Inserted **42 new survey charts** after Section 4.3.6:
+    *   25 staff-related charts (Roles, Records, Campaigns, Certificates, Satisfaction).
+    *   17 student comparative bar charts.
+*   **Section 4.4.2 (Reporting Validation):** Updated **Table 4.5** to reflect the **9 Finalized Categories** (8 Workshops + 1 Audit Report).
+
+---
+
+## 5. Chapter 5: Conclusions
+*   **Section 5.2 (Conclusions):** Appended final assessment stating the secondary simulation proved the system resolved specific legacy manual bottlenecks in reporting and certificate speed.
+
+---
+
+## 6. Appendices
+*   **Appendix C (Training Plan):** Updated Module 3 to refer to **"Clinic Operational Density Reports"**.
+*   **Appendix D (User Manuals):** 
+    *   Added official **Video Tutorial Link**: `https://bit.ly/usc-pis-tutorial`.
+    *   Inserted directives for updated screenshots and corrected certificate issuance steps.
+*   **Appendix F (Testing Results):** 
+    *   Added **Test ID MRM-07** for Attributed Remarks.
+    *   Standardized the **Reporting Engine Validation Table** (9 categories, 45 scenarios, 100% pass rate).
+*   **Appendix L (Interface Screenshots):** Enlarged all **29 screenshots** to **1.0x** full text width for maximum readability.
+
+---
+**Status:** ALL CHANGES VERIFIED AND INTEGRATED.
+**Analyst:** Gemini CLI
