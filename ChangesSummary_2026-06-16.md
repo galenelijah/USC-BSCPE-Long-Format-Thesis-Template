@@ -5,7 +5,18 @@ This document provides a comprehensive, section-by-section audit trail of all mo
 ---
 
 ## 1. Front Matter & Abstract
-*   **Abstract:** Appended summary of the secondary comparative simulation. Updated demographics to **N=30 students** and **N=8 clinic staff**. Injected specific satisfaction means (**4.73** and **4.17**) to ensure identical scientific transparency as the primary pilot results. Confirmed significant operational upgrades in record retrieval and certificate issuance.
+*   **Title Page:** Updated the official submission date from **May 2026** to **June 2026**.
+*   **Abstract:** 
+    *   Synthesized the results of the primary pilot (**N=70/N=7**) and secondary comparative simulation (**N=30/N=8**) into a cohesive narrative.
+    *   Removed repetitive descriptions of the testing methodology to improve professional flow.
+    *   Injected specific satisfaction means (**4.76/3.29** and **4.73/4.17**) to ensure identical scientific transparency across both datasets.
+    *   Mathematically justified the successful attainment of all core project objectives through empirical proof of superiority over the paper-based baseline.
+*   **Application Retooling (Unified Definition):** Formally defined the "Application Retooling" phase as the comprehensive response to **exhaustive panel recommendations** and staff feedback. This phase specifically integrated:
+    1.  The advanced real-time Academic Year/Semester filter bar.
+    2.  The Attributed Clinical Remarks system (allowing inter-professional visibility of doctor/nurse notes).
+    3.  The overhauled professional reporting engine (nine diverse reporting categories, interactive charts, and multi-format exports).
+    4.  The dual-engine PDF module for Medical Certificates.
+    5.  **Extensive "among other" architectural and UI refinements** mandated during the defense and evaluation process.
 
 ---
 
@@ -64,9 +75,10 @@ This document provides a comprehensive, section-by-section audit trail of all mo
 ---
 
 ## 5. Chapter 5: Conclusions
+*   **Section 5.1 (Summary):** Appended a definitive concluding paragraph to the Summary section, explicitly documenting the methodology and strategic execution of the secondary comparative UAT (N=30/N=8) to ensure the summary perfectly leads into the conclusion narrative.
 *   **Section 5.2 (Conclusions):** 
     *   Completely rewrote the first paragraph to explicitly declare: "The empirical data gathered from the secondary comparative simulation definitively justifies the attainment of all six project objectives," confirming massive, mathematically proven operational upgrades over the manual baseline. 
-    *   Explicitly clarified the distinction between the primary pilot deployment scores (N=70 / N=7; means: 4.76 / 3.29) and the secondary simulation to prevent data collision.
+    *   Explicitly clarified the distinction between the primary pilot deployment scores (N=70 / N=7; means: **4.76** / **3.29**) and the secondary simulation to prevent data collision.
     *   Injected the specific secondary simulation metrics (Student Mean: **4.73**, Staff Mean: **4.17**) and specific operational variances (+0.88 for reporting, +0.83 for campaigns) directly into the concluding paragraphs to solidify the final performance narrative.
 
 ---
@@ -74,24 +86,29 @@ This document provides a comprehensive, section-by-section audit trail of all mo
 ## 6. General Formatting
 *   Standardized formal figure referencing across the document, changing all abbreviated "Fig." instances to the formal text "Figure" (e.g., in Chapter 3).
 *   **Final Data Audit (Session Conclusion):** Executed a cross-document synchronization sweep ensuring 100% agreement between the Abstract, Chapter 4 results tables, and Chapter 5 conclusions regarding all UAT means and N-values.
+*   **Retooling Scope Alignment:** Ensured all mentions of "Application Retooling" across Chapters 3, 4, Appendix N, and Appendix H consistently describe the complete scope of panel-mandated improvements (filtering, attributed remarks, reporting, and other strategic upgrades).
 
 ---
 
 ## 7. Appendices
 *   **Appendix H (Finalized Project Costs):** Renamed from "Updated Cost Estimates". Modified introduction and tables to explicitly reflect the *actual finalized expenses incurred* (131,400.00 PHP) rather than theoretical projections.
-*   **Appendix N (Original Project Deliverables):** Expanded upon the definition of "maintain system stability" to formally document the strategic deferment of complex logistics (Appointment Scheduling, Inventory Management), prioritizing the stability, security (PHI), and verification (SQA) of the core application.
+*   **Appendix N (Original Project Deliverables):** Expanded upon the definition of "maintain system stability" to formally document the strategic deferment of complex logistics (Appointment Scheduling, Inventory Management), prioritizing the stability, security (PHI), and verification (SQA) of the core application. Updated the description of Deliverable D6 (Application Retooling) to reflect the comprehensive scope.
 *   **Appendix Q (Exhaustive Secondary UAT Parameter Charts):** 
+    *   Removed redundant "Appendix Q:" prefix from the chapter title to resolve Table of Contents duplication.
     *   Created a new 100+ line appendix containing 42+ individual graphical visualizations for every survey question.
     *   Included frequency distributions, pie charts for demographics, and validated mean scores for all staff and student sets.
-*   **Appendix R (Secondary UAT Evaluation Instruments and Results):** Created a new appendix directly embedding the 4 official raw PDF data/survey files using the `pdfpages` package.
+*   **Appendix R (Secondary UAT Evaluation Instruments and Results):** 
+    *   Removed redundant "Appendix R:" prefix and applied an `\mbox{}` wrapper to "Results" to optimize Table of Contents line breaking.
+    *   Created a new appendix directly embedding the 4 official raw PDF data/survey files using the `pdfpages` package.
 *   **Appendix C (Training Plan):** Updated Module 3 to refer to **"Clinic Operational Density Reports"**.
 *   **Appendix D (User Manuals):** 
     *   Added official **Video Tutorial Link**: `https://bit.ly/usc-pis-tutorial`.
     *   Inserted directives for updated screenshots and corrected certificate issuance steps.
 *   **Appendix F (Testing Results):** 
     *   Added **Test ID MRM-07** for Attributed Remarks.
-    *   Standardized the **Reporting Engine Validation Table** (9 categories, 45 scenarios, 100% pass rate).
+    *   Standardized the **Reporting Engine Validation Table** (nine diverse reporting categories, 45 scenarios, 100% pass rate).
 *   **Appendix L (Interface Screenshots):** Enlarged all **29 screenshots** to **1.0x** full text width for maximum readability.
+*   **Appendix A (SRS) & Appendix B (SDD):** Synchronized the Software Requirements and Design documents with the finalized project state, including the unified "Application Retooling" scope, Attributed Clinical Remarks, and finalized performance benchmarks (123.16ms--127.81ms).
 
 ---
 **Status:** ALL CHANGES VERIFIED AND INTEGRATED.
