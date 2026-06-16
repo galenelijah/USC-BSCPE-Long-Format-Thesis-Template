@@ -231,37 +231,37 @@ Downloadable as HTML file","Report starts generating.
 Status: Complete.
 Downloadable as HTML file",PASS,,,,,
 ,,,,,,,,,,,,
-,Treatment Outcomes Report,,,,,,,,,,,
+,Comprehensive System Analytics,,,,,,,,,,,
 ,Test Case ID,Scenario,Pre-condition,Input Provided,Expected Result,Actual Result,Status,,,,,
-,TOR-01,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+,CSA-01,Comprehensive System Analytics,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Comprehensive System Analytics
 Date: 2/1/2026 - 4/7/2026
 Format: PDF Document","Report starts generating. 
 Status: Complete.
 Downloadable as PDF file","Report starts generating. 
 Status: Complete.
 Downloadable as PDF file",PASS,,,,,
-,TOR-02,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+,CSA-02,Comprehensive System Analytics,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Comprehensive System Analytics
 Date: 2/1/2026 - 4/7/2026
 Format: PDF Document","Report starts generating. 
 Status: Complete.
 Downloadable as Excel Document","Report starts generating. 
 Status: Complete.
 Downloadable as Excel Document",PASS,,,,,
-,TOR-03,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+,CSA-03,Comprehensive System Analytics,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Comprehensive System Analytics
 Date: 2/1/2026 - 4/7/2026
 Format: PDF Document","Report starts generating. 
 Status: Complete.
 Downloadable as CSV file","Report starts generating. 
 Status: Complete.
 Downloadable as CSV file",PASS,,,,,
-,TOR-04,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+,CSA-04,Comprehensive System Analytics,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Comprehensive System Analytics
 Date: 2/1/2026 - 4/7/2026
 Format: PDF Document","Report starts generating. 
 Status: Complete.
 Downloadable as JSON file","Report starts generating. 
 Status: Complete.
 Downloadable as JSON file",PASS,,,,,
-,TOR-05,Treatment Outcomes Report,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Treatment Outcomes Report
+,CSA-05,Comprehensive System Analytics,"Account must be admin or staff role (doctor,nurse,staff, dentist)","Title: Comprehensive System Analytics
 Date: 2/1/2026 - 4/7/2026
 Format: PDF Document","Report starts generating. 
 Status: Complete.
@@ -344,4 +344,4 @@ Status: Complete.
 Downloadable as HTML file","Report starts generating. 
 Status: Complete.
 Downloadable as HTML file",PASS,,,,,
-,"The Reporting and Analytics module serves as the primary data processing engine of the system, designed to transform raw clinical data into actionable insights for the clinic coordinator and medical staff. These test cases evaluate the system's ability to aggregate large datasets and export them into various professional formats, including PDF, Excel, CSV, JSON, and HTML. By validating diverse reporting categories ranging from dental health and health metrics to treatment outcomes and user activity, the testing confirms that the backend can successfully query the PostgreSQL database and render complex summaries without data loss. The successful execution across all export types ensures that the USC Clinic can maintain both digital and physical records for compliance, administrative review, and health trend analysis within the university community.",,,,,,,,,,,
+,"The Reporting and Analytics module serves as the primary data processing engine of the system, designed to transform raw clinical data into actionable insights for the clinic coordinator and medical staff. These test cases evaluate the system's ability to aggregate large datasets and export them into various professional formats, including PDF, Excel, CSV, JSON, and HTML. By validating diverse reporting categories ranging from dental health and health metrics to clinical case distribution and user activity, the testing confirms that the backend can successfully query the PostgreSQL database and render complex summaries without data loss. The successful execution across all export types ensures that the USC Clinic can maintain both digital and physical records for compliance, administrative review, and health trend analysis within the university community.",,,,,,,,,,,

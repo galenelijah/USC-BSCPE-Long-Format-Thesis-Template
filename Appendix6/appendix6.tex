@@ -177,15 +177,15 @@ MCM-01 & Create Certificate & Purpose: CPE Week & New draft is created with "Pen
 \hline
 MCM-02 & Edit Certificate & Change Purpose & Record updated, status remains pending. & \textbf{PASS} \\
 \hline
-MCM-03 & Approve (Doctor) & Fitness: Fit, Approval: Approved & Certificate approved and unlocked for PDF render. & \textbf{PASS} \\
+MCM-03 & Issue (Doctor) & Fitness: Physically Fit, Issuance: Issued & Certificate issued and unlocked for PDF render. & \textbf{PASS} \\
 \hline
-MCM-04 & Reject (Doctor) & Fitness: Not Fit, Approval: Rejected & Certificate marked as rejected successfully. & \textbf{PASS} \\
+MCM-04 & Reject (Doctor) & Fitness: Unfit, Issuance: Rejected & Certificate marked as rejected successfully. & \textbf{PASS} \\
 \hline
 MCM-05 & Search (Patient) & Input: Galen & Certificates with name "Galen" filtered. & \textbf{PASS} \\
 \hline
-MCM-09 & Filter (All) & Status: All Status & All certificates (Pending, Approved, Rejected) shown. & \textbf{PASS} \\
+MCM-09 & Filter (All) & Status: All Status & All certificates (Pending, Issued, Rejected) shown. & \textbf{PASS} \\
 \hline
-MCM-10 & Filter Approved & Status: Approved & Only approved certificates are shown. & \textbf{PASS} \\
+MCM-10 & Filter Issued & Status: Issued & Only issued certificates are shown. & \textbf{PASS} \\
 \hline
 MCM-11 & Filter Rejected & Status: Rejected & Only rejected certificates are shown. & \textbf{PASS} \\
 \hline
@@ -230,23 +230,23 @@ The background reporting engine was rigorously tested to ensure the system can a
 \hline
 \textbf{Report Category Tested} & \textbf{Formats Successfully Generated \& Downloaded} & \textbf{Execution Status} \\
 \hline
-Health Campaign Performance (HCP 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+Detailed Health Campaigns Breakdown (HCP 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-Dental Health Report (DHP 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+Population \& Academic Distribution (PSR 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-Patient Feedback Analysis (PFA 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+Service Satisfaction \& Sentiment (PFA 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-Health Metrics Report (HMP 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+Clinical Diagnostic (MSD 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-Medical Statistics Dashboard (MSD 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+Clinical Capacity \& Visit Volume (MVT 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-Patient Summary Report (PSR 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+Clinic Operational Flow \& Density (COD 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-Treatment Outcomes Report (TOR 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+Oral Health Services \& Clinical Capacity (DHP 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-User Activity Report (UAR 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+Medical Fitness \& Certification (MFA 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-Monthly Visit Trends (MVT 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
+System Audit Report (UAR 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
 \end{tabular}
 \end{table}

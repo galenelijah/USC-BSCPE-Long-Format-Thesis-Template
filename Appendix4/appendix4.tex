@@ -80,7 +80,7 @@ The system features a massive automated communication engine requiring administr
 \subsection{7. Patient Health Insights \& Enterprise Reporting}
 \begin{itemize}
     \item \textbf{Health Insights (\texttt{/health-insights}):} Review unified medical and dental timelines. Document attachments listed within the unified timeline are rendered non-interactive to enforce strict data privacy.
-    \item \textbf{Enterprise Reporting (\texttt{/reports}):} Access available analytical templates (e.g., Visit Trends, Feedback Analysis).
+    \item \textbf{Enterprise Reporting (\texttt{/reports}):} Access available analytical templates (e.g., Clinic Operational Density, Medical Fitness Analysis).
 \end{itemize}
 \textbf{Technical Note:} Heavy data aggregations are processed asynchronously via Celery and Redis. PDF generation utilizes a Dual-Engine strategy (\textbf{\texttt{xhtml2pdf}} with a \textbf{\texttt{ReportLab}} fallback) and exports are programmatically capped at the first 200 items per section to maintain document stability. Excel/CSV exports offer unlimited deep data analysis.
 

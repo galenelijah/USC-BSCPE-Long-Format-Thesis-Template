@@ -18,7 +18,7 @@ The conceptual framework for developing the USC-PIS (illustrated in Fig. \ref{fi
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=1.0\textwidth]{ConceptualFramewor}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{ConceptualFramewor}}
     \caption{Conceptual Framework of the USC-PIS}
     \label{fig:conceptual_framework}
 \end{figure}
@@ -40,7 +40,7 @@ The USC-PIS is engineered using a modern, scalable three-tier web architecture (
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{SystemArchitecture}
+    \makebox[\textwidth][c]{\includegraphics[width=1.15\textwidth]{SystemArchitecture}}
     \caption{Top-Level System Architecture of the USC-PIS}
     \label{fig:system_architecture}
 \end{figure}
@@ -60,7 +60,7 @@ The Context Diagram provides a high-level overview of the USC-PIS and its intera
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.75\textwidth]{ContextDiagram}
+    \includegraphics[width=1.0\textwidth]{ContextDiagram}
     \caption{Context Diagram of the USC-PIS}
     \label{fig:context_diagram}
 \end{figure}
@@ -70,8 +70,8 @@ To safeguard Protected Health Information (PHI) and Personally Identifiable Info
 
 \begin{itemize}
     \item \textbf{Admin:} Possesses global system access, which includes managing RBAC adjustments, monitoring system health, and administering the email notification system. Crucially, the Admin role includes a comprehensive \textbf{Audit Logging} dashboard that tracks all system activities and data mutations (CREATE, UPDATE, DELETE), providing a full audit trail beyond simple log-in tracking.
-    \item \textbf{Doctor and Dentist:} Both roles are endowed with full clinical and administrative access, allowing them to diagnose, prescribe treatments, and access all feedback analytics. For the \textbf{Dentist} role, irrelevant medical fields are dynamically disabled to streamline the dental workflow, and a dedicated \textbf{Visual Teeth Chart} is included for precise oral geography mapping. Both roles, along with the Nurse role, have the authority to generate comprehensive clinical reports featuring charts, graphs, and dynamic filtering capabilities.
-    \item \textbf{Nurse:} Functions in a supervisory and clinical data-entry capacity. Nurses are authorized to manage patient intake, record vital signs, input treatment plans, and generate medical-related reports tailored to show all relevant clinical information. They can also draft medical certificates (which remain pending until Doctor approval).
+    \item \textbf{Doctor and Dentist:} Both roles are endowed with full clinical and administrative access, allowing them to diagnose, prescribe treatments, and access all feedback analytics. For the \textbf{Dentist} role, irrelevant medical fields are dynamically disabled to streamline the dental workflow, and a dedicated \textbf{Visual Teeth Chart} is included for precise oral geography mapping. Both roles, along with the Nurse role, have the authority to generate comprehensive clinical reports featuring charts, graphs, dynamic filtering capabilities, and fixed formatting. Furthermore, medical-related reports are tailored to show all relevant clinical information.
+    \item \textbf{Nurse:} Functions in a supervisory and clinical data-entry capacity. Nurses are authorized to manage patient intake, record vital signs, input treatment plans, and generate medical-related reports tailored to show all relevant clinical information. They can also draft medical certificates (which remain pending until Doctor issuance).
     \item \textbf{Staff:} Responsible for clinic administration. This role manages patient intake processing, certificate issuance, asynchronous report generation, and the creation and deployment of health awareness campaigns.
     \item \textbf{Student and Faculty (Patient):} This role is heavily restricted strictly to their own data. Patients are only permitted to view their personal medical and dental timelines via the Health Insights dashboard, submit visit-linked feedback, and view public health campaigns.
 \end{itemize}
@@ -83,7 +83,7 @@ The authentication sequence is designed to ensure stringent identity verificatio
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{AuthenticationWorkflow}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{AuthenticationWorkflow}}
     \caption{Sequential Authentication Workflow of the USC-PIS}
     \label{fig:authentication_workflow}
 \end{figure}
@@ -95,7 +95,7 @@ Furthermore, the system incorporates an \textbf{Attributed Clinical Remarks Syst
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{ClinicalRecordSecurityPipeline}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{ClinicalRecordSecurityPipeline}}
     \caption{Clinical Record Data Flow and Security Pipeline}
     \label{fig:clinical_record_pipeline}
 \end{figure}
@@ -105,7 +105,7 @@ The issuance of the USC Form ACA-HSD-04F Medical Certificate follows a digitized
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{MedicalCertificatePipeline}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{MedicalCertificatePipeline}}
     \caption{Role-Gated Medical Certificate Issuance Pipeline}
     \label{fig:medical_certificate_pipeline}
 \end{figure}
@@ -125,7 +125,7 @@ The Presentation Layer of the USC-PIS was engineered to be highly intuitive and 
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{WebsiteHomeDashboard}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{WebsiteHomeDashboard}}
     \caption{The USC-PIS Home Dashboard Overview}
     \label{fig:home_dashboard}
 \end{figure}
@@ -137,7 +137,7 @@ The student-facing dashboard was designed to provide personalized health analyti
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{StudentFacingPatientMedicalDashboard}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{StudentFacingPatientMedicalDashboard}}
     \caption{The Student-Facing Patient Medical Dashboard}
     \label{fig:student_dashboard}
 \end{figure}
@@ -147,7 +147,7 @@ The administrative interface prioritizes dense data processing and rapid retriev
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{StaffSidePatientList}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{StaffSidePatientList}}
     \caption{Clinic Staff Advanced Search/Filter Interface}
     \label{fig:staff_patient_list}
 \end{figure}
@@ -157,7 +157,7 @@ The Health Information module acts as the clinic's digital bulletin board. This 
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{StudentSideCampaignsFeed}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{StudentSideCampaignsFeed}}
     \caption{Health Awareness Campaign Student Feed}
     \label{fig:student_campaigns}
 \end{figure}
@@ -167,7 +167,7 @@ The system's dual-engine PDF module autonomously generates the USC Form ACA-HSD-
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{Medical Certificate Generation Preview}
+    \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{Medical Certificate Generation Preview}}
     \caption{Generated Medical Certificate PDF Preview}
     \label{fig:med_cert_preview}
 \end{figure}
@@ -180,7 +180,7 @@ To ensure high data integrity, secure role-based access, and rapid query retriev
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=1.0\textwidth]{ERD_Final}
+    \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{ERD_Final}}
     \caption{Entity Relationship Diagram (ERD) of the USC-PIS}
     \label{fig:erd_final}
 \end{figure}
@@ -205,7 +205,7 @@ The core of the clinic's digital operations is handled by the \texttt{Medical Re
 \end{itemize}
 
 \subsection{Medical Certificates and Administrative Workflows}
-Crucially, the database schema seamlessly integrates the \texttt{Medical Certificates} entity to manage the digital issuance of the USC Form ACA-HSD-04F. This table is directly linked to the patient (\texttt{patient\_id}) and securely captures the \texttt{fitness\_status}, \texttt{fitness\_reason}, \texttt{diagnosis}, and \texttt{recommendations}. It also defines the exact validity timeframe via the \texttt{valid\_from} and \texttt{valid\_until} fields. To enforce strict clinical hierarchies and data integrity, the workflow is governed by two distinct tracking fields: \texttt{issued\_by} and \texttt{approved\_by}. This schema constraint ensures that while clinical staff can draft and issue the initial document, an authorized Doctor must execute the final approval (\texttt{approved\_at}) before the backend dual-engine PDF rendering is unlocked.
+Crucially, the database schema seamlessly integrates the \texttt{Medical Certificates} entity to manage the digital issuance of the USC Form ACA-HSD-04F. This table is directly linked to the patient (\texttt{patient\_id}) and securely captures the \texttt{fitness\_status}, \texttt{fitness\_reason}, \texttt{diagnosis}, and \texttt{recommendations}. It also defines the exact validity timeframe via the \texttt{valid\_from} and \texttt{valid\_until} fields. To enforce strict clinical hierarchies and data integrity, the workflow is governed by two distinct tracking fields: \texttt{issued\_by} and \texttt{issued\_by\_doctor}. This schema constraint ensures that while clinical staff can draft and issue the initial document, an authorized Doctor must execute the final issuance (\texttt{issued\_at}) before the backend dual-engine PDF rendering is unlocked.
 
 \section{Database Schema and Data Dictionary}
 While the ERD visualizes the high-level entity relationships, the physical database schema dictates the strict data types, cryptographic boundaries, and structural constraints required for healthcare data management. The USC-PIS is normalized to eliminate data redundancy and ensure relationship integrity. The following data dictionaries outline the core tables powering the system's authentication and clinical operations.
@@ -323,13 +323,13 @@ The \texttt{medical\_certificates} table manages the End-to-End issuance of the 
 \hline
 \texttt{patient\_id} & Integer & Foreign Key (FK) mapping to \texttt{patients\_patient.id}. \\
 \hline
-\texttt{fitness\_status} & String (varchar) & Constrained to choices: 'fit' or 'not\_fit'. \\
+\texttt{fitness\_status} & String (varchar) & Constrained to choices: 'physically fit' or 'unfit'. \\
 \hline
-\texttt{approval\_status} & String (varchar) & Tracks document state: 'draft', 'pending', 'approved', 'rejected'. \\
+\texttt{approval\_status} & String (varchar) & Tracks document state: 'draft', 'pending', 'issued', 'rejected'. \\
 \hline
 \texttt{issued\_by} & Integer & Foreign Key (FK) mapping to the Nurse/Staff who drafted the form. \\
 \hline
-\texttt{approved\_by} & Integer & Foreign Key (FK) mapping strictly to an authorized Doctor. \\
+\texttt{issued\_by\_doctor} & Integer & Foreign Key (FK) mapping strictly to an authorized Doctor. \\
 \hline
 \end{tabular}
 \end{table}
@@ -357,7 +357,7 @@ The development adhered to an Agile methodology, ensuring iterative cycles that 
 
 \begin{itemize}
     \item \textbf{Unit Testing (UT-01 to UT-06):} Validated isolated components and logic constraints. Key tests verified the strict binary storage of \texttt{pgcrypto} encrypted data, accurate regex enforcement of the FDI 11-48 dental charting range, and the rejection of \texttt{.EXE} and \texttt{.JS} file uploads to secure system integrity.
-    \item \textbf{Integration Testing (IT-01 to IT-05):} Evaluated end-to-end interactions between the frontend, backend, and external APIs. This included simulating the end-to-end medical certificate pipeline (from a Nurse's draft to a Doctor's approval to PDF rendering) and executing RBAC stress tests to ensure unauthorized users could not bypass role-gated endpoints.
+    \item \textbf{Integration Testing (IT-01 to IT-05):} Evaluated end-to-end interactions between the frontend, backend, and external APIs. This included simulating the end-to-end medical certificate pipeline (from a Nurse's draft to a Doctor's issuance to PDF rendering) and executing RBAC stress tests to ensure unauthorized users could not bypass role-gated endpoints.
 \end{itemize}
 
 \subsection{Performance Testing}
