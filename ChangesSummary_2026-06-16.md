@@ -40,7 +40,8 @@ This document provides a comprehensive, section-by-section audit trail of all mo
     *   **Fig 3.1 (Conceptual Framework):** Implemented as a **SidewaysFigure** on a dedicated page for maximum scale and readability.
     *   **Fig 3.2 (System Architecture):** Implemented as a **SidewaysFigure** on a dedicated page.
     *   **Fig 3.3 (Context Diagram):** Moved to a **dedicated page** and enlarged to **1.25x** width.
-    *   **Figs 3.4-3.6 (Workflow Pipelines):** Moved to **individual dedicated pages** and enlarged to **1.25x** width to ensure absolute legibility of all process nodes and text.
+    *   **Figs 3.4 & 3.6 (Workflow Pipelines):** Moved to **individual dedicated pages** and enlarged to **1.25x** width.
+    *   **Fig 3.5 (Security Pipeline):** Implemented as a **SidewaysFigure** on a dedicated page for maximum readability.
     *   **Fig 3.12 (ERD):** Implemented as a **SidewaysFigure** on a dedicated page, utilizing the full paper length to resolve all relational line and font size issues.
     *   **Figs 3.7-3.11 (GUI Dashboard Previews):** Maintained at **1.1x** width with improved sectional anchoring.
 
@@ -49,15 +50,14 @@ This document provides a comprehensive, section-by-section audit trail of all mo
 ## 4. Chapter 4: Results & Discussion
 *   **Section 4.1.1 (Unit Testing):** Verified Table 4.1 remains consistent with finalized logic.
 *   **Section 4.3.2 & 4.3.3:** Preserved the original **N=70 student baseline** and initial staff scores.
-*   **Section 4.3.5 (Comparative Operational Analysis):** Completely rewritten with finalized simulation data:
-    *   **Table 4.9:** Mapping all Staff Objective means (Report generation mean improved to **4.14**).
-    *   **Table 4.10:** Staff Performance Comparison Matrix (87.5% "Better" rating).
-    *   **Table 4.11 & 4.12:** Student Usability Re-Evaluation and Comparative Assessment (Satisfaction mean: **4.73**).
+*   **Section 4.3.5 (Comparative Operational Analysis):** 
+    *   **Data Synthesis:** Performed a strict academic data analysis of the secondary simulation (N=30 students, N=8 staff).
+    *   **Consolidated Tables:** Replaced 42 individual survey charts with 4 consolidated academic tables (**Tables 4.9–4.12**).
+    *   **Staff Efficiency (Table 4.9):** Calculated granular means for Manual vs. Web-based processes, including improvement variances (Max variance: +0.88 for Reporting).
+    *   **Performance Matrix (Table 4.10):** Documented direct comparisons showing 83.3\% improvement in Data Collection and Record Retrieval.
+    *   **Student Metrics (Tables 4.11-4.12):** Validated usability means (Avg: 4.67) and comparative operational gains (Avg: 4.75).
 *   **Section 4.3.6 (Qualitative Proof):** Inserted direct quotes from participants validating the "fast system flow" and "home access to records."
-*   **New Visual Data Sections:** Inserted **42 new survey charts** after Section 4.3.6:
-    *   25 staff-related charts (Roles, Records, Campaigns, Certificates, Satisfaction).
-    *   17 student comparative bar charts.
-*   **Section 4.4.2 (Reporting Validation):** Updated **Table 4.5** to reflect the **9 Finalized Categories** (8 Workshops + 1 Audit Report).
+*   **Visualization Migration:** Moved all 42+ individual survey parameter charts to the new **Appendix Q**.
 
 ---
 
@@ -67,6 +67,9 @@ This document provides a comprehensive, section-by-section audit trail of all mo
 ---
 
 ## 6. Appendices
+*   **Appendix Q (Exhaustive Secondary UAT Parameter Charts):** 
+    *   Created a new 99-line appendix containing 42+ individual graphical visualizations for every survey question.
+    *   Included frequency distributions, pie charts for demographics, and validated mean scores for all staff and student sets.
 *   **Appendix C (Training Plan):** Updated Module 3 to refer to **"Clinic Operational Density Reports"**.
 *   **Appendix D (User Manuals):** 
     *   Added official **Video Tutorial Link**: `https://bit.ly/usc-pis-tutorial`.
