@@ -16,16 +16,14 @@ This chapter details the methodology guiding the system design, core features, s
 
 The conceptual framework for developing the USC-PIS (illustrated in Fig. \ref{fig:conceptual_framework}) is anchored in a User-Centered Design (UCD) approach, which prioritizes the workflows of clinic staff and the accessibility needs of the students. The legacy system at the USC Clinic was heavily reliant on fragmented, paper-based records (such as the Daily Treatment Records) and basic Google Forms for feedback, which introduced significant inefficiencies in data retrieval and program evaluation.
 
-\FloatBarrier
-\begin{landscape}
-\begin{figure}[H]
+\clearpage
+\begin{sidewaysfigure}
     \centering
-    \includegraphics[width=1.35\linewidth]{ConceptualFramewor}
+    \includegraphics[width=1.0\textheight]{ConceptualFramewor}
     \caption{Conceptual Framework of the USC-PIS}
     \label{fig:conceptual_framework}
-\end{figure}
-\end{landscape}
-\FloatBarrier
+\end{sidewaysfigure}
+\clearpage
 
 To resolve these bottlenecks, the modernized framework was constructed upon the following core pillars:
 
@@ -42,16 +40,14 @@ To resolve these bottlenecks, the modernized framework was constructed upon the 
 
 The USC-PIS is engineered using a modern, scalable three-tier web architecture (illustrated in Fig. \ref{fig:system_architecture}). This design ensures a clean separation of concerns, allowing for independent scaling and maintenance of the presentation, logic, and data storage components.
 
-\FloatBarrier
-\begin{landscape}
-\begin{figure}[H]
+\clearpage
+\begin{sidewaysfigure}
     \centering
-    \includegraphics[width=1.35\linewidth]{SystemArchitecture}
+    \includegraphics[width=0.9\textheight]{SystemArchitecture}
     \caption{Top-Level System Architecture of the USC-PIS}
     \label{fig:system_architecture}
-\end{figure}
-\end{landscape}
-\FloatBarrier
+\end{sidewaysfigure}
+\clearpage
 
 The architectural flow centers on the RESTful communication between the React frontend and the Django backend. As shown in the diagram, the backend serves as the central hub, managing secure data access to the PostgreSQL database while delegating time-consuming operations, such as PDF generation and automated email dispatch, to an asynchronous task queue managed by Celery and Redis.
 
@@ -66,12 +62,14 @@ The architectural flow centers on the RESTful communication between the React fr
 \subsection{Context Diagram}
 The Context Diagram provides a high-level overview of the USC-PIS and its interactions with external entities. The system acts as the central hub bridging the clinical staff and the student body. Students interact with the platform to access their personal health information and submit visit-linked feedback, while Clinic Staff (Doctors, Nurses, and Dentists) input clinical data, issue medical certificates, and manage health campaigns. All transactions are routed securely to the central Patient Database, ensuring real-time data synchronization across all user endpoints.
 
+\clearpage
 \begin{figure}[!ht]
     \centering
-    \makebox[\textwidth][c]{\includegraphics[width=1.15\textwidth]{ContextDiagram}}
+    \makebox[\textwidth][c]{\includegraphics[width=1.25\textwidth]{ContextDiagram}}
     \caption{Context Diagram of the USC-PIS}
     \label{fig:context_diagram}
 \end{figure}
+\clearpage
 
 \subsection{User Roles and Functionalities}
 To safeguard Protected Health Information (PHI) and Personally Identifiable Information (PII), the USC-PIS employs a strict Role-Based Access Control (RBAC) architecture enforced via Django REST Framework (DRF) permission classes. The system dynamically restricts access and capabilities across the following hierarchical user classes:
@@ -89,34 +87,40 @@ The system also integrates a multi-tiered \textbf{System Alerts} architecture, p
 \subsection{Authentication Workflow}
 The authentication sequence is designed to ensure stringent identity verification before granting system access while maintaining high data consistency. To eliminate manual input errors, USC ID numbers are auto-captured from the institutional database, and user roles are automatically assigned based on their verified status upon registration. Furthermore, the system implements a streamlined GMail auto sign-in mechanism to reduce friction. The sequential workflow begins with a student registering an account, where the system actively enforces a domain constraint, requiring the email to end in \texttt{@usc.edu.ph}. Upon validation, the Django backend generates a 6-digit One-Time Password (OTP) with a precise 10-minute expiration window. This OTP is transmitted to the user via the Gmail API OAuth 2.0 integration. Once the user inputs the correct OTP, the system authenticates the session and issues a secure JWT token, granting access to the role-gated dashboards.
 
+\clearpage
 \begin{figure}[!ht]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.25\textwidth]{AuthenticationWorkflow}}
     \caption{Sequential Authentication Workflow of the USC-PIS}
     \label{fig:authentication_workflow}
 \end{figure}
+\clearpage
 
 \subsection{Clinical Record and Security Pipeline}
 To comply with strict data privacy mandates, the USC-PIS employs a highly secure data flow pipeline for clinical records. When medical personnel utilize the Unified Record Component to enter vital signs and a clinical diagnosis, the data is transmitted to the Application Layer. Before the data is committed to the PostgreSQL database, a Django \texttt{post\_save} signal intercepts the transaction. This signal executes the \texttt{pgp\_sym\_encrypt} function, instantly converting plaintext Protected Health Information (PHI), such as patient names and diagnoses, into secure \texttt{BinaryField} (\texttt{bytea}) hashes. This ensures military-grade encryption-at-rest with minimal computational overhead. To maintain clinical data integrity, the pipeline includes robust \textbf{Validation and Error Trapping} mechanisms. The system autonomously calculates BMI based on height and weight inputs, traps dates to block impossible future dates for birthdays or visit records, and validates erroneous clinical inputs such as negative temperatures or zero blood pressure readings to prevent data entry errors.
 
 Furthermore, the system incorporates an \textbf{Attributed Clinical Remarks System} to enhance inter-professional collaboration. This feature allows Doctors to view historical remarks and clinical notes authored by other medical personnel during patient consultations. By providing a centralized, color-coded view of previous clinical observations, the system ensures collaborative care and seamless coordination between different healthcare providers, allowing for a more informed and comprehensive assessment of the patient's medical history.
 
+\clearpage
 \begin{figure}[!ht]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.25\textwidth]{ClinicalRecordSecurityPipeline}}
     \caption{Clinical Record Data Flow and Security Pipeline}
     \label{fig:clinical_record_pipeline}
 \end{figure}
+\clearpage
 
 \subsection{The Medical Certificate Pipeline}
 The issuance of the USC Form ACA-HSD-04F Medical Certificate follows a digitized, role-gated sequential pipeline. The workflow initiates when a Nurse or Staff member accesses a patient's record to draft the certificate and input the ``Purpose/Requirement''. However, the system's RBAC middleware restricts the rendering of the document until a user with the DOCTOR role assesses the draft. The Doctor must select the Medical Fitness Status (strictly displaying either ``Physically Fit'' or ``Unfit'', but never both) and authorize the issuance. Once the \texttt{IsDoctorUser} permission is validated, the system logs the issuance of the certificate along with the name of the issuing doctor. The backend dual-engine PDF module then autonomously renders the landscape-formatted certificate for download. To maintain administrative integrity, editing of rejected certificate requests is not allowed. For the student demographic, the interface displays the status as ``Ready to be Claimed'', as they cannot print the official document themselves.
 
+\clearpage
 \begin{figure}[!ht]
     \centering
     \makebox[\textwidth][c]{\includegraphics[width=1.25\textwidth]{MedicalCertificatePipeline}}
     \caption{Role-Gated Medical Certificate Issuance Pipeline}
     \label{fig:medical_certificate_pipeline}
 \end{figure}
+\clearpage
 
 \section{Software Tools and Technology Stack}
 The USC-PIS is engineered upon a modern, highly scalable three-tier web architecture designed to ensure a clean separation of concerns.
@@ -186,16 +190,14 @@ Beyond basic role-gated access, the USC-PIS addresses the critical necessity of 
 \section{Entity Relationship Diagram (ERD) and Database Schema}
 To ensure high data integrity, secure role-based access, and rapid query retrieval, the USC-PIS database is normalized and structured into highly interdependent relational tables. The Entity Relationship Diagram (ERD) illustrates the complete core architecture of the system, defining how user identities specialize into distinct profiles, and how clinical records and official certificates are securely mapped within the PostgreSQL environment.
 
-\FloatBarrier
-\begin{landscape}
-\begin{figure}[H]
+\clearpage
+\begin{sidewaysfigure}
     \centering
-    \includegraphics[width=1.4\linewidth]{ERD_Final}
+    \includegraphics[width=1.0\textheight]{ERD_Final}
     \caption{Entity Relationship Diagram (ERD) of the USC-PIS}
     \label{fig:erd_final}
-\end{figure}
-\end{landscape}
-\FloatBarrier
+\end{sidewaysfigure}
+\clearpage
 
 \subsection{User Identity and Role Authorization}
 The foundation of the system's architecture relies on the central \texttt{USER} entity, which stores core credentials such as the unique \texttt{email} (enforcing the Unique Key constraint), \texttt{password\_hash}, and foundational demographic data including \texttt{contact}, \texttt{address}, and \texttt{emergency\_contact\_name}. To enforce the system's strict Role-Based Access Control (RBAC) middleware, the \texttt{USER} table is directly linked via a Foreign Key (\texttt{role\_id}) to the \texttt{ROLES} entity. This table defines the absolute privileges of the account, specifically categorizing users as "Admin, Doctor, Nurse, Staff, Student, Faculty".
