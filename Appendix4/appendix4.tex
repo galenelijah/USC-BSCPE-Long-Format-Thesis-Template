@@ -3,6 +3,11 @@
 \chapter{USC-PIS User Manuals}
 \label{appendix:user_manuals}
 
+\section*{System Walkthrough and Video Tutorial}
+To supplement these written guides, a comprehensive video walkthrough demonstrating all system features, including the Doctor Remarks system, the visual teeth chart, and the medical certificate pipeline, can be accessed via the following URL: \url{https://bit.ly/usc-pis-tutorial}
+
+\textit{Note: All screenshots in this manual must be replaced with the updated version of the system to ensure the Attributed Clinical Remarks feature, the visual teeth chart, and the updated medical certificate pipeline are clearly visible.}
+
 \section{Manual 1: Clinical \& Administrative Staff Guide}
 
 \textbf{Target Audience:} Doctors, Nurses, Dentists, and Clinic Staff.
@@ -29,7 +34,7 @@
     
     \textbf{Technical Note:} Upon saving, PostgreSQL's \textbf{\texttt{pgp\_sym\_encrypt}} function hashes sensitive patient data into a secure binary format invisibly in the background (< 1.0ms overhead).
     
-    \item \textbf{Dental Documentation:} Navigate to the \textbf{Dental Records} tab and use the \textbf{FDI 11-48} numerical system to input tooth conditions. For rapid checks, use the streamlined "Consultation/Referral" mode.
+    \item \textbf{Dental Documentation:} Navigate to the \textbf{Dental Records} tab and use the \textbf{Visual Teeth Chart} and the \textbf{FDI 11-48} numerical system to input tooth conditions. For rapid checks, use the streamlined "Consultation/Referral" mode.
 \end{itemize}
 
 \subsection{4. Medical Certificate Management \& Issuance}
@@ -37,7 +42,7 @@
     \item Navigate to \textbf{Medical Certificates -> Create New Certificate}.
     \item Select the patient; the system will autonomously autofill their Name, Year Level, and Full Course Name.
     \item Select the \textbf{USC Clinic Template ACA-HSD-04F} and enter the "Purpose/Requirement".
-    \item A \textbf{DOCTOR} must assess the draft, select Medical Fitness Status ("Fit"/"Not Fit"), and authorize approval. The dual-engine PDF system will instantly render the certificate for download.
+    \item A \textbf{DOCTOR} must assess the draft, select Medical Fitness Status (strictly displaying either ``Physically Fit'' or ``Unfit'', but never both), and authorize the issuance. The system will log the issuance and the name of the issuing doctor, and the dual-engine PDF system will instantly render the certificate for download. To maintain administrative integrity, editing of rejected certificate requests is not allowed.
 \end{enumerate}
 
 \subsection{5. System Maintenance \& Data Backups}
@@ -95,6 +100,7 @@ The system features a massive automated communication engine requiring administr
 \begin{enumerate}
     \item Log into the portal and navigate to the \textbf{Patient Medical History} link in the sidebar (\textbf{\texttt{/health-insights}}).
     \item The interface displays a Unified Timeline separated into Medical Records, Dental Records, and Health Insights.
+    \item Clinical certificates in the student-facing view are marked as ``Ready to be Claimed,'' indicating that the physical copy must be collected from the clinic.
     \item Click the \textbf{Health Insights} tab to view personalized health analytics, monthly visit frequency patterns, and visual trend indicators.
 \end{enumerate}
 \textbf{Technical Note: Data Privacy:} The Student Medical Record dashboard is governed by strict access controls limiting visibility exclusively to the record owner and authorized medical staff. All clinical documents are proxied securely through an authenticated backend stream.

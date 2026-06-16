@@ -225,6 +225,31 @@ For the clinical staff (N=7), the quantitative results yielded a moderate overal
 
 For the student evaluation, the overall satisfaction yielded an impressive mean of 4.76. Students overwhelmingly praised the Patient Medical Dashboard and the Medical Certificate Issuance feature, noting that the ability to obtain a medical certificate without waiting in physical queues was a massive operational improvement. The most recurring constructive feedback from the student body was a request for aesthetic UI optimizations, specifically the addition of a ``Dark Mode'' toggle and enhanced responsiveness to ensure the application fits perfectly on narrower mobile screens.
 
+\subsection{Comparative Operational Analysis}
+To further validate the system's impact, a secondary comparative simulation was conducted with N=30 students and N=8 clinic staff members who had extensive experience with the legacy manual clinic processes. This analysis aimed to directly compare the old paper-based baseline with the digital USC-PIS results.
+
+\begin{itemize}
+    \item \textbf{Staff Operational Comparison:} In the initial UAT, staff rated the ease of generating reports at a mean of 3.29. Following the implementation of the system updates and the Application Retooling filter bar, this score improved significantly to approximately 3.66. According to the ``Operational Indicator Comparison Matrix,'' staff rated key metrics such as \textit{Data Collection}, \textit{Record Retrieval}, and \textit{Campaign Reach} as either ``Better'' or ``Much Better'' compared to the manual baseline.
+    \item \textbf{Student Operational Comparison:} The targeted student group overwhelmingly agreed that the digital system optimized clinical workflows compared to the manual process. In the comparative analysis, students awarded top marks (4s and 5s on the Likert scale) for \textit{Record Management}, \textit{Timely Alerts}, and \textit{Time Efficiency} for medical certificate processing. This demonstrates that the digital transition effectively resolved the primary bottlenecks of the legacy system.
+\end{itemize}
+
+\subsection{Qualitative Proof of Operational Upgrade}
+The secondary simulation also captured direct qualitative evidence of the system's success in modernizing the clinic's operations. The following quotes from the participants highlight the tangible benefits of the digital transition:
+
+\begin{itemize}
+    \item \textbf{Clinic Staff Perspectives:}
+    \begin{itemize}
+        \item ``The system provides an easy and fast system flow compared to the old manual way.''
+        \item ``The organization of patient profiles makes everything a lot more organized and easier to find during busy hours.''
+    \end{itemize}
+    \item \textbf{Student Perspectives:}
+    \begin{itemize}
+        \item ``I can finally access my own medical records at home without having to visit the clinic in person.''
+        \item ``The issuing of an electronic medical certificate is a much faster and more organized way of keeping records.''
+        \item ``The notifications feature keeps me updated with health campaigns and clinic announcements in real-time.''
+    \end{itemize}
+\end{itemize}
+
 \section{Database Analysis and Data Quality Assessment}
 To validate the reliability of the system under real-world clinical operations, an extensive empirical database analysis was executed targeting the production PostgreSQL 16.8 server. This analysis evaluated data consistency, table normalization, and query latency across the system's 39 normalized tables.
 
