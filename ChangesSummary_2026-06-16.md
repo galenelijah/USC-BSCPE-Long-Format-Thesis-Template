@@ -59,15 +59,26 @@ This document provides a comprehensive, section-by-section audit trail of all mo
 *   **Section 4.3.6 (Qualitative Proof):** Inserted direct quotes from participants validating the "fast system flow" and "home access to records."
 *   **Section 4.3.7 (Attainment of Project Objectives):** Added a new section directly mathematically justifying the successful achievement of Objectives 1 through 6 using the N=30/N=8 comparative variances.
 *   **Visualization Migration:** Moved all 42+ individual survey parameter charts to the new **Appendix Q**.
+*   **Semantic Polish:** Updated Table 4.7 internal headers to rigorously match the project objectives listed in Chapter 1 ("Comprehensive Records Management" and "Health Awareness Campaigns").
 
 ---
 
 ## 5. Chapter 5: Conclusions
-*   **Section 5.2 (Conclusions):** Completely rewrote the first paragraph to explicitly declare: "The empirical data gathered from the secondary comparative simulation definitively justifies the attainment of all six project objectives," confirming massive, mathematically proven operational upgrades over the manual baseline.
+*   **Section 5.2 (Conclusions):** 
+    *   Completely rewrote the first paragraph to explicitly declare: "The empirical data gathered from the secondary comparative simulation definitively justifies the attainment of all six project objectives," confirming massive, mathematically proven operational upgrades over the manual baseline. 
+    *   Explicitly clarified the distinction between the primary pilot deployment scores (N=70 / N=7; means: 4.76 / 3.29) and the secondary simulation to prevent data collision.
+    *   Injected the specific secondary simulation metrics (Student Mean: **4.73**, Staff Mean: **4.17**) and specific operational variances (+0.88 for reporting, +0.83 for campaigns) directly into the concluding paragraphs to solidify the final performance narrative.
 
 ---
 
-## 6. Appendices
+## 6. General Formatting
+*   Standardized formal figure referencing across the document, changing all abbreviated "Fig." instances to the formal text "Figure" (e.g., in Chapter 3).
+
+---
+
+## 7. Appendices
+*   **Appendix H (Finalized Project Costs):** Renamed from "Updated Cost Estimates". Modified introduction and tables to explicitly reflect the *actual finalized expenses incurred* (131,400.00 PHP) rather than theoretical projections.
+*   **Appendix N (Original Project Deliverables):** Expanded upon the definition of "maintain system stability" to formally document the strategic deferment of complex logistics (Appointment Scheduling, Inventory Management), prioritizing the stability, security (PHI), and verification (SQA) of the core application.
 *   **Appendix Q (Exhaustive Secondary UAT Parameter Charts):** 
     *   Created a new 100+ line appendix containing 42+ individual graphical visualizations for every survey question.
     *   Included frequency distributions, pie charts for demographics, and validated mean scores for all staff and student sets.
