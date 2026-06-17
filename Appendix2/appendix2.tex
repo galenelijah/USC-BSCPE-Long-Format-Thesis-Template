@@ -94,6 +94,10 @@ Access to backend endpoints is restricted via DRF \texttt{PermissionClasses} to 
 \hline
 \url{/api/certificates/{id}/assess/} & POST & \texttt{IsDoctorUser} & DOCTOR (Exclusive Approval) \\
 \hline
+\url{/api/reports/} & GET, POST & \texttt{IsStaffUser} & ADMIN, STAFF, DOCTOR, NURSE, DENTIST \\
+\hline
+\url{/api/reports/audit/} & GET & \texttt{IsAdminUser} & ADMIN (Exclusive Access) \\
+\hline
 \end{tabular}
 \end{table}
 

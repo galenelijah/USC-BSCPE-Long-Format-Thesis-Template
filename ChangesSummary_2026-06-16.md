@@ -91,6 +91,7 @@ This document provides a comprehensive, section-by-section audit trail of all mo
 ---
 
 ## 7. Appendices
+*   **User Roles \& Reporting Permissions (Staff Access):** Updated all manuscript sections (Chapter 3, Appendix 1, 2, 3, 4, 6) to reflect that the reporting module and data export capabilities are restricted to **professional clinical roles** (Admin, Doctor, Dentist, Nurse, and Staff). Explicitly documented that the **System Audit Report** is strictly reserved for the Admin role, while Students and Faculty remain restricted to their own data only.
 *   **Appendix H (Finalized Project Costs):** Renamed from "Updated Cost Estimates". Modified introduction and tables to explicitly reflect the *actual finalized expenses incurred* (131,400.00 PHP) rather than theoretical projections.
 *   **Appendix N (Original Project Deliverables):** Expanded upon the definition of "maintain system stability" to formally document the strategic deferment of complex logistics (Appointment Scheduling, Inventory Management), prioritizing the stability, security (PHI), and verification (SQA) of the core application. Updated the description of Deliverable D6 (Application Retooling) to reflect the comprehensive scope.
 *   **Appendix Q (Exhaustive Secondary UAT Parameter Charts):** 

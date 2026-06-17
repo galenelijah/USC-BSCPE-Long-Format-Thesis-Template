@@ -86,6 +86,16 @@ Thank you for pointing this out. We agree with this recommendation. Therefore, w
 
 ---
 
+### ENTRY 9: USER MANUAL & TRAINING ACCESSIBILITY
+**Recommendation/Comment:**
+*Provide more accessible training materials and ensure the User Manual reflects the latest system updates (Retooling phase).*
+
+**Response:**
+Thank you for pointing this out. We agree with this recommendation. Therefore, we have updated **Appendix D (User Manuals)** with new high-resolution screenshots reflecting the "Application Retooling" UI updates. We also produced and integrated an official **Video Tutorial Link** (https://bit.ly/usc-pis-tutorial) to provide a more interactive training experience for clinical staff and students.
+*   **Location:** Appendix D (User Manuals) and Appendix C (Training Plan).
+
+---
+
 ### GENERAL FORMATTING & POLISH
 *   **Figure References:** Updated all abbreviated "Fig." instances to the formal text **"Figure"** (e.g., in Chapter 3).
 *   **Interface Screenshots:** Enlarged all **29 screenshots** in Appendix L to **1.0x full text width** for maximum readability.

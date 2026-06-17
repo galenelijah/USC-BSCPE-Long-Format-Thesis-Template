@@ -33,7 +33,7 @@ To maintain a strict boundary on the current system deployment, the following fe
 The USC-PIS is built upon a modern, three-tier web architecture. The backend is powered by Django 5.0.2 and Django REST Framework, while the presentation layer operates on React 18 using a Vite build system and Material-UI components. The data layer relies on a dual-database environment featuring PostgreSQL for production and SQLite for local development, enforcing vendor-aware logic to prevent compatibility errors during testing. External enterprise integrations include Heroku for hosting, Cloudinary for scalable media storage, and the Gmail API utilizing OAuth 2.0 to bypass "less secure app" restrictions for clinical communications.
 
 \subsection{User Classes \& Characteristics}
-The system strictly enforces user authorizations across hierarchical classes:
+The system strictly enforces user authorizations across hierarchical classes. Notably, all professional clinical roles (Admin, Doctor, Dentist, Nurse, and Staff) possess the authorization to create and export operational and clinical reports, while the System Audit Report is strictly reserved for the Admin role.
 
 \begin{table}[htbp]
 \centering
@@ -42,13 +42,13 @@ The system strictly enforces user authorizations across hierarchical classes:
 \hline
 \textbf{Role} & \textbf{Access Level \& Capabilities} \\
 \hline
-\textbf{Admin} & Possesses full system access, including global RBAC adjustments, system health monitoring, email system administration, and report generation. \\
+\textbf{Admin} & Possesses full system access, including global RBAC adjustments, system health monitoring, email system administration, and exclusive access to system audit reports. All clinical roles can create and export reports. \\
 \hline
-\textbf{Doctor / Dentist} & Endowed with full administrative and clinical access, only the Doctor role is uniquely authorized to approve medical certificates. Both can prescribe treatments and access all reporting/feedback analytics. \\
+\textbf{Doctor / Dentist} & Endowed with full administrative and clinical access, only the Doctor role is uniquely authorized to approve medical certificates. Both can prescribe treatments, access all feedback analytics, and generate clinical reports. \\
 \hline
-\textbf{Nurse} & Supervisory and data-entry capacity; authorized to cater to patients, record vital signs, input treatment plans, and draft medical certificates for doctor approval. \\
+\textbf{Nurse} & Supervisory and data-entry capacity; authorized to cater to patients, record vital signs, input treatment plans, generate clinical reports, and draft medical certificates for doctor approval. \\
 \hline
-\textbf{Staff} & Manages clinic administration, patient intake, certificate issuance, report generation, and health campaign creation. All other clinical roles (Admin, Doctor, Dentist, and Nurse) possess the authorization to perform all tasks and access all functionalities available to this Staff role. \\
+\textbf{Staff} & Manages clinic administration, patient intake, certificate issuance, clinical report generation, and health campaign creation. All other clinical roles (Admin, Doctor, Dentist, and Nurse) possess the authorization to perform all tasks available to this Staff role. \\
 \hline
 \textbf{Student / Faculty (Patient)} & Restricted to their own data; permitted only to read personal medical/dental timelines, submit visit-linked feedback, and view public health campaigns. \\
 \hline
@@ -104,7 +104,7 @@ System performance benchmarking explicitly addressed and resolved prior ineffici
 \begin{table}[htbp]
 \centering
 \caption{System Benchmarks}
-\begin{tabular}{|p{0.2\textwidth}|p{0.6\textwidth}|p{0.15\textwidth}|}
+\begin{tabularx}{\textwidth}{|Y|Y|c|}
 \hline
 \textbf{Requirement Area} & \textbf{Verified Benchmark} & \textbf{Audit Test ID} \\
 \hline
@@ -116,7 +116,7 @@ System performance benchmarking explicitly addressed and resolved prior ineffici
 \hline
 \textbf{File Security} & \textbf{100\% rejection rate} against executable scripts (.EXE, .JS). & UT-06 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Data Resilience}

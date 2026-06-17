@@ -82,7 +82,7 @@ The system features a massive automated communication engine requiring administr
     \item \textbf{Health Insights (\texttt{/health-insights}):} Review unified medical and dental timelines. Document attachments listed within the unified timeline are rendered non-interactive to enforce strict data privacy.
     \item \textbf{Enterprise Reporting (\texttt{/reports}):} Access available analytical templates (e.g., Clinic Operational Density, Medical Fitness Analysis).
 \end{itemize}
-\textbf{Technical Note:} Heavy data aggregations are processed asynchronously via Celery and Redis. PDF generation utilizes a Dual-Engine strategy (\textbf{\texttt{xhtml2pdf}} with a \textbf{\texttt{ReportLab}} fallback) and exports are programmatically capped at the first 200 items per section to maintain document stability. Excel/CSV exports offer unlimited deep data analysis.
+\textbf{Technical Note:} Heavy data aggregations are processed asynchronously via Celery and Redis. PDF generation utilizes a Dual-Engine strategy (\textbf{\texttt{xhtml2pdf}} with a \textbf{\texttt{ReportLab}} fallback) and exports are programmatically capped at the first 200 items per section to maintain document stability. Excel/CSV exports offer unlimited deep data analysis. All professional clinical roles (Admin, Doctor, Dentist, Nurse, and Staff) possess the authorization to create and export reports, while the System Audit Report is strictly reserved for the Admin role.
 
 \section{Manual 2: Student \& Faculty Portal Guide}
 
@@ -113,7 +113,7 @@ The system features a massive automated communication engine requiring administr
     \item Interact with high-quality image PubMats via zooming, or execute direct, secure downloads of attached health guidelines.
 \end{enumerate}
 
-\subsection{4. The Feedback Loop}
+\subsection{5. The Feedback Loop}
 \begin{enumerate}
     \item Exactly 24 hours following the conclusion of a Medical or Dental consultation, the system automatically dispatches a Feedback Request reminder to your university email.
     \item Open the email and click the embedded rating links, or log directly into the portal and navigate to the \textbf{Feedback} tab.

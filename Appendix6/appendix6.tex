@@ -12,7 +12,7 @@ The following test cases validate the integrity of the system's entry points, en
 \begin{table}[H]
 \centering
 \caption{Manual Validation of Login and Authentication Mechanisms}
-\begin{tabular}{|l|p{2cm}|p{2cm}|p{3cm}|p{3cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -30,14 +30,14 @@ AUTH-06 & Session Persistence & Logged in user & Close \& Reopen Browser & User 
 \hline
 AUTH-07 & Unauthorized Access & User logged out & Enter /staff/dashboard in URL & System detects no session; redirects to Login. & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Registration Module Validation}
 \begin{table}[H]
 \centering
 \caption{Manual Validation of User Registration and Account Creation}
-\begin{tabular}{|l|p{2cm}|p{2cm}|p{3cm}|p{3cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -55,14 +55,16 @@ REG-06 & No Input Password & On Register Page & Pass: [empty] & Error: "Password
 \hline
 REG-07 & Weak Password & On Register Page & Pass: 123456789abc & Error: "Password must contain upper, lower, number, special" & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Role-Based Access Control (RBAC) Validation}
+Notably, all professional clinical roles (Admin, Doctor, Dentist, Nurse, and Staff) possess the authorization to create and export reports, while the System Audit Report is strictly reserved for the Admin role. The following test cases validate the integrity of the system's entry points and role-specific dashboard access.
+
 \begin{table}[H]
 \centering
 \caption{Manual Validation of Role-Based Access Controls}
-\begin{tabular}{|l|p{2.5cm}|p{2.5cm}|p{3.5cm}|p{3.5cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-cond.} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -80,7 +82,9 @@ RBAC-06 & Staff to Admin URL & Logged in Staff & Enter URL: \url{/user-managemen
 \hline
 RBAC-07 & Public to Dashboard & Not Logged In & Enter URL: \url{/home} & Redirect to Login Page & \textbf{PASS} \\
 \hline
-\end{tabular}
+RBAC-08 & Student Access to Reports & Logged in Student & Enter URL: \url{/reports} & Access Denied; Error: "Unauthorized" & \textbf{PASS} \\
+\hline
+\end{tabularx}
 \end{table}
 
 \section{Clinic Features and Operations}
@@ -90,7 +94,7 @@ The following test cases validate the End-to-End processing of clinical data, sp
 \begin{table}[H]
 \centering
 \caption{Manual Validation of Patient Search and Filtering Functionalities}
-\begin{tabular}{|l|p{2cm}|p{3cm}|p{4.5cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -110,14 +114,14 @@ PSF-07 & Program Filter & Filter: BS CpE & System only displays computer enginee
 \hline
 PSF-08 & Year Level Filter & Filter: 1st Year & System dynamically isolates only 1st-year students. & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Medical Record Management}
 \begin{table}[H]
 \centering
 \caption{Manual Validation of Clinical Medical Record Management}
-\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -135,14 +139,14 @@ MRM-06 & Delete Record & Select record to delete & Record successfully removed f
 \hline
 MRM-07 & Attributed Remarks & Doctor views another Doctor's clinical remark & Remark is visible, color-coded, and accurately attributed. & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Dental Record Management}
 \begin{table}[H]
 \centering
 \caption{Manual Validation of Dental Record Entry and File Attachments}
-\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -162,14 +166,14 @@ DRM-07 & Date Filter & Input: 04/01 to 04/23 & Records within exact date range i
 \hline
 DRM-08 & Delete Record & Select record to delete & Record removed securely from medical history. & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Medical Certificate Issuance (ACA-HSD-04F)}
 \begin{table}[H]
 \centering
 \caption{Manual Validation of Medical Certificate Workflows (ACA-HSD-04F)}
-\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -191,14 +195,14 @@ MCM-11 & Filter Rejected & Status: Rejected & Only rejected certificates are sho
 \hline
 MCM-12 & Filter Pending & Status: Pending & Only pending drafts are shown. & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Health Campaign Management}
 \begin{table}[H]
 \centering
 \caption{Manual Validation of Health Campaigns and Educational Content}
-\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -216,7 +220,7 @@ HIM-02 & Edit Info & Change title & Record updates accurately in the database. &
 \hline
 HIM-03 & Delete Info & Select Record to Delete & Record successfully removed from the library. & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \section{Analytics and Reporting Engine}
@@ -226,7 +230,7 @@ The background reporting engine was rigorously tested to ensure the system can a
 \begin{table}[H]
 \centering
 \caption{Manual Validation of Multi-Format Reporting Engine Exports}
-\begin{tabular}{|p{5cm}|p{5cm}|c|}
+\begin{tabularx}{\textwidth}{|Y|Y|c|}
 \hline
 \textbf{Report Category Tested} & \textbf{Formats Successfully Generated \& Downloaded} & \textbf{Execution Status} \\
 \hline
@@ -248,7 +252,7 @@ Medical Fitness \& Certification (MFA 01-05) & PDF, Excel, CSV, JSON, HTML & \te
 \hline
 System Audit Report (UAR 01-05) & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
-\textbf{Discussion for Reporting Validation:} By validating 45 distinct export scenarios across nine diverse reporting categories, the testing confirms that the backend can successfully query the PostgreSQL database and render complex summaries without data loss. The flawless execution across all export types (PDF, Excel, CSV, JSON, and HTML) guarantees that the USC Clinic can maintain both digital and physical records for compliance, administrative review, and health trend analysis within the university community.
+\textbf{Discussion for Reporting Validation:} By validating 45 distinct export scenarios across nine diverse reporting categories, the testing confirms that the backend can successfully query the PostgreSQL database and render complex summaries without data loss. Crucially, validation confirmed that all professional clinical roles possess the authorization to create and export these reports, while the System Audit Report remains exclusive to the Admin. The flawless execution across all export types (PDF, Excel, CSV, JSON, and HTML) guarantees that the USC Clinic can maintain both digital and physical records for personal analysis, compliance, and administrative review within the university community.

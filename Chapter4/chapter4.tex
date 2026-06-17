@@ -28,7 +28,7 @@ Unit testing evaluated the foundational components and security middleware of th
     \centering
     \caption{Unit Testing Results (Security \& Logic)}
     \label{tab:unit_testing}
-    \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{3.5cm}|c|}
+    \begin{tabularx}{\textwidth}{|l|Y|Y|Y|c|}
         \hline
         \textbf{Test ID} & \textbf{Requirement Evaluated} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Status} \\ \hline
         UT-01 & pgcrypto SQL Encryption Audit & Binary storage for Name/Diagnosis & Binary (bytea) hashes detected & \textbf{PASS} \\ \hline
@@ -37,7 +37,7 @@ Unit testing evaluated the foundational components and security middleware of th
         UT-04 & Clinical Field Constraints & Regex validation for Dental FDI & "11,12" accepted; "1,2" blocked & \textbf{PASS} \\ \hline
         UT-05 & Safe List Onboarding & Automatic Role Assignment & Assigned: DOCTOR / NURSE & \textbf{PASS} \\ \hline
         UT-06 & File Upload Security & Reject .EXE, .JS, .PY files & 100\% Rejection rate & \textbf{PASS} \\ \hline
-    \end{tabular}
+    \end{tabularx}
 \end{table}
 
 The unit testing phase systematically verified the foundational security and clinical constraints of the system. Specifically, UT-01 confirmed the successful integration of the PostgreSQL \texttt{pgcrypto} extension, ensuring that all Protected Health Information (PHI), such as patient diagnoses and names, is strictly converted into binary \texttt{bytea} hashes upon database commit, shielding data from plaintext exposure. Clinical logic was also rigorously validated in UT-04, where the system successfully applied backend regex constraints to restrict dental records strictly to the FDI notation range (11-48), preventing erroneous user data entry. Furthermore, UT-05 confirmed the efficiency of the SafeList onboarding protocol, automatically assigning clinical roles (DOCTOR/NURSE) to pre-authorized emails, bypassing the standard student routing. Finally, UT-06 demonstrated robust cybersecurity measures by actively intercepting and rejecting high-risk executable files (such as \texttt{.EXE} and \texttt{.JS}) while safely processing valid clinical documents.
@@ -50,7 +50,7 @@ Integration testing verified that different modules, such as frontend forms, bac
     \centering
     \caption{Integration Testing Results (Workflows \& RBAC)}
     \label{tab:integration_testing}
-    \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{3.5cm}|c|}
+    \begin{tabularx}{\textwidth}{|l|Y|Y|Y|c|}
         \hline
         \textbf{Test ID} & \textbf{Workflow / Requirement} & \textbf{Expected Result} & \textbf{Actual Result} & \textbf{Status} \\ \hline
         IT-01 & Clinical Certificate Pipeline & Nurse $\rightarrow$ Doctor $\rightarrow$ PDF Flow & Flow Completed (HTTP 200 OK) & \textbf{PASS} \\ \hline
@@ -58,7 +58,7 @@ Integration testing verified that different modules, such as frontend forms, bac
         IT-03 & RBAC Security Stress Test & Cross-patient access restricted & HTTP 403 (Denied) / 404 (Hidden) & \textbf{PASS} \\ \hline
         IT-04 & Academic Year Sort & Filter specific records via API & 1/1 Match (e.g., 4th Year isolated) & \textbf{PASS} \\ \hline
         IT-05 & Health Campaign Flow & Student sees Admin alert & Visible in Student Dashboard Feed & \textbf{PASS} \\ \hline
-    \end{tabular}
+    \end{tabularx}
 \end{table}
 
 Integration testing evaluated the seamless interaction between the React frontend, the Django REST Framework APIs, and external enterprise tools. Test IT-01 successfully validated the End-to-End Medical Certificate issuance pipeline, confirming that while a Nurse can draft the USC Form ACA-HSD-04F, the system's middleware strictly requires a Doctor's authorization before the backend dual-engine PDF module renders the final document. Additionally, IT-03 stress-tested the Role-Based Access Control (RBAC) architecture; malicious attempts to access cross-patient records were successfully blocked, returning HTTP 403 (Denied) or 404 (Not Found) errors, proving data isolation between students. IT-04 also confirmed the success of the "Application Retooling" feature, proving that the API can dynamically sort, filter, and isolate specific student cohorts by Academic Year and Semester in real-time, effectively resolving the clinic's previous reporting inefficiencies.
@@ -72,7 +72,7 @@ To demonstrate the rigorous nature of this validation phase, representative test
 \centering
 \caption{Sample Validation - Login and Authentication}
 \label{tab:sample_auth}
-\begin{tabular}{|l|p{2.5cm}|p{2.5cm}|p{3cm}|p{3cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Pre-condition} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -84,14 +84,14 @@ AUTH-05 & Non-USC email & Invalid email format & Email: test@gmail.com & Error: 
 \hline
 AUTH-06 & Persistent Session & User is logged in & Close \& Reopen Browser & User remains authenticated via stored token. & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[htbp]
 \centering
 \caption{Sample Validation - Medical Record Management}
 \label{tab:sample_mrm}
-\begin{tabular}{|l|p{2.5cm}|p{3.5cm}|p{4.5cm}|c|}
+\begin{tabularx}{\textwidth}{|l|Y|Y|Y|c|}
 \hline
 \textbf{Test ID} & \textbf{Scenario} & \textbf{Input Provided} & \textbf{Expected / Actual Result} & \textbf{Status} \\
 \hline
@@ -103,14 +103,14 @@ MRM-04 & Search Clinical Record (Concern) & Search Input: Stomach & Only records
 \hline
 MRM-06 & Delete Clinical Record & Select record and confirm delete & Record successfully removed from the medical history. & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[htbp]
 \centering
 \caption{Sample Validation - Reporting Engine Formats}
 \label{tab:sample_reports}
-\begin{tabular}{|p{4cm}|p{6cm}|c|}
+\begin{tabularx}{\textwidth}{|Y|Y|c|}
 \hline
 \textbf{Report Category Tested} & \textbf{Formats Successfully Generated \& Downloaded} & \textbf{Execution Status} \\
 \hline
@@ -120,7 +120,7 @@ Clinic Operational Flow \& Density & PDF, Excel, CSV, JSON, HTML & \textbf{PASS 
 \hline
 Service Satisfaction \& Sentiment & PDF, Excel, CSV, JSON, HTML & \textbf{PASS (5/5)} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \textbf{Discussion and Analysis for Manual Validation:} The manual testing evaluated precise data inputs, expected system behaviors, and error-handling capabilities under real-world human interaction. The validation confirmed that the Role-Based Access Control (RBAC) securely isolated dashboards, clinical records correctly processed complex medical inputs (such as vital signs and FDI dental record notation), and the background reporting engine successfully synthesized large datasets into five distinct export formats without data loss. All manual test scenarios yielded a 100\% pass rate across all nine reporting categories.
@@ -139,14 +139,14 @@ The USC-PIS was benchmarked against strict latency and concurrency thresholds to
     \centering
     \caption{Performance Benchmarking Results}
     \label{tab:performance_benchmarking}
-    \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|p{3.5cm}|c|}
+    \begin{tabularx}{\textwidth}{|l|Y|Y|Y|c|}
         \hline
         \textbf{Test ID} & \textbf{Performance Metric} & \textbf{Target Threshold} & \textbf{Measured Result} & \textbf{Status} \\ \hline
         PT-01 & Report / PDF Latency & < 1000 ms & 124.53 ms & \textbf{PASS} \\ \hline
         PT-02 & System Concurrency (20 Users) & 20 Concurrent Requests & 20/20 Success (0\% Drop) & \textbf{PASS} \\ \hline
         PT-03 & Encryption Lag / Overhead & < 50 ms overhead & < 1 ms (Standard) & \textbf{PASS} \\ \hline
         PT-04 & Search Query Efficiency & < 500 ms (for 100+ records) & 123.16 ms & \textbf{PASS} \\ \hline
-    \end{tabular}
+    \end{tabularx}
 \end{table}
 
 The non-functional benchmarks confirm that the architectural optimizations of the USC-PIS successfully eliminated the latency issues associated with manual clinic operations. As demonstrated in PT-04, the system's advanced search query optimization processes 100+ patient records with an average latency ranging strictly between 123.16ms and 127.81ms, operating nearly four times faster than the maximum acceptable threshold of 500ms. Furthermore, PT-01 confirmed that the dual-engine PDF module renders official medical certificates in roughly 122.93ms to 124.53ms, ensuring zero delays in administrative output during peak consultation hours. PT-02 verified the system's high-availability architecture by successfully processing 20 simultaneous HTTP requests in just 0.66 seconds, suffering a 0\% data drop or failure rate. Lastly, PT-03 proved that the military-grade \texttt{pgcrypto} encryption applied to clinical records introduces an entirely negligible computational overhead of less than 1.0ms, ensuring maximum data security without sacrificing system speed or responsiveness.
@@ -237,7 +237,7 @@ The clinic staff evaluation focused on three primary functional objectives: reco
 \centering
 \caption{Comprehensive Staff Workflow Efficiency Comparison}
 \label{tab:staff_efficiency}
-\begin{tabular}{|l|c|c|c|}
+\begin{tabularx}{\textwidth}{|Y|c|c|c|}
 \hline
 \textbf{Clinical Workflow Category} & \textbf{Manual Mean} & \textbf{Web Mean} & \textbf{Improvement Variance} \\
 \hline
@@ -297,7 +297,7 @@ Technical issues are minimal. & 3.29 & 4.00 & +0.71 \\
 \hline
 \textbf{Overall Staff Satisfaction (Comparative)} & \textbf{3.29} & \textbf{4.17} & \textbf{+0.88} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 The results indicate a consistent operational upgrade across all categories, with the most significant improvements noted in report generation (+0.88) and campaign dissemination (+0.83). Table~\ref{tab:staff_comparison_matrix} further details the direct performance comparison matrix.
@@ -306,7 +306,7 @@ The results indicate a consistent operational upgrade across all categories, wit
 \centering
 \caption{Staff Direct Performance Comparison Matrix}
 \label{tab:staff_comparison_matrix}
-\begin{tabular}{|l|c|c|c|}
+\begin{tabularx}{\textwidth}{|Y|c|c|c|}
 \hline
 \textbf{Operational Indicator} & \textbf{Worse} & \textbf{Same} & \textbf{Better} \\
 \hline
@@ -322,7 +322,7 @@ Cert Processing Speed & 0.0\% & 33.3\% & 66.7\% \\
 \hline
 Overall Clinic Efficiency & 0.0\% & 33.3\% & 66.7\% \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsubsection{Student Comparative Assessment}
@@ -332,7 +332,7 @@ The student demographic (N=30) provided a re-evaluation of general usability and
 \centering
 \caption{Student General Usability Re-Evaluation}
 \label{tab:student_usability}
-\begin{tabular}{|l|c|}
+\begin{tabularx}{\textwidth}{|Y|c|}
 \hline
 \textbf{Usability Metric} & \textbf{Mean Score (1-5)} \\
 \hline
@@ -348,14 +348,14 @@ Notifications (updates, reminders) useful. & 4.73 \\
 \hline
 Certificate issuance process clear/easy. & 4.67 \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{table}[htbp]
 \centering
 \caption{Exhaustive Student Comparative Operational Assessment}
 \label{tab:student_comparative}
-\begin{tabular}{|p{10cm}|c|}
+\begin{tabularx}{\textwidth}{|Y|c|}
 \hline
 \textbf{Comparative Operational Statement} & \textbf{Mean Score} \\
 \hline
@@ -381,7 +381,7 @@ Navigating system is more intuitive/less frustrating. & 4.77 \\
 \hline
 \textbf{Overall Satisfaction (Student)} & \textbf{4.73} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Qualitative Proof of Operational Upgrade}
@@ -434,7 +434,7 @@ Legacy systems typically experience severe degradation in query speeds (commonly
 \centering
 \caption{Database Query Optimization and Latency Benchmarking}
 \label{tab:latency_benchmarking}
-\begin{tabular}{|p{4cm}|p{3.5cm}|p{3.5cm}|p{3cm}|}
+\begin{tabularx}{\textwidth}{|Y|Y|Y|c|}
 \hline
 \textbf{Performance Metric Tested} & \textbf{Target Acceptable Threshold} & \textbf{Actual Measured Latency} & \textbf{Optimization Status} \\
 \hline
@@ -444,7 +444,7 @@ Medical Certificate PDF Render & < 1000.00 ms & 122.93 ms — 124.53 ms & \textb
 \hline
 Concurrent Requests (20 Users) & 0\% Data Drop Rate & 0.66 seconds execution & \textbf{PASS} (100\% Success) \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 The empirical benchmark metrics proved highly successful. During the performance testing phase (PT-04), the optimized database architecture successfully handled search queries against 100+ patient records with an average retrieval latency ranging strictly between 123.16ms and 127.81ms. This effectively addressed the primary operational inefficiency outlined in the system's objectives, processing requests nearly four times faster than the maximum acceptable threshold of 500ms.
@@ -456,7 +456,7 @@ A comprehensive cybersecurity audit was conducted to verify that the USC-PIS arc
 \centering
 \caption{Security and Vulnerability Assessment Results}
 \label{tab:security_assessment}
-\begin{tabular}{|p{3cm}|p{5cm}|p{4.5cm}|c|}
+\begin{tabularx}{\textwidth}{|Y|Y|Y|c|}
 \hline
 \textbf{Security Module Tested} & \textbf{Audit Scenario} & \textbf{Primary Threat Mitigated} & \textbf{Status} \\
 \hline
@@ -468,7 +468,7 @@ RBAC Middleware & IT-03: Attempt unauthorized cross-role URL endpoint access & P
 \hline
 SafeList Onboarding & UT-05: Verify institutional domain and role assignment & Unauthorized account registration & \textbf{PASS} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Cryptographic Benchmarking (pgcrypto)}
