@@ -16,14 +16,12 @@ This chapter details the methodology guiding the system design, core features, s
 
 The conceptual framework for developing the USC-PIS (illustrated in Figure \ref{fig:conceptual_framework}) is anchored in a User-Centered Design (UCD) approach, which prioritizes the workflows of clinic staff and the accessibility needs of the students. The legacy system at the USC Clinic was heavily reliant on fragmented, paper-based records (such as the Daily Treatment Records) and basic Google Forms for feedback, which introduced significant inefficiencies in data retrieval and program evaluation.
 
-\clearpage
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.9\textwidth]{ConceptualFramewor}
+    \includegraphics[width=0.85\textwidth]{ConceptualFramewor}
     \caption{Conceptual Framework of the USC-PIS}
     \label{fig:conceptual_framework}
 \end{figure}
-\clearpage
 
 To resolve these bottlenecks, the modernized framework was constructed upon the following core pillars:
 
@@ -62,14 +60,12 @@ The architectural flow centers on the RESTful communication between the React fr
 \subsection{Context Diagram}
 The Context Diagram provides a high-level overview of the USC-PIS and its interactions with external entities. The system acts as the central hub bridging the clinical staff and the student body. Students interact with the platform to access their personal health information and submit visit-linked feedback, while Clinic Staff (Doctors, Nurses, and Dentists) input clinical data, issue medical certificates, and manage health campaigns. All transactions are routed securely to the central Patient Database, ensuring real-time data synchronization across all user endpoints.
 
-\clearpage
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{ContextDiagram}
+    \includegraphics[width=0.65\textwidth]{ContextDiagram}
     \caption{Context Diagram of the USC-PIS}
     \label{fig:context_diagram}
 \end{figure}
-\clearpage
 
 \subsection{User Roles and Functionalities}
 To safeguard Protected Health Information (PHI) and Personally Identifiable Information (PII), the USC-PIS employs a strict Role-Based Access Control (RBAC) architecture enforced via Django REST Framework (DRF) permission classes. Notably, all professional clinical roles (Admin, Doctor, Dentist, Nurse, and Staff) possess the authorization to create and export reports, while the System Audit Report is strictly reserved for the Admin role. The system dynamically restricts other access and capabilities across the following hierarchical user classes:
@@ -87,14 +83,12 @@ The system also integrates a multi-tiered \textbf{System Alerts} architecture, p
 \subsection{Authentication Workflow}
 The authentication sequence is designed to ensure stringent identity verification before granting system access while maintaining high data consistency. To eliminate manual input errors, USC ID numbers are auto-captured from the institutional database, and user roles are automatically assigned based on their verified status upon registration. Furthermore, the system implements a streamlined GMail auto sign-in mechanism to reduce friction. The sequential workflow begins with a student registering an account, where the system actively enforces a domain constraint, requiring the email to end in \texttt{@usc.edu.ph}. Upon validation, the Django backend generates a 6-digit One-Time Password (OTP) with a precise 10-minute expiration window. This OTP is transmitted to the user via the Gmail API OAuth 2.0 integration. Once the user inputs the correct OTP, the system authenticates the session and issues a secure JWT token, granting access to the role-gated dashboards.
 
-\clearpage
 \begin{figure}[!ht]
     \centering
-    \makebox[\textwidth][c]{\includegraphics[width=1.25\textwidth]{AuthenticationWorkflow}}
+    \includegraphics[width=0.85\textwidth]{AuthenticationWorkflow}
     \caption{Sequential Authentication Workflow of the USC-PIS}
     \label{fig:authentication_workflow}
 \end{figure}
-\clearpage
 
 \subsection{Clinical Record and Security Pipeline}
 To comply with strict data privacy mandates, the USC-PIS employs a highly secure data flow pipeline for clinical records. When medical personnel utilize the Unified Record Component to enter vital signs and a clinical diagnosis, the data is transmitted to the Application Layer. Before the data is committed to the PostgreSQL database, a Django \texttt{post\_save} signal intercepts the transaction. This signal executes the \texttt{pgp\_sym\_encrypt} function, instantly converting plaintext Protected Health Information (PHI), such as patient names and diagnoses, into secure \texttt{BinaryField} (\texttt{bytea}) hashes. This ensures military-grade encryption-at-rest with minimal computational overhead. To maintain clinical data integrity, the pipeline includes robust \textbf{Validation and Error Trapping} mechanisms. The system autonomously calculates BMI based on height and weight inputs, traps dates to block impossible future dates for birthdays or visit records, and validates erroneous clinical inputs such as negative temperatures or zero blood pressure readings to prevent data entry errors.
@@ -113,14 +107,12 @@ Furthermore, the system incorporates an \textbf{Attributed Clinical Remarks Syst
 \subsection{The Medical Certificate Pipeline}
 The issuance of the USC Form ACA-HSD-04F Medical Certificate follows a digitized, role-gated sequential pipeline. The workflow initiates when a Nurse or Staff member accesses a patient's record to draft the certificate and input the ``Purpose/Requirement''. However, the system's RBAC middleware restricts the rendering of the document until a user with the DOCTOR role assesses the draft. The Doctor must select the Medical Fitness Status (strictly displaying either ``Physically Fit'' or ``Unfit'', but never both) and authorize the issuance. Once the \texttt{IsDoctorUser} permission is validated, the system logs the issuance of the certificate along with the name of the issuing doctor. The backend dual-engine PDF module then autonomously renders the landscape-formatted certificate for download. To maintain administrative integrity, editing of rejected certificate requests is not allowed. For the student demographic, the interface displays the status as ``Ready to be Claimed'', as they cannot print the official document themselves.
 
-\clearpage
 \begin{figure}[!ht]
     \centering
-    \makebox[\textwidth][c]{\includegraphics[width=1.25\textwidth]{MedicalCertificatePipeline}}
+    \includegraphics[width=0.85\textwidth]{MedicalCertificatePipeline}
     \caption{Role-Gated Medical Certificate Issuance Pipeline}
     \label{fig:medical_certificate_pipeline}
 \end{figure}
-\clearpage
 
 \section{Software Tools and Technology Stack}
 The USC-PIS is engineered upon a modern, highly scalable three-tier web architecture designed to ensure a clean separation of concerns.
@@ -215,7 +207,7 @@ The core of the clinic's digital operations is handled by the \texttt{Medical Re
 
 \begin{itemize}
     \item \textbf{Medical Records:} This entity tracks the \texttt{visit\_date}, chief concern, and the resulting \texttt{diagnosis} and \texttt{treatment}. It also features dedicated fields for comprehensive \texttt{vital\_signs}, \texttt{physical\_examination} inputs, and additional clinical notes. (\textit{Note: As detailed in Section 3.6, sensitive text payloads within these clinical fields are intercepted by backend signals and cryptographically hashed at rest using pgcrypto}).
-    \item \textbf{Dental Records:} The dental entity is highly specialized to accommodate complex oral health charting. It captures specific clinical metrics including \texttt{oral\_hygiene\_status}, \texttt{gum\_condition}, \texttt{pain\_level}, and \texttt{materials\_used}. It also maps exact oral geography through the \texttt{tooth\_numbers} and \texttt{affected\_teeth\_display} fields, which restrict input to standard FDI notation boundaries.
+    \item \textbf{Dental Records:} The dental entity is highly specialized to accommodate complex oral health charting. It captures specific clinical metrics including \texttt{oral\_hygiene\_status}, \texttt{gum\_condition}, \texttt{pain\_level}, and \texttt{materials\_used}. It also maps exact oral geography through the \texttt{tooth\_numbers} and \texttt{affected\_teeth\_display} fields (utilizing standardized FDI notation), which restrict input to valid clinical boundaries.
 \end{itemize}
 
 \subsection{Medical Certificates and Administrative Workflows}
