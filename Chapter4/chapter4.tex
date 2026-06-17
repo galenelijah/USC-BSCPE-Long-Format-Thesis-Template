@@ -233,14 +233,23 @@ The results are split into two distinct categories: the \textbf{Usability Re-Tes
 \subsubsection{Clinic Staff Comparative Assessment}
 The clinic staff evaluation focused on three primary functional objectives: record streamlining, health awareness orchestration, and medical certificate workflows. Table~\ref{tab:staff_efficiency} presents the comprehensive means for every quantitative metric evaluated, comparing the manual process baseline against the web-based implementation.
 
-\begin{table}[htbp]
-\centering
-\caption{Comprehensive Staff Workflow Efficiency Comparison}
-\label{tab:staff_efficiency}
-\begin{tabularx}{\textwidth}{|Y|c|c|c|}
+\begingroup
+\small
+\begin{longtable}{|p{0.55\textwidth}|c|c|c|}
+\caption{Comprehensive Staff Workflow Efficiency Comparison} \label{tab:staff_efficiency} \\
 \hline
 \textbf{Clinical Workflow Category} & \textbf{Manual Mean} & \textbf{Web Mean} & \textbf{Improvement Variance} \\
 \hline
+\endfirsthead
+\hline
+\textbf{Clinical Workflow Category} & \textbf{Manual Mean} & \textbf{Web Mean} & \textbf{Improvement Variance} \\
+\hline
+\endhead
+\hline
+\multicolumn{4}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
 \multicolumn{4}{|c|}{\textbf{Objective \#1: Comprehensive Records Management}} \\
 \hline
 Patient records easy to create/maintain. & 3.50 & 3.83 & +0.33 \\
@@ -297,8 +306,8 @@ Technical issues are minimal. & 3.29 & 4.00 & +0.71 \\
 \hline
 \textbf{Overall Staff Satisfaction (Comparative)} & \textbf{3.29} & \textbf{4.17} & \textbf{+0.88} \\
 \hline
-\end{tabularx}
-\end{table}
+\end{longtable}
+\endgroup
 
 The results indicate a consistent operational upgrade across all categories, with the most significant improvements noted in report generation (+0.88) and campaign dissemination (+0.83). Table~\ref{tab:staff_comparison_matrix} further details the direct performance comparison matrix.
 
