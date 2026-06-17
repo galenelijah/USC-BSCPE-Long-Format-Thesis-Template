@@ -22,6 +22,7 @@ The conceptual framework for developing the USC-PIS (illustrated in Figure \ref{
     \caption{Conceptual Framework of the USC-PIS}
     \label{fig:conceptual_framework}
 \end{figure}
+\FloatBarrier
 
 To resolve these bottlenecks, the modernized framework was constructed upon the following core pillars:
 
@@ -66,6 +67,7 @@ The Context Diagram provides a high-level overview of the USC-PIS and its intera
     \caption{Context Diagram of the USC-PIS}
     \label{fig:context_diagram}
 \end{figure}
+\FloatBarrier
 
 \subsection{User Roles and Functionalities}
 To safeguard Protected Health Information (PHI) and Personally Identifiable Information (PII), the USC-PIS employs a strict Role-Based Access Control (RBAC) architecture enforced via Django REST Framework (DRF) permission classes. Notably, all professional clinical roles (Admin, Doctor, Dentist, Nurse, and Staff) possess the authorization to create and export reports, while the System Audit Report is strictly reserved for the Admin role. The system dynamically restricts other access and capabilities across the following hierarchical user classes:
@@ -89,6 +91,7 @@ The authentication sequence is designed to ensure stringent identity verificatio
     \caption{Sequential Authentication Workflow of the USC-PIS}
     \label{fig:authentication_workflow}
 \end{figure}
+\FloatBarrier
 
 \subsection{Clinical Record and Security Pipeline}
 To comply with strict data privacy mandates, the USC-PIS employs a highly secure data flow pipeline for clinical records. When medical personnel utilize the Unified Record Component to enter vital signs and a clinical diagnosis, the data is transmitted to the Application Layer. Before the data is committed to the PostgreSQL database, a Django \texttt{post\_save} signal intercepts the transaction. This signal executes the \texttt{pgp\_sym\_encrypt} function, instantly converting plaintext Protected Health Information (PHI), such as patient names and diagnoses, into secure \texttt{BinaryField} (\texttt{bytea}) hashes. This ensures military-grade encryption-at-rest with minimal computational overhead. To maintain clinical data integrity, the pipeline includes robust \textbf{Validation and Error Trapping} mechanisms. The system autonomously calculates BMI based on height and weight inputs, traps dates to block impossible future dates for birthdays or visit records, and validates erroneous clinical inputs such as negative temperatures or zero blood pressure readings to prevent data entry errors.
@@ -113,6 +116,7 @@ The issuance of the USC Form ACA-HSD-04F Medical Certificate follows a digitized
     \caption{Role-Gated Medical Certificate Issuance Pipeline}
     \label{fig:medical_certificate_pipeline}
 \end{figure}
+\FloatBarrier
 
 \section{Software Tools and Technology Stack}
 The USC-PIS is engineered upon a modern, highly scalable three-tier web architecture designed to ensure a clean separation of concerns.
